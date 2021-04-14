@@ -1,5 +1,5 @@
 package com.lasalle.meetmate;
-//MAIN
+//MAIN COMENT
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
