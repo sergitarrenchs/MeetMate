@@ -1,4 +1,4 @@
-package com.lasalle.meetmate;
+package com.lasalle.meet;
 //MAIN COMENT
 import android.os.Bundle;
 
