@@ -9,17 +9,4 @@
             android:fillType="evenOdd"
             android:pathData="M0 0h414v301l-39.64-2.16c-26.8-1.46-51.9-13.64-69.64-33.8l-20.28-23.06c-17.96-20.42-43.46-32.64-70.63-33.85l-136.49-6.1c-18.78-0.83-36.95-6.95-52.41-17.64L0 167.17V0z"/>
     </group>
-    <path
-        android:fillColor="#FC8A5C"
-        android:strokeColor="#FFF"
-        android:strokeWidth="31"
-        android:pathData="M153.5 102.5c0 25.96-21.04 47-47 47s-47-21.04-47-47s21.04-47 47-47s47 21.04 47 47z"/>
-    <path
-        android:fillColor="#6846FE"
-        android:fillType="evenOdd"
-        android:pathData="M263.09 54.67c-22.26 34.27-12.52 80.1 21.76 102.36c34.27 22.26 80.1 12.52 102.36-21.76"/>
-    <path
-        android:strokeColor="#FFF"
-        android:strokeWidth="31"
-        android:pathData="M263.09 54.67c-22.26 34.27-12.52 80.1 21.76 102.36c34.27 22.26 80.1 12.52 102.36-21.76"/>
 </vector>
