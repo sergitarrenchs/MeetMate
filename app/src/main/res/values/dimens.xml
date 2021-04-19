@@ -2,6 +2,7 @@
     <dimen name="side_margin">16dp</dimen>
     <dimen name="top_margin">40dp</dimen>
     <dimen name="bottom_margin">30dp</dimen>
+    <dimen name="h1super_size">80sp</dimen>
     <dimen name="h1_size">32sp</dimen>
     <dimen name="h2_size">22sp</dimen>
     <dimen name="t1_size">16sp</dimen>
