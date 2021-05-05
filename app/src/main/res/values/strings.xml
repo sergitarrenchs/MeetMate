@@ -45,5 +45,11 @@
     <string name="upload_event_picture">UPLOAD EVENT PICTURE</string>
     <string name="event_location">Event Location</string>
 
+    //PROFILE//
+    <string name="delete_account">Delete Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="background">Background Image</string>
+    <string name="you_have">YOU HAVE</string>
+
 
 </resources>

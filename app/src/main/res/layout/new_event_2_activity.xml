@@ -33,7 +33,7 @@
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:background="@drawable/rounded_button_white"
+        android:background="@color/white"
         android:fontFamily="@font/gilroylight"
         android:text="@string/upload_event_picture"
         android:textColor="#FFFF"
