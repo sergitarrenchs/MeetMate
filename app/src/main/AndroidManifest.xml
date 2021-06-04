@@ -33,6 +33,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.lasalle.meet.LoginScreen"/>
+        <activity android:name="com.lasalle.meet.SignupScreen"/>
+        <activity android:name="com.lasalle.meet.HomeScreen"/>
+        <activity android:name="com.lasalle.meet.ProfileScreen"/>
+        <activity android:name="com.lasalle.meet.ChatScreen"/>
+
     </application>
 
 </manifest>
