@@ -9,13 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.lasalle.meet.enities.User;
+import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
+import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
+import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
+import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
+import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 public class SignupScreen extends AppCompatActivity{
-    public Button LoginOptButton;
-    public Button SignUpButton;
+    private Button LoginOptButton;
+    private Button SignUpButton;
 
-    public EditText nameSignUpText;
+    private EditText nameSignUpText;
+    private EditText surnameSignUpText;
+    private EditText emailSignUpText;
+    private EditText passwordSignUpText;
+    private EditText passwordRepeatedSignUpText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +52,28 @@ public class SignupScreen extends AppCompatActivity{
         });
 
         nameSignUpText = (EditText) findViewById(R.id.username_signup);
+        surnameSignUpText = (EditText) findViewById(R.id.fullname_signup);
+        emailSignUpText = (EditText) findViewById(R.id.username_login3);
+        passwordSignUpText = (EditText) findViewById(R.id.password_editText2);
+        passwordRepeatedSignUpText = (EditText) findViewById(R.id.password_editText);
     }
 
     private void createUser() {
         User user = new User();
 
         try {
-            user.signUpUser("loca23l@host.com","1234567890","1234567890", nameSignUpText.getText().toString(),"thaht");
-
-        } catch (UserException e) {
-            System.out.println("ERROR CREATE USER");
-        }
+            user.signUpUser(emailSignUpText.getText().toString(),passwordSignUpText.getText().toString(),passwordRepeatedSignUpText.getText().toString(),
+                    nameSignUpText.getText().toString(),surnameSignUpText.getText().toString());
+        } catch (UserEmailNullException e) {
+            emailSignUpText.setError("The email is empty");
+        } catch (UserPasswordNullException e) {
+            passwordSignUpText.setError("The password is empty");
+        } catch (UserPasswordNotEqualException e){
+            passwordRepeatedSignUpText.setError("The passwords do not coincide");
+        } catch (UserPasswordLowSecurityException e){
+            passwordSignUpText.setError("The password has to be minimum of 8 characters long");
+        } catch (UserEmailExistException e){
+            emailSignUpText.setError("The email already exist");
+        } catch (UserException ignored){}
     }
 }

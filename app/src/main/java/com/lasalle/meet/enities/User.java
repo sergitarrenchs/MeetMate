@@ -45,10 +45,13 @@ public class User {
     @Expose(serialize = false, deserialize = false)
     private String username;
 
+    @Expose(serialize = false, deserialize = false)
+    private int userError;
+
     private User(String name, String last_name, String email, String password, String image) {
         this.name = name;
         this.last_name = last_name;
-        this.username = "@" + name.toLowerCase() + "." + last_name.toLowerCase();
+        this.username = "@" + name.toLowerCase().replaceAll(" ","") + "." + last_name.toLowerCase().replaceAll(" ","");
         this.email = email;
         this.password = password;
         this.stringImage = image;
@@ -64,6 +67,7 @@ public class User {
         } else if (password.equals("")) {
             throw new UserPasswordNullException();
         }else if (false /*SQLCheckEmail(email)*/) {
+            //TODO: Change it to image null
             throw new UserEmailExistException();
 
         }else if (!password.equals(repeatedPassword)) {
@@ -74,20 +78,17 @@ public class User {
         } else{
             logInUser(email, password, name, last_name, "");
 
+            userError = 0;
+
             Call<User> call = APIAdapter.getApiService().postCreateUser(this);
 
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if(!response.isSuccessful()){
+                    if(!response.isSuccessful()) {
                         APIError apiError = ErrorUtils.parseError(response);
 
-                        switch (apiError.getStackTrace().getErrno()){
-                            case 1062:
-                                //TODO: how to throw exception
-                                System.out.println("EMAIL ALREADY EXISTS");
-                                break;
-                        }
+                        userError = apiError.getStackTrace().getErrno();
 
                         return;
                     }
@@ -98,9 +99,15 @@ public class User {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    System.err.println("FAILED");
+
                 }
+
             });
+
+            switch (userError){
+                case 1062:
+                    throw new UserEmailExistException();
+            }
 
         }
     }
@@ -113,6 +120,4 @@ public class User {
         this.last_name = last_name;
         this.stringImage = stringImage;
     }
-
-
 }
