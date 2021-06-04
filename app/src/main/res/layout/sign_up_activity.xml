@@ -44,7 +44,7 @@
         android:layout_marginEnd="@dimen/side_margin"
         android:focusable="true"
         android:fontFamily="@font/gilroylight"
-        android:hint="@string/username"
+        android:hint="@string/name"
         android:inputType="textVisiblePassword|textNoSuggestions"
         android:textColorHighlight="#6A6A6A"
         android:textColorHint="#6A6A6A"
@@ -64,7 +64,7 @@
         android:layout_marginEnd="@dimen/side_margin"
         android:focusable="true"
         android:fontFamily="@font/gilroylight"
-        android:hint="@string/full_name"
+        android:hint="@string/last_name"
         android:inputType="textVisiblePassword|textNoSuggestions"
         android:textColorHighlight="#6A6A6A"
         android:textColorHint="#6A6A6A"
@@ -180,6 +180,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/meet_logo" />
 
+    <!--
     <Button
         android:id="@+id/upload_profile_pic_button"
         android:layout_width="0dp"
@@ -198,5 +199,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

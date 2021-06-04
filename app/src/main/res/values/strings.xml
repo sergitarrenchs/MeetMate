@@ -25,8 +25,8 @@
         <string name="signup">SIGN UP</string>
         <string name="or">OR</string>
         <string name="content_description">Sign up top design</string>
-        <string name="username">USERNAME</string>
-        <string name="full_name">FULL NAME</string>
+        <string name="name">NAME</string>
+        <string name="last_name">LAST NAME</string>
         <string name="email">EMAIL</string>
         <string name="password">PASSWORD</string>
         <string name="repeat_password">REPEAT PASSWORD</string>
