@@ -51,8 +51,8 @@ public class SignupScreen extends AppCompatActivity{
             }
         });
 
-        nameSignUpText = (EditText) findViewById(R.id.username_signup);
-        surnameSignUpText = (EditText) findViewById(R.id.fullname_signup);
+        nameSignUpText = (EditText) findViewById(R.id.name_signup);
+        surnameSignUpText = (EditText) findViewById(R.id.lastname_signup);
         emailSignUpText = (EditText) findViewById(R.id.username_login3);
         passwordSignUpText = (EditText) findViewById(R.id.password_editText2);
         passwordRepeatedSignUpText = (EditText) findViewById(R.id.password_editText);

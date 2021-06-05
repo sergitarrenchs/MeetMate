@@ -44,11 +44,26 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.lasalle.meet.LoginScreen"/>
-        <activity android:name="com.lasalle.meet.SignupScreen"/>
-        <activity android:name="com.lasalle.meet.HomeScreen"/>
-        <activity android:name="com.lasalle.meet.ProfileScreen"/>
-        <activity android:name="com.lasalle.meet.ChatScreen"/>
+        <activity
+            android:name="com.lasalle.meet.LoginScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.SignupScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.HomeScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.ProfileScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.ChatScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
 
     </application>
 
