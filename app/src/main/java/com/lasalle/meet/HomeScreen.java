@@ -2,11 +2,14 @@ package com.lasalle.meet;
 //MAIN COMENT
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -16,6 +19,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
     float x1,x2,y1,y2;
+
+    public FloatingActionButton newEventButton;
+    public FloatingActionButton viewTimelineButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,27 @@ public class HomeScreen extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this::onMapReady);
+
+
+        newEventButton = (FloatingActionButton) findViewById(R.id.addFloatingActionButton);
+
+        newEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, NewEvent.class);
+                startActivity(intent);
+            }
+        });
+
+        viewTimelineButton = (FloatingActionButton) findViewById(R.id.viewFloatingActionButton);
+
+        viewTimelineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, EventTimeline.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onTouchEvent(MotionEvent touchEvent){

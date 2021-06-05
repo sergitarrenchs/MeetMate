@@ -38,6 +38,7 @@ public class SignupScreen extends AppCompatActivity{
                 //Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
                 //startActivity(intent);
                 createUser();
+                finish();
             }
         });
 
