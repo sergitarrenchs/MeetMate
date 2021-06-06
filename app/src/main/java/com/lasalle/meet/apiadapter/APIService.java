@@ -9,7 +9,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface APIService {
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type: multipart/form-data")
     @POST("users")
     public Call<User> postCreateUser(@Body User user);
 }

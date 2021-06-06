@@ -78,6 +78,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/meet_logo" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="148dp"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -95,16 +107,23 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/name_signup_layout"
+                android:layout_marginStart="@dimen/side_margin"
+                app:errorIconDrawable="@null"
+                app:errorTextAppearance="@style/error_appearance"
+                app:errorTextColor="@color/error_red"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_signup"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/signup_textView"
                     android:layout_alignParentStart="false"
                     android:layout_alignParentEnd="false"
-                    android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
                     android:background="#CDF8E3"
@@ -117,16 +136,23 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/side_margin"
+                android:id="@+id/lastname_signup_layout"
+                app:errorIconDrawable="@null"
+                app:errorTextAppearance="@style/error_appearance"
+                app:errorTextColor="@color/error_red"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/lastname_signup"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name_signup"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
                     android:background="#CDF8E3"
@@ -140,7 +166,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/side_margin"
+                android:id="@+id/username_login3_layout"
+                app:errorIconDrawable="@null"
+                app:errorTextAppearance="@style/error_appearance"
+                app:errorTextColor="@color/error_red"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username_login3"
@@ -149,7 +181,6 @@
                     android:layout_below="@id/lastname_signup"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
                     android:background="#CDF8E3"
@@ -158,22 +189,32 @@
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textColorHighlight="#6A6A6A"
-                    android:textColorHint="#6A6A6A" />
+                    android:textColorHint="#6A6A6A"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/side_margin"
+                android:id="@+id/password_editText2_layout"
+                app:errorIconDrawable="@null"
+                app:errorTextAppearance="@style/error_appearance"
+                app:errorTextColor="@color/error_red"
+                app:counterEnabled="true"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_editText2"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/username_login3"
                     android:layout_alignEnd="@+id/name_signup"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="#CDF8E3"
@@ -185,8 +226,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_editText_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:errorIconDrawable="@null"
+                app:errorIconTint="@color/error_red"
+                app:errorTextAppearance="@style/error_appearance"
+                app:errorTextColor="@color/error_red"
+                app:counterEnabled="true"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_editText"
@@ -203,11 +251,13 @@
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/repeat_password"
                     android:inputType="textPassword"
-                    android:textColorHint="#6A6A6A" />
+                    android:textColorHint="#6A6A6A"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/upload_profile_pic_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

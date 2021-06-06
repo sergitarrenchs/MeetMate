@@ -38,10 +38,7 @@ public class User {
     @Expose(serialize = true, deserialize = true)
     private String password;
     @Expose(serialize = true, deserialize = true)
-    @SerializedName(value = "image")
-    private String stringImage = "default";
-    @Expose(serialize = false, deserialize = false)
-    private ImageView image;
+    private String image;
     @Expose(serialize = false, deserialize = false)
     private String username;
 
@@ -54,29 +51,26 @@ public class User {
         this.username = "@" + name.toLowerCase().replaceAll(" ","") + "." + last_name.toLowerCase().replaceAll(" ","");
         this.email = email;
         this.password = password;
-        this.stringImage = image;
+        this.image = image;
     }
 
     public User() {
     }
 
-    public void signUpUser(String email, String password, String repeatedPassword, String name, String last_name) throws UserException {
+    public void signUpUser(String email, String password, String repeatedPassword, String name, String last_name, String image) throws UserException {
 
         if (email.equals("")) {
             throw new UserEmailNullException();
         } else if (password.equals("")) {
             throw new UserPasswordNullException();
-        }else if (false /*SQLCheckEmail(email)*/) {
-            //TODO: Change it to image null
-            throw new UserEmailExistException();
-
         }else if (!password.equals(repeatedPassword)) {
             throw new UserPasswordNotEqualException();
 
         } else if (password.length() < 8){
             throw new UserPasswordLowSecurityException();
         } else{
-            logInUser(email, password, name, last_name, "");
+
+            logInUser(email, password, name, last_name, image);
 
             userError = 0;
 
@@ -112,12 +106,12 @@ public class User {
         }
     }
 
-    private void logInUser(String email, String password, String name, String last_name, String stringImage) {
+    private void logInUser(String email, String password, String name, String last_name, String image) {
         this.username = "@" + name.toLowerCase() + "." + last_name.toLowerCase();
         this.email = email;
         this.password = password;
         this.name = name;
         this.last_name = last_name;
-        this.stringImage = stringImage;
+        this.image = image;
     }
 }
