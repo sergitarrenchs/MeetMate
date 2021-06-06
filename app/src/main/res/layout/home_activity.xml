@@ -103,19 +103,35 @@
             app:layout_constraintTop_toBottomOf="@+id/scrollView2"
             tools:context=".MapsActivity" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/mainFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/side_margin"
-            android:layout_marginBottom="@dimen/bottom_margin"
-            android:backgroundTint="#D0ABFF"
-            android:contentDescription="@string/icon"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:fab_addButtonColorNormal="#D0ABFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@color/white"
-            app:srcCompat="@drawable/arrow_pointing_up" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/plus_sign"
+                app:fab_colorNormal="#5A35FF">
+
+            </com.getbase.floatingactionbutton.FloatingActionButton>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/viewFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eye_view"
+                app:fab_colorNormal="#FFDC50">
+
+            </com.getbase.floatingactionbutton.FloatingActionButton>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
