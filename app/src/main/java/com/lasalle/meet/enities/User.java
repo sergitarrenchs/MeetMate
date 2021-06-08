@@ -19,6 +19,7 @@ import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class User {
+public class User implements Serializable {
     @Expose(serialize = true, deserialize = true)
     private String name;
     @Expose(serialize = true, deserialize = true)

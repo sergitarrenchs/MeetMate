@@ -19,8 +19,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -61,22 +59,20 @@ public class SignupScreen extends AppCompatActivity{
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
     private ImageView imageSelected;
+    private User user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_activity);
 
-        imageSelected = (ImageView) findViewById(R.id.imageView4);
+        imageSelected = (ImageView) findViewById(R.id.profilePicture);
 
         SignUpButton = (MaterialButton) findViewById(R.id.signup_button);
 
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
-                //startActivity(intent);
                 createUser();
-                finish();
             }
         });
 
@@ -271,6 +267,11 @@ public class SignupScreen extends AppCompatActivity{
 
     private void createUser() {
         User user = new User();
+
+        Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
 
         //Get bitmap from the selected image
         Bitmap bitmap = ((BitmapDrawable) imageSelected.getDrawable()).getBitmap();

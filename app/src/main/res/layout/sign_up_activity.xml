@@ -78,18 +78,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/meet_logo" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:contentDescription="@string/content_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -106,19 +94,16 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_signup_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/name_signup_layout"
                 android:layout_marginStart="@dimen/side_margin"
                 app:errorIconDrawable="@null"
                 app:errorTextAppearance="@style/error_appearance"
-                app:errorTextColor="@color/error_red"
-                >
+                app:errorTextColor="@color/error_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_signup"
-                    app:errorIconDrawable="@null"
-                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/signup_textView"
@@ -130,24 +115,23 @@
                     android:focusable="true"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/name"
-                    android:inputType="textVisiblePassword|textNoSuggestions" />
+                    android:inputType="textVisiblePassword|textNoSuggestions"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lastname_signup_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/side_margin"
-                android:id="@+id/lastname_signup_layout"
                 app:errorIconDrawable="@null"
                 app:errorTextAppearance="@style/error_appearance"
-                app:errorTextColor="@color/error_red"
-                >
+                app:errorTextColor="@color/error_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/lastname_signup"
-                    app:errorIconDrawable="@null"
-                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name_signup"
@@ -161,18 +145,19 @@
                     android:hint="@string/last_name"
                     android:inputType="textVisiblePassword|textNoSuggestions"
                     android:textColorHighlight="#6A6A6A"
-                    android:textColorHint="#6A6A6A" />
+                    android:textColorHint="#6A6A6A"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_login3_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/side_margin"
-                android:id="@+id/username_login3_layout"
                 app:errorIconDrawable="@null"
                 app:errorTextAppearance="@style/error_appearance"
-                app:errorTextColor="@color/error_red"
-                >
+                app:errorTextColor="@color/error_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username_login3"
@@ -196,20 +181,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_editText2_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/side_margin"
-                android:id="@+id/password_editText2_layout"
+                app:counterEnabled="true"
                 app:errorIconDrawable="@null"
                 app:errorTextAppearance="@style/error_appearance"
-                app:errorTextColor="@color/error_red"
-                app:counterEnabled="true"
-                >
+                app:errorTextColor="@color/error_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_editText2"
-                    app:errorIconDrawable="@null"
-                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/username_login3"
@@ -222,19 +204,20 @@
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColorHint="#6A6A6A" />
+                    android:textColorHint="#6A6A6A"
+                    app:errorIconDrawable="@null"
+                    app:errorTextAppearance="@style/error_appearance" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_editText_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:counterEnabled="true"
                 app:errorIconDrawable="@null"
                 app:errorIconTint="@color/error_red"
                 app:errorTextAppearance="@style/error_appearance"
-                app:errorTextColor="@color/error_red"
-                app:counterEnabled="true"
-                >
+                app:errorTextColor="@color/error_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_editText"
@@ -272,6 +255,14 @@
                 app:iconSize="60dp"
                 app:iconTint="#FFFFFF"
                 app:iconTintMode="multiply" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/content_description"
+                tools:srcCompat="@tools:sample/avatars" />
 
         </LinearLayout>
     </ScrollView>

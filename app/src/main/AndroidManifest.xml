@@ -73,6 +73,10 @@
             android:name="com.lasalle.meet.NewEvent"
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.FinishEvent"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
 
     </application>
 

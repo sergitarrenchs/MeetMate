@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lasalle.meet.enities.User;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
@@ -29,11 +30,12 @@ public class HomeScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_activity);
         Intent intent = getIntent();
+        getIntent().getSerializableExtra("user");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this::onMapReady);
-
 
         newEventButton = (FloatingActionButton) findViewById(R.id.addFloatingActionButton);
 
