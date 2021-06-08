@@ -22,16 +22,18 @@
             android:fontFamily="@font/gilroybold"
             android:text="@string/welcome_message_morning"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#292D30"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcomeMessageMorning">
@@ -49,11 +51,9 @@
                         style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:backgroundTint="#FFFFFF"
                         android:fontFamily="@font/gilroybold"
 
-                        android:text="@string/event_type_all"
-                        android:textColor="#000000" />
+                        android:text="@string/event_type_all" />
 
                     <Button
                         style="@style/Widget.AppCompat.Button.Small"

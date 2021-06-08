@@ -50,8 +50,12 @@
     <string name="log_out">Log Out</string>
     <string name="background">Background Image</string>
     <string name="you_have">YOU HAVE</string>
-
-    //EVENT VIEW//
+    <string name="created">CREATED</string>
+    <string name="attended">ATTENDED</string>
+    <string name="connected">CONNECTED</string>
+    <string name="events">EVENTS</string>
+    <string name="friends">FRIENDS</string>
+    <string name="test_num">17</string>
 
 
 </resources>
