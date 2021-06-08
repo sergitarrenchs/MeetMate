@@ -58,11 +58,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/next_button_imageView"
+    <ImageButton
+        android:id="@+id/create_button_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/next_button"
+        android:background="#CDF8E3"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/new_event_button" />
@@ -87,8 +89,8 @@
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:layout_marginBottom="@dimen/top_margin"
-        app:layout_constraintBottom_toTopOf="@+id/next_button_imageView"
+        android:layout_marginBottom="@dimen/side_margin"
+        app:layout_constraintBottom_toTopOf="@+id/create_button_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_name_signup7" />
