@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editProfileButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/profile_gradiant">
@@ -172,23 +173,112 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/profile_details_box" />
+        app:srcCompat="@drawable/white_box" />
+
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/profileImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="170dp"
-        android:src="@color/teal_200"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/signup_upload_picture_icon"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/terry_meyer"
+        android:textColor="#000000"
+        android:textSize="@dimen/h2_size"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/progile_name3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/email"
+        android:textColor="#000000"
+        android:textSize="@dimen/h2_size"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <TextView
+        android:id="@+id/progile_name5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/password"
+        android:textColor="#000000"
+        android:textSize="@dimen/h2_size"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/progile_name4" />
+
+    <TextView
+        android:id="@+id/progile_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/username_tm"
+        android:textSize="@dimen/t1_size"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+    <TextView
+        android:id="@+id/progile_name4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/username_tm"
+        android:textSize="@dimen/t1_size"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/progile_name3" />
+
+    <TextView
+        android:id="@+id/progile_name6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/username_tm"
+        android:textSize="@dimen/t1_size"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/progile_name5" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="#FF8C8C"
+        app:fabSize="auto"
+        app:fab_colorDisabled="#FFFFFF"
+        app:fab_colorNormal="#FFFFFF"
+        app:fab_colorPressed="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:srcCompat="@drawable/edit_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
