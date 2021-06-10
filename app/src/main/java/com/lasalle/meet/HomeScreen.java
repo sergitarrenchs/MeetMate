@@ -37,6 +37,8 @@ public class HomeScreen extends AppCompatActivity {
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this::onMapReady);
 
+
+
         newEventButton = (FloatingActionButton) findViewById(R.id.addFloatingActionButton);
 
         newEventButton.setOnClickListener(new View.OnClickListener() {

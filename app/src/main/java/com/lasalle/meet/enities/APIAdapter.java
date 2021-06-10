@@ -33,7 +33,6 @@ public class APIAdapter{
             apiService = retrofit.create(APIService.class);
         }
 
-
         return apiService;
     }
 

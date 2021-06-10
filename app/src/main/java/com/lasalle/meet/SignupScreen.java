@@ -268,11 +268,6 @@ public class SignupScreen extends AppCompatActivity{
     private void createUser() {
         User user = new User();
 
-        Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
-        finish();
-
         //Get bitmap from the selected image
         Bitmap bitmap = ((BitmapDrawable) imageSelected.getDrawable()).getBitmap();
 
@@ -287,6 +282,12 @@ public class SignupScreen extends AppCompatActivity{
         try {
             user.signUpUser(emailSignUpText.getText().toString(),passwordSignUpText.getText().toString(),passwordRepeatedSignUpText.getText().toString(),
                     nameSignUpText.getText().toString(),surnameSignUpText.getText().toString(), imageString);
+
+            Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+
         } catch (UserEmailNullException e) {
             emailSignUpLayout.setError("The email is empty");
         } catch (UserPasswordNullException e) {

@@ -117,6 +117,7 @@
                 android:id="@+id/addFloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
                 android:src="@drawable/plus_sign"
                 app:fab_colorNormal="#5A35FF">
 
@@ -126,6 +127,7 @@
                 android:id="@+id/viewFloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
                 android:src="@drawable/eye_view"
                 app:fab_colorNormal="#FFDC50">
 
