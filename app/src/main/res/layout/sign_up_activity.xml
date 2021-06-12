@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDF8E3">
+    android:background="@color/teal_light">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/signup_textView"
@@ -15,7 +15,7 @@
         android:layout_marginTop="246dp"
         android:fontFamily="@font/gilroybold"
         android:text="@string/signup"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="@dimen/h1_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login_top_imageView" />
@@ -61,7 +61,7 @@
         android:background="#00FFFFFF"
         android:fontFamily="@font/gilroylight"
         android:text="@string/login"
-        android:textColor="#6A6A6A"
+        android:textColor="@color/black_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -71,7 +71,9 @@
         android:id="@+id/logo_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/content_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +113,7 @@
                     android:layout_alignParentEnd="false"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
-                    android:background="#CDF8E3"
+                    android:background="@color/teal_light"
                     android:focusable="true"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/name"
@@ -139,13 +141,13 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
-                    android:background="#CDF8E3"
+                    android:background="@color/teal_light"
                     android:focusable="true"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/last_name"
                     android:inputType="textVisiblePassword|textNoSuggestions"
-                    android:textColorHighlight="#6A6A6A"
-                    android:textColorHint="#6A6A6A"
+                    android:textColorHighlight="@color/black_light"
+                    android:textColorHint="@color/black_light"
                     app:errorIconDrawable="@null"
                     app:errorTextAppearance="@style/error_appearance" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -168,13 +170,13 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/side_margin"
-                    android:background="#CDF8E3"
+                    android:background="@color/teal_light"
                     android:focusable="true"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:textColorHighlight="#6A6A6A"
-                    android:textColorHint="#6A6A6A"
+                    android:textColorHighlight="@color/black_light"
+                    android:textColorHint="@color/black_light"
                     app:errorIconDrawable="@null"
                     app:errorTextAppearance="@style/error_appearance" />
 
@@ -199,12 +201,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="#CDF8E3"
+                    android:background="@color/teal_light"
                     android:ems="10"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColorHint="#6A6A6A"
+                    android:textColorHint="@color/black_light"
                     app:errorIconDrawable="@null"
                     app:errorTextAppearance="@style/error_appearance" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -229,12 +231,12 @@
                     android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
-                    android:background="#CDF8E3"
+                    android:background="@color/teal_light"
                     android:ems="10"
                     android:fontFamily="@font/gilroylight"
                     android:hint="@string/repeat_password"
                     android:inputType="textPassword"
-                    android:textColorHint="#6A6A6A"
+                    android:textColorHint="@color/black_light"
                     app:errorIconDrawable="@null"
                     app:errorTextAppearance="@style/error_appearance" />
 
@@ -253,7 +255,7 @@
                 app:cornerRadius="@dimen/radius_1"
                 app:icon="@drawable/signup_upload_picture_icon"
                 app:iconSize="60dp"
-                app:iconTint="#FFFFFF"
+                app:iconTint="@color/white"
                 app:iconTintMode="multiply" />
 
             <com.google.android.material.imageview.ShapeableImageView
