@@ -1,30 +1,23 @@
 package com.lasalle.meet.enities;
 
-import android.widget.ImageView;
+import android.content.Intent;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.lasalle.meet.apiadapter.APIService;
 import com.lasalle.meet.exceptions.apierrors.APIError;
 import com.lasalle.meet.exceptions.apierrors.ErrorUtils;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
+import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Serializable;
-import java.io.Writer;
-import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +38,13 @@ public class User implements Serializable {
 
     @Expose(serialize = false, deserialize = false)
     private int userError;
+
+    @Expose(serialize = false, deserialize = true)
+    private String accessToken;
+
+    private final static int NO_ERROR = 0;
+    private final static int USER_NOT_FOUND = 404;
+    private final static int EMAIL_EXIST = 1062;
 
     private User(String name, String last_name, String email, String password, String image) {
         this.name = name;
@@ -73,7 +73,7 @@ public class User implements Serializable {
 
             logInUser(email, password, name, last_name, image);
 
-            userError = 0;
+            userError = NO_ERROR;
 
             Call<User> call = APIAdapter.getApiService().postCreateUser(this);
 
@@ -88,8 +88,6 @@ public class User implements Serializable {
                         return;
                     }
 
-                    System.out.println(response.message());
-
                 }
 
                 @Override
@@ -100,7 +98,7 @@ public class User implements Serializable {
             });
 
             switch (userError){
-                case 1062:
+                case EMAIL_EXIST:
                     throw new UserEmailExistException();
             }
 
@@ -114,5 +112,69 @@ public class User implements Serializable {
         this.name = name;
         this.last_name = last_name;
         this.image = image;
+    }
+
+    public void logInUser(String email, String password) throws UserException {
+        if (email.equals("")) {
+            throw new UserEmailNullException();
+        } else if (password.equals("")) {
+            throw new UserPasswordNullException();
+        }else if (password.length() < 8){
+            throw new UserPasswordLowSecurityException();
+        } else{
+            userError = NO_ERROR;
+
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+
+            this.email = email;
+            this.password = password;
+
+            Call<User> call = APIAdapter.getApiService().postLoginUser(User.this);
+
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if(!response.isSuccessful()) {
+                        accessToken = null;
+                        userError = USER_NOT_FOUND;
+
+                    }else {
+                        assert response.body() != null;
+                        accessToken = response.body().accessToken;
+                    }
+                    countDownLatch.countDown();
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    countDownLatch.countDown();
+
+                }
+            });
+
+            try {
+                countDownLatch.await();
+
+                if (userError == USER_NOT_FOUND) {
+                    throw new UserIncorrectCredentialsException();
+                }
+
+            } catch (InterruptedException e) {
+                /*
+                If we are cannot wait due to an error, we need to parse again
+                 */
+                throw new UserIncorrectCredentialsException();
+            }
+
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

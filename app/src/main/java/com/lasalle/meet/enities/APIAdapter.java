@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lasalle.meet.apiadapter.APIService;
 
+import java.util.concurrent.Executors;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -28,6 +30,7 @@ public class APIAdapter{
             retrofit = new Retrofit.Builder()
                     .baseUrl("http://puigmal.salle.url.edu/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
+                    .callbackExecutor(Executors.newSingleThreadExecutor())
                     .client(httpClient.build())
                     .build();
             apiService = retrofit.create(APIService.class);

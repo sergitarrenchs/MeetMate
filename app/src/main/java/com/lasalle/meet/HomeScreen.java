@@ -19,18 +19,22 @@ import com.lasalle.meet.enities.User;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
-    float x1,x2,y1,y2;
+    private float x1,x2,y1,y2;
 
-    public FloatingActionButton newEventButton;
-    public FloatingActionButton viewTimelineButton;
+    private FloatingActionButton newEventButton;
+    private FloatingActionButton viewTimelineButton;
+
+    private User user;
+    private static String userId = "USER_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_activity);
-        Intent intent = getIntent();
-        getIntent().getSerializableExtra("user");
+
+
+        user = (User) getIntent().getSerializableExtra(userId);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -98,5 +102,16 @@ public class HomeScreen extends AppCompatActivity {
         mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+    }
+
+    /**
+     * This allow us to go back to logIn Screen
+     */
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HomeScreen.this, LoginScreen.class);
+        intent.putExtra(userId, user);
+        startActivity(intent);
     }
 }

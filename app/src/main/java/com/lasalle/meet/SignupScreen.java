@@ -29,6 +29,7 @@ import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
+import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
@@ -60,10 +61,13 @@ public class SignupScreen extends AppCompatActivity{
 
     private ImageView imageSelected;
     private User user;
+    private static String userId = "USER_ID";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_activity);
+
+        user = (User) getIntent().getSerializableExtra(userId);
 
         imageSelected = (ImageView) findViewById(R.id.profilePicture);
 
@@ -72,7 +76,18 @@ public class SignupScreen extends AppCompatActivity{
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser();
+                boolean userCreated = createUser();
+                if (userCreated) {
+
+                    boolean userLogged = searchUser();
+
+                    if (userLogged) {
+                        Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
+                        intent.putExtra(userId, user);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
             }
         });
 
@@ -87,6 +102,7 @@ public class SignupScreen extends AppCompatActivity{
                 passwordSignUpLayout.setErrorEnabled(false);
                 passwordRepeatedSignUpLayout.setErrorEnabled(false);
                 Intent intent = new Intent(SignupScreen.this, LoginScreen.class);
+                intent.putExtra(userId, user);
                 startActivity(intent);
             }
         });
@@ -265,28 +281,23 @@ public class SignupScreen extends AppCompatActivity{
         }
     }
 
-    private void createUser() {
-        User user = new User();
+    private boolean createUser() {
 
-        //Get bitmap from the selected image
-        Bitmap bitmap = ((BitmapDrawable) imageSelected.getDrawable()).getBitmap();
-
-        //Compress into a less weight var
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-
-        //Convert into base64 string
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+//        //Get bitmap from the selected image
+//        Bitmap bitmap = ((BitmapDrawable) imageSelected.getDrawable()).getBitmap();
+//
+//        //Compress into a less weight var
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+//
+//        //Convert into base64 string
+//        byte[] byteArray = byteArrayOutputStream.toByteArray();
+//        String imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
         try {
             user.signUpUser(emailSignUpText.getText().toString(),passwordSignUpText.getText().toString(),passwordRepeatedSignUpText.getText().toString(),
-                    nameSignUpText.getText().toString(),surnameSignUpText.getText().toString(), imageString);
-
-            Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
-            finish();
+                    nameSignUpText.getText().toString(),surnameSignUpText.getText().toString(), "imageString");
+            return true;
 
         } catch (UserEmailNullException e) {
             emailSignUpLayout.setError("The email is empty");
@@ -299,5 +310,28 @@ public class SignupScreen extends AppCompatActivity{
         } catch (UserEmailExistException e){
             emailSignUpLayout.setError("The email already exist");
         } catch (UserException ignored){}
+
+        return false;
+    }
+
+    private boolean searchUser() {
+        try {
+            String email = user.getEmail();
+            String password = user.getPassword();
+            user = new User();
+            user.logInUser(email, password);
+
+            return true;
+
+        } catch (UserException ignored){}
+
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignupScreen.this, LoginScreen.class);
+        intent.putExtra(userId, user);
+        startActivity(intent);
     }
 }

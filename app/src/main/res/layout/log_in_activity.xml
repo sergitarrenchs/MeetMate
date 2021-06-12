@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#CDF8E3">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/signup_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login_top_imageView" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/login_top_imageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,14 +33,17 @@
         app:srcCompat="@drawable/login_signup_top_design" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/name_login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/side_margin"
-        app:layout_constraintTop_toBottomOf="@+id/signup_textView">
+        app:layout_constraintTop_toBottomOf="@+id/signup_textView"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red">
 
-        <EditText
-            android:id="@+id/name_signup"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/signup_textView"
@@ -55,16 +58,22 @@
             android:hint="@string/email"
             android:inputType="textVisiblePassword|textNoSuggestions"
             android:textColor="#000000"
-            android:textColorHint="#000000" />
+            android:textColorHint="#000000"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/error_appearance"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/name_login_layout"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red">
 
-        <EditText
-            android:id="@+id/password_editText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name_signup"
@@ -79,11 +88,13 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#000000"
-            android:textColorHint="#000000" />
+            android:textColorHint="#000000"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/error_appearance"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signup_button"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
@@ -100,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -118,7 +129,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/logo_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
