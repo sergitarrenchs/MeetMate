@@ -63,6 +63,38 @@ public interface APIService {
     @PUT("events/ID")
     Call<Event> modifyEvent(@Body Event event);
     @DELETE("events/ID")
-    Call<Event> deleteEvent();
+    Call<Event> deleteEvent(); //WHICH ARE THE PARAMETERS??//
+
+    //EVENT ASSISTENCES//
+    @GET("events/ID/assistances")
+    Call<Event> getEventAssistans(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
+    @GET("events/ID/assistances/ID_USER")
+    Call<Event> getUserIDAssistan(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
+    @POST("events/ID/assistances")
+    Call<Event> postUserAssistanInfo(@Field("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary); //WHICH ARE THE PARAMETERS??//
+    @PUT("events/ID/assistances")
+    Call<Event> modifyUserAssistanInfo(@Field("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary); //WHICH ARE THE PARAMETERS??//
+    @DELETE("events/ID/assistances")
+    Call<Event> deleteAssistance(@Field("ID") int eventID); //WHICH ARE THE PARAMETERS??//
+
+    //FRIENDS//
+    @GET("friends/requests")
+    Call<Event> getFriendRequests(); //WHICH ARE THE PARAMETERS??//
+    @GET("friends")
+    Call<Event> getFriends(); //WHICH ARE THE PARAMETERS??//
+    @POST("friends/ID")
+    Call<Event> postFriendRequest(); //WHICH ARE THE PARAMETERS??//
+    @PUT("friends/ID")
+    Call<Event> putFriendRequestAccept(); //WHICH ARE THE PARAMETERS??//
+    @DELETE("friends/ID")
+    Call<Event> deleteFriendRequest(@Field("ID") int ID); //WHICH ARE THE PARAMETERS??//
+
+    //MESSAGES//
+    @POST("messages")
+    Call<Event> postMessage(@Field("content") String content, @Field("user_id_send") int user_id_send, @Field("user_id_recived") int user_id_recived); //WHICH ARE THE PARAMETERS??//
+    @GET("messages/users")
+    Call<Event> getUsersMessaged(); //WHICH ARE THE PARAMETERS??//
+    @GET("messages/USER_ID")
+    Call<Event> getUserIDMessages(@Field("USER_ID") int user_id); //WHICH ARE THE PARAMETERS??//
 
 }
