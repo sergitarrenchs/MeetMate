@@ -34,7 +34,6 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signup_button"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -48,7 +47,8 @@
         app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/purple_strong"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
@@ -256,7 +256,8 @@
                 app:icon="@drawable/signup_upload_picture_icon"
                 app:iconSize="60dp"
                 app:iconTint="@color/white"
-                app:iconTintMode="multiply" />
+                app:iconTintMode="multiply"
+                android:backgroundTint="@color/purple_strong"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profilePicture"
