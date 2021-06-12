@@ -5,7 +5,7 @@
     android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDF8E3"
+    android:background="@color/teal_light"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:fontFamily="@font/gilroybold"
             android:text="@string/welcome_message_morning"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#292D30"
+            android:textColor="@color/black_light"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:fab_addButtonColorNormal="#D0ABFF"
+            app:fab_addButtonColorNormal="@color/purple_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
                 android:src="@drawable/plus_sign"
-                app:fab_colorNormal="#5A35FF">
+                app:fab_colorNormal="@color/purple_strong">
 
             </com.getbase.floatingactionbutton.FloatingActionButton>
 
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
                 android:src="@drawable/eye_view"
-                app:fab_colorNormal="#FFDC50">
+                app:fab_colorNormal="@color/yellow">
 
             </com.getbase.floatingactionbutton.FloatingActionButton>
 

@@ -5,7 +5,7 @@
     android:id="@+id/chat_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDF8E3">
+    android:background="@color/teal_light">
 
     <TextView
         android:id="@+id/welcomeMessageMorning"
@@ -16,7 +16,7 @@
         android:fontFamily="@font/gilroybold"
         android:text="@string/welcome_message_morning"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#292D30"
+        android:textColor="@color/black_light"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
                         android:layout_marginEnd="2dp"
                         android:fontFamily="@font/gilroybold"
                         android:text="@string/terry_meyer"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t1_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
                         android:layout_marginEnd="2dp"
                         android:fontFamily="@font/gilroybold"
                         android:text="@string/terry_meyer"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t1_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +120,7 @@
                         android:layout_marginEnd="2dp"
                         android:fontFamily="@font/gilroybold"
                         android:text="@string/terry_meyer"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t1_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +153,7 @@
                         android:layout_marginEnd="2dp"
                         android:fontFamily="@font/gilroybold"
                         android:text="@string/terry_meyer"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t1_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
                         android:layout_marginEnd="2dp"
                         android:fontFamily="@font/gilroybold"
                         android:text="@string/terry_meyer"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t1_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -241,7 +241,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gilroybold"
         android:text="@string/terry_meyer"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="@dimen/h2_size"
         app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/profileImage" />
