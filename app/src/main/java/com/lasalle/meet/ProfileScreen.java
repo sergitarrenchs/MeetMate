@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
+import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 
 public class ProfileScreen extends AppCompatActivity {
     private MaterialButton LogOutButton;
@@ -38,7 +39,10 @@ public class ProfileScreen extends AppCompatActivity {
         LogOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user.logOutUser();
+
                 Intent intent = new Intent(ProfileScreen.this, LoginScreen.class);
+                intent.putExtra(userId, user);
                 startActivity(intent);
             }
         });
@@ -48,8 +52,14 @@ public class ProfileScreen extends AppCompatActivity {
         DeleteAccButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileScreen.this, SignupScreen.class);
-                startActivity(intent);
+                try {
+                    user.deleteUser();
+
+                    Intent intent = new Intent(ProfileScreen.this, LoginScreen.class);
+                    intent.putExtra(userId, user);
+                    startActivity(intent);
+
+                } catch (UserUnableDeletionException ignored) {}
             }
         });
 

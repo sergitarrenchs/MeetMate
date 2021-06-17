@@ -50,8 +50,10 @@ public interface APIService {
 
 //    @PUT("users")
 //    Call<User> modifyUser(@Body User user);
-//    @DELETE("users")
-//    Call<User> deleteUser();
+
+    @DELETE("users")
+    Call<User> deleteUser(@Header("Authorization") String Token);
+
 //    @GET("users/ID/friends")
 //    Call<Event> getUserFriend(@Field("ID") int ID);
 //

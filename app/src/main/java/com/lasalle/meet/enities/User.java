@@ -13,6 +13,7 @@ import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsExcept
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
+import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -48,6 +49,7 @@ public class User implements Serializable {
     private final static int NO_ERROR = 0;
     private final static int USER_NOT_FOUND = 404;
     private final static int EMAIL_EXIST = 1062;
+    private final static int UNAUTHORISED = 401;
 
     private User(String name, String last_name, String email, String password, String image) {
         this.name = name;
@@ -200,6 +202,44 @@ public class User implements Serializable {
             }
 
         }
+    }
+
+    public void logOutUser() {
+        name = null;
+        last_name = null;
+        email = null;
+        password = null;
+        image = null;
+        username = null;
+        id = 0;
+        accessToken = null;
+    }
+
+    public void deleteUser() throws UserUnableDeletionException {
+        //accessToken
+        Call<User> call = APIAdapter.getApiService().deleteUser("Bearer " + this.accessToken);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    //TODO: WHAT
+                    userError = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
+        if (userError == UNAUTHORISED) {
+            throw new UserUnableDeletionException();
+        }
+
+        logOutUser();
+
     }
 
     public String getEmail() {

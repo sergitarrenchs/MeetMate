@@ -260,6 +260,8 @@ public class HomeScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        user.logOutUser();
+
         Intent intent = new Intent(HomeScreen.this, LoginScreen.class);
         intent.putExtra(userId, user);
         startActivity(intent);
