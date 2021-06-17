@@ -15,7 +15,6 @@ import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -36,8 +35,6 @@ public class User implements Serializable {
     private String image;
     @Expose(serialize = false, deserialize = false)
     private String username;
-    @Expose(serialize = false, deserialize = false)
-    private int id;
 
     @Expose(serialize = false, deserialize = false)
     private int userError;
@@ -163,35 +160,6 @@ public class User implements Serializable {
                     throw new UserIncorrectCredentialsException();
                 }
 
-                CountDownLatch countDownLatch2 = new CountDownLatch(1);
-
-                Call<List<User>> userCall = APIAdapter.getApiService().searchUser(this.email, "Bearer " + this.accessToken);
-
-                userCall.enqueue(new Callback<List<User>>() {
-                    @Override
-                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                        if (!response.isSuccessful()){
-                            //TODO: Log in
-                            countDownLatch2.countDown();
-                            return;
-                        }
-
-                        List<User> users = response.body();
-                        assert users != null;
-                        User.this.id = users.get(0).id;
-
-                        User.this.logInUser(User.this.email, User.this.password, users.get(0).name, users.get(0).last_name, users.get(0).image);
-                        countDownLatch2.countDown();
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<User>> call, Throwable t) {
-                        countDownLatch2.countDown();
-                    }
-                });
-
-                countDownLatch2.await();
-
             } catch (InterruptedException e) {
                 /*
                 If we are cannot wait due to an error, we need to parse again
@@ -208,25 +176,5 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFullName() {
-        return name + " " + last_name;
     }
 }

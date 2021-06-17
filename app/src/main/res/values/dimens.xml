@@ -14,5 +14,6 @@
 
     //RADIUS//
     <dimen name="radius_1">20dp</dimen>
+    <dimen name="radius_2">16dp</dimen>
 
 </resources>

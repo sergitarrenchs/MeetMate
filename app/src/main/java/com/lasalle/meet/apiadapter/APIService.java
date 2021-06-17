@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 
-import java.util.List;
-
 import kotlin.sequences.USequencesKt;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -15,11 +13,9 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -34,8 +30,7 @@ public interface APIService {
     Call<User> postLoginUser(@Body User user);
 
     //USERS
-    //@Headers("Content-Type: multipart/form-data") I want to change it
-    @Headers("Content-type: application/json")
+    @Headers("Content-Type: multipart/form-data")
     @POST("users")
     public Call<User> postCreateUser(@Body User user);
 
@@ -43,11 +38,8 @@ public interface APIService {
 //    Call<User> getUser();
 //    @GET("users/")
 //    Call<User> getUserID();
-
-    @GET("users/search/")
-    Call<List<User>> searchUser(@Query("s") String s, @Header("Authorization") String Token);
-
-
+//    @GET("users/search/?s=john")
+//    Call<User> searchUser(@Field("s") String s);
 //    @PUT("users")
 //    Call<User> modifyUser(@Body User user);
 //    @DELETE("users")
