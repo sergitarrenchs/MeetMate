@@ -27,6 +27,7 @@ public class HomeScreen extends AppCompatActivity {
     private User user;
     private static String userId = "USER_ID";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
