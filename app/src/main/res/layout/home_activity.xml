@@ -52,27 +52,29 @@
                     android:scrollbars="none">
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:backgroundTint="@color/white"
-                        android:fontFamily="@font/gilroybold"
-                        android:text="@string/event_type_all"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"/>
-
-
-                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/all_type_button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineAmbientShadowColor="@color/transparent"
+                        android:outlineSpotShadowColor="@color/transparent"
+                        android:text="@string/event_type_all"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/t1_size"
+                        android:theme="@style/Widget.AppCompat.Button"
+                        app:cornerRadius="@dimen/radius_1" />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/education_type_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:backgroundTint="@color/transparent"
+                        android:fontFamily="@font/gilroybold"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:text="@string/event_type_education"
                         android:textColor="@color/black_light"
@@ -81,13 +83,13 @@
                         app:cornerRadius="@dimen/radius_1" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/games_type_button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineAmbientShadowColor="@color/transparent"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:text="@string/event_type_games"
                         android:textColor="@color/black_light"
@@ -96,13 +98,13 @@
                         app:cornerRadius="@dimen/radius_1" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/music_type_button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineAmbientShadowColor="@color/transparent"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:text="@string/event_type_music"
                         android:textColor="@color/black_light"
@@ -111,13 +113,13 @@
                         app:cornerRadius="@dimen/radius_1" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sports_type_button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineAmbientShadowColor="@color/transparent"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:text="@string/event_type_sports"
                         android:textColor="@color/black_light"
@@ -126,13 +128,13 @@
                         app:cornerRadius="@dimen/radius_1" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/travel_type_button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineAmbientShadowColor="@color/transparent"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:text="@string/event_type_Travel"
                         android:textColor="@color/black_light"

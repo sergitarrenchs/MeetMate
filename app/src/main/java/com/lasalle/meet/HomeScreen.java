@@ -32,6 +32,12 @@ public class HomeScreen extends AppCompatActivity {
 
     private FloatingActionButton newEventButton;
     private FloatingActionButton viewTimelineButton;
+    private Button allTypeButton;
+    private Button educationTypeButton;
+    private Button gamesTypeButton;
+    private Button musicTypeButton;
+    private Button sportsTypeButton;
+    private Button travelTypeButton;
 
     private TextView welcomeMessage;
 
@@ -80,6 +86,91 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+
+        allTypeButton = (Button) findViewById(R.id.all_type_button);
+        allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+
+        allTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+            }
+        });
+
+        educationTypeButton = (Button) findViewById(R.id.education_type_button);
+
+        educationTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+            }
+        });
+
+        gamesTypeButton = (Button) findViewById(R.id.games_type_button);
+
+        gamesTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+            }
+        });
+
+        musicTypeButton = (Button) findViewById(R.id.music_type_button);
+
+        musicTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+            }
+        });
+
+        sportsTypeButton = (Button) findViewById(R.id.sports_type_button);
+
+        sportsTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+            }
+        });
+
+        travelTypeButton = (Button) findViewById(R.id.travel_type_button);
+
+        travelTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
     }
 
     private void compareDates() {
