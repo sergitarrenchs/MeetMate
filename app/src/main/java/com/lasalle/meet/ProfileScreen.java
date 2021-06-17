@@ -101,4 +101,13 @@ public class ProfileScreen extends AppCompatActivity {
         }
         return false;
     }
+
+    @Override
+    public void onBackPressed() {
+        user.logOutUser();
+
+        Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
+        intent.putExtra(userId, user);
+        startActivity(intent);
+    }
 }

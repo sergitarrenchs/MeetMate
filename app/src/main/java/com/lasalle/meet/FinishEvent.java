@@ -12,15 +12,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lasalle.meet.enities.User;
 
 
 public class FinishEvent extends AppCompatActivity {
     private GoogleMap mMap;
-    public ImageButton CreateButton;
+    private ImageButton CreateButton;
+
+    private User user;
+    private static String userId = "USER_ID";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_2_activity);
+
+        user = (User) getIntent().getSerializableExtra(userId);
 
         CreateButton = (ImageButton) findViewById(R.id.create_button_image);
 
@@ -55,5 +61,14 @@ public class FinishEvent extends AppCompatActivity {
         mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+    }
+
+    @Override
+    public void onBackPressed() {
+        user.logOutUser();
+
+        Intent intent = new Intent(FinishEvent.this, NewEvent.class);
+        intent.putExtra(userId, user);
+        startActivity(intent);
     }
 }

@@ -71,6 +71,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, NewEvent.class);
+                intent.putExtra(userId, user);
                 startActivity(intent);
             }
         });
@@ -81,6 +82,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, EventTimeline.class);
+                intent.putExtra(userId, user);
                 startActivity(intent);
             }
         });
