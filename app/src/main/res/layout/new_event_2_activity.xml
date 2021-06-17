@@ -18,7 +18,7 @@
         android:focusable="true"
         android:fontFamily="@font/gilroylight"
         android:hint="@string/event_location"
-        android:inputType="textVisiblePassword|textNoSuggestions|textPostalAddress"
+        android:inputType="textVisiblePassword|textNoSuggestions"
         android:textColorHighlight="@color/black_light"
         android:textColorHint="@color/black_light"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,23 +26,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/upload_profile_pic_button2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
+        android:background="@color/white"
         android:fontFamily="@font/gilroylight"
         android:text="@string/upload_event_picture"
         android:textColor="@color/white"
         android:textSize="@dimen/t1_size"
-        app:cornerRadius="@dimen/radius_2"
         app:icon="@drawable/signup_upload_picture_icon"
         app:iconSize="60dp"
-        app:iconTint="@color/white"
-        app:iconTintMode="multiply"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_details_textView" />
 
@@ -83,19 +82,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <fragment
+    <com.google.android.gms.maps.MapView
         android:id="@+id/event_location_mapView"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/side_margin"
         app:layout_constraintBottom_toTopOf="@+id/create_button_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup7"
-        tools:context=".MapsActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/event_name_signup7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,8 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,14 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.lasalle.meet.enities.User;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
@@ -32,21 +23,6 @@ public class HomeScreen extends AppCompatActivity {
 
     private FloatingActionButton newEventButton;
     private FloatingActionButton viewTimelineButton;
-    private Button allTypeButton;
-    private Button educationTypeButton;
-    private Button gamesTypeButton;
-    private Button musicTypeButton;
-    private Button sportsTypeButton;
-    private Button travelTypeButton;
-
-    private TextView welcomeMessage;
-
-    private Date date;
-    private Date dateCompareMorning;
-    private Date dateCompareAfternoon;
-    private Date dateCompareNight;
-    public static final String inputFormat = "HH:mm";
-    SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.GERMANY);
 
     private User user;
     private static String userId = "USER_ID";
@@ -56,7 +32,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_activity);
-        compareDates();
+
 
         user = (User) getIntent().getSerializableExtra(userId);
 
@@ -64,6 +40,7 @@ public class HomeScreen extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this::onMapReady);
+
 
 
         newEventButton = (FloatingActionButton) findViewById(R.id.addFloatingActionButton);
@@ -85,129 +62,6 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-        allTypeButton = (Button) findViewById(R.id.all_type_button);
-        allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-
-        allTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-            }
-        });
-
-        educationTypeButton = (Button) findViewById(R.id.education_type_button);
-
-        educationTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-            }
-        });
-
-        gamesTypeButton = (Button) findViewById(R.id.games_type_button);
-
-        gamesTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-            }
-        });
-
-        musicTypeButton = (Button) findViewById(R.id.music_type_button);
-
-        musicTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-            }
-        });
-
-        sportsTypeButton = (Button) findViewById(R.id.sports_type_button);
-
-        sportsTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-            }
-        });
-
-        travelTypeButton = (Button) findViewById(R.id.travel_type_button);
-
-        travelTypeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                allTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                educationTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                gamesTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
-                travelTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-            }
-        });
-    }
-
-    private void compareDates() {
-        welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
-
-        String compareStringMorning = "6:00";
-        String compareStringAfternoon = "12:00";
-        String compareStringNight = "21:00";
-
-        Calendar now = Calendar.getInstance();
-
-
-        int hour = now.get(Calendar.HOUR);
-        int minute = now.get(Calendar.MINUTE);
-
-        date = parseDate(hour + ":" + minute);
-        dateCompareMorning = parseDate(compareStringMorning);
-        dateCompareAfternoon = parseDate(compareStringAfternoon);
-        dateCompareNight = parseDate(compareStringNight);
-
-        if (dateCompareAfternoon.before(date) && dateCompareMorning.after(date)) {
-            welcomeMessage.setText(getResources().getString(R.string.welcome_message_morning));
-        }
-        else if(dateCompareNight.before(date) && dateCompareAfternoon.after(date)){
-            welcomeMessage.setText(getResources().getString(R.string.welcome_message_afternoon));
-        }
-        else{
-            welcomeMessage.setText(getResources().getString(R.string.welcome_message_night));
-        }
-    }
-
-    private Date parseDate(String date) {
-        try {
-            return inputParser.parse(date);
-        } catch (java.text.ParseException e) {
-            return new Date(0);
-        }
     }
 
     public boolean onTouchEvent(MotionEvent touchEvent){
@@ -221,6 +75,7 @@ public class HomeScreen extends AppCompatActivity {
                 y2 = touchEvent.getY();
                 if(x1 < x2){
                 Intent i = new Intent(HomeScreen.this, ProfileScreen.class);
+                i.putExtra(userId, user);
                 startActivity(i);
             }else if(x1 > x2){
                 Intent i = new Intent(HomeScreen.this, ChatScreen.class);

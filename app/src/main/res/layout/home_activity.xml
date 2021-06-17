@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/welcomeMessage"
+            android:id="@+id/welcomeMessageMorning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/side_margin"
@@ -34,111 +34,57 @@
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginTop="@dimen/side_margin"
             android:layout_marginEnd="@dimen/side_margin"
-            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeMessage">
+            app:layout_constraintTop_toBottomOf="@+id/welcomeMessageMorning">
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/all_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
+
                         android:text="@string/event_type_all"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:backgroundTint="@color/purple_strong"/>
 
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/education_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
-                        android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
-                        android:text="@string/event_type_education"
-                        android:textColor="@color/black_light"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:text="@string/event_type_education" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/games_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
-                        android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
-                        android:text="@string/event_type_games"
-                        android:textColor="@color/black_light"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:text="@string/event_type_games" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/music_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
-                        android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
-                        android:text="@string/event_type_music"
-                        android:textColor="@color/black_light"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:text="@string/event_type_music" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/sports_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
-                        android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
-                        android:text="@string/event_type_sports"
-                        android:textColor="@color/black_light"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:text="@string/event_type_sports" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/travel_type_button"
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:backgroundTint="@color/transparent"
-                        android:fontFamily="@font/gilroybold"
-                        android:outlineSpotShadowColor="@color/transparent"
-                        android:text="@string/event_type_Travel"
-                        android:textColor="@color/black_light"
-                        android:textSize="@dimen/t1_size"
-                        android:theme="@style/Widget.AppCompat.Button"
-                        app:cornerRadius="@dimen/radius_1" />
+                        android:text="@string/event_type_Travel" />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -148,9 +94,9 @@
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_marginTop="@dimen/side_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
