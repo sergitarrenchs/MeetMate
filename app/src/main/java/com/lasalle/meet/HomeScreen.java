@@ -6,8 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +15,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
 
 import java.text.SimpleDateFormat;
@@ -32,31 +30,32 @@ public class HomeScreen extends AppCompatActivity {
 
     private FloatingActionButton newEventButton;
     private FloatingActionButton viewTimelineButton;
-    private Button allTypeButton;
-    private Button educationTypeButton;
-    private Button gamesTypeButton;
-    private Button musicTypeButton;
-    private Button sportsTypeButton;
-    private Button travelTypeButton;
 
-    private TextView welcomeMessage;
+    private MaterialButton allTypeButton;
+    private MaterialButton educationTypeButton;
+    private MaterialButton gamesTypeButton;
+    private MaterialButton musicTypeButton;
+    private MaterialButton sportsTypeButton;
+    private MaterialButton travelTypeButton;
+
+    private MaterialTextView welcomeMessage;
+
+    private User user;
+    private static String userId = "USER_ID";
 
     private Date date;
     private Date dateCompareMorning;
     private Date dateCompareAfternoon;
     private Date dateCompareNight;
     public static final String inputFormat = "HH:mm";
-    SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.GERMANY);
-
-    private User user;
-    private static String userId = "USER_ID";
+    private SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.GERMANY);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_activity);
-        compareDates();
+
 
         user = (User) getIntent().getSerializableExtra(userId);
 
@@ -86,8 +85,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-
-        allTypeButton = (Button) findViewById(R.id.all_type_button);
+        allTypeButton = (MaterialButton) findViewById(R.id.all_type_button);
         allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
 
         allTypeButton.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +100,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        educationTypeButton = (Button) findViewById(R.id.education_type_button);
+        educationTypeButton = (MaterialButton) findViewById(R.id.education_type_button);
 
         educationTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +114,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        gamesTypeButton = (Button) findViewById(R.id.games_type_button);
+        gamesTypeButton = (MaterialButton) findViewById(R.id.games_type_button);
 
         gamesTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +128,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        musicTypeButton = (Button) findViewById(R.id.music_type_button);
+        musicTypeButton = (MaterialButton) findViewById(R.id.music_type_button);
 
         musicTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +142,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        sportsTypeButton = (Button) findViewById(R.id.sports_type_button);
+        sportsTypeButton = (MaterialButton) findViewById(R.id.sports_type_button);
 
         sportsTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +156,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        travelTypeButton = (Button) findViewById(R.id.travel_type_button);
+        travelTypeButton = (MaterialButton) findViewById(R.id.travel_type_button);
 
         travelTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,12 +167,56 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+
+
             }
         });
     }
 
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if(x1 < x2){
+                Intent i = new Intent(HomeScreen.this, ProfileScreen.class);
+                i.putExtra(userId, user);
+                startActivity(i);
+            }else if(x1 > x2){
+                Intent i = new Intent(HomeScreen.this, ChatScreen.class);
+                i.putExtra(userId, user);
+                startActivity(i);
+            }
+            break;
+        }
+        return false;
+    }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng barcelona = new LatLng(41.390205,2.154007);
+        mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+    }
+
     private void compareDates() {
-        welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
+        welcomeMessage = (MaterialTextView) findViewById(R.id.welcomeMessage);
 
         String compareStringMorning = "6:00";
         String compareStringAfternoon = "12:00";
@@ -210,45 +252,7 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
-    public boolean onTouchEvent(MotionEvent touchEvent){
-        switch(touchEvent.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                x1 = touchEvent.getX();
-                y1 = touchEvent.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = touchEvent.getX();
-                y2 = touchEvent.getY();
-                if(x1 < x2){
-                Intent i = new Intent(HomeScreen.this, ProfileScreen.class);
-                startActivity(i);
-            }else if(x1 > x2){
-                Intent i = new Intent(HomeScreen.this, ChatScreen.class);
-                startActivity(i);
-            }
-            break;
-        }
-        return false;
-    }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng barcelona = new LatLng(41.390205,2.154007);
-        mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
-    }
 
     /**
      * This allow us to go back to logIn Screen

@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -55,7 +54,6 @@ public class SignupScreen extends AppCompatActivity{
     private TextInputLayout surnameSignUpLayout;
     private TextInputLayout emailSignUpLayout;
     private TextInputLayout passwordSignUpLayout;
-
     private TextInputLayout passwordRepeatedSignUpLayout;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
@@ -269,6 +267,7 @@ public class SignupScreen extends AppCompatActivity{
 
                 if (selectedImageUri != null) {
                     try {
+
                         InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 

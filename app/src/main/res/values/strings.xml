@@ -8,29 +8,29 @@
 
 
     //HOME STRINGS//
-        //Top welcome message//
-            <string name="welcome_message_morning">Good Morning</string>
-            <string name="welcome_message_afternoon">Good Afternoon</string>
-            <string name="welcome_message_night">Good Night</string>
-        //Event Type message//
-            <string name="event_type_all">All</string>
-            <string name="event_type_games">Games</string>
-            <string name="event_type_music">Music</string>
-            <string name="event_type_sports">Sports</string>
-            <string name="event_type_Travel">Travel</string>
-            <string name="event_type_education">Education</string>
+    //Top welcome message//
+    <string name="welcome_message_morning">Good Morning</string>
+    <string name="welcome_message_afternoon">Good Afternoon</string>
+    <string name="welcome_message_night">Good Night</string>
+    //Event Type message//
+    <string name="event_type_all">All</string>
+    <string name="event_type_games">Games</string>
+    <string name="event_type_music">Music</string>
+    <string name="event_type_sports">Sports</string>
+    <string name="event_type_Travel">Travel</string>
+    <string name="event_type_education">Education</string>
 
     //LOGIN/SIGNUP STRINGS//
-        <string name="login">LOG IN</string>
-        <string name="signup">SIGN UP</string>
-        <string name="or">OR</string>
-        <string name="content_description">Sign up top design</string>
-        <string name="name">NAME</string>
-        <string name="last_name">LAST NAME</string>
-        <string name="email">EMAIL</string>
-        <string name="password">PASSWORD</string>
-        <string name="repeat_password">REPEAT PASSWORD</string>
-        <string name="upload_profile_picture">UPLOAD PROFILE PICTURE</string>
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="or">OR</string>
+    <string name="content_description">Sign up top design</string>
+    <string name="name">NAME</string>
+    <string name="last_name">LAST NAME</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
+    <string name="repeat_password">REPEAT PASSWORD</string>
+    <string name="upload_profile_picture">UPLOAD PROFILE PICTURE</string>
 
     //NEW EVENT//
     <string name="event_details">Event Details</string>
