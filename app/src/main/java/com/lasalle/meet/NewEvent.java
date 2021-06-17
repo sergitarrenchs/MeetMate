@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompatExtras;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.lasalle.meet.enities.User;
 
 
@@ -17,6 +18,13 @@ public class NewEvent extends AppCompatActivity {
 
     private User user;
     private static String userId = "USER_ID";
+
+    private TextInputEditText eventName;
+    private TextInputEditText eventDescription;
+    private TextInputEditText eventStartDate;
+    private TextInputEditText eventEndDate;
+    private TextInputEditText eventType;
+    private TextInputEditText eventMaxParticipants;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,13 @@ public class NewEvent extends AppCompatActivity {
             intent.putExtra(userId, user);
             startActivity(intent);
         });
+
+        eventName = (TextInputEditText) findViewById(R.id.event_name_signup2);
+        eventDescription = (TextInputEditText) findViewById(R.id.event_name_signup);
+        eventStartDate = (TextInputEditText) findViewById(R.id.event_name_signup3);
+        eventEndDate = (TextInputEditText) findViewById(R.id.event_name_signup4);
+        eventType = (TextInputEditText) findViewById(R.id.event_name_signup6);
+        eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_name_signup5);
     }
 
     @Override

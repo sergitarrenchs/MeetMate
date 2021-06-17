@@ -12,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 
 
@@ -21,6 +22,8 @@ public class FinishEvent extends AppCompatActivity {
 
     private User user;
     private static String userId = "USER_ID";
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,5 +73,9 @@ public class FinishEvent extends AppCompatActivity {
         Intent intent = new Intent(FinishEvent.this, NewEvent.class);
         intent.putExtra(userId, user);
         startActivity(intent);
+    }
+
+    private void createNewEvent(){
+        //Event.createNewEvent();
     }
 }

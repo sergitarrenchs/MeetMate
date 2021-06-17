@@ -44,6 +44,7 @@ public interface APIService {
 //    @GET("users/")
 //    Call<User> getUserID();
 
+    @Headers("Content-type: application/json")
     @GET("users/search/")
     Call<List<User>> searchUser(@Query("s") String s, @Header("Authorization") String Token);
 
@@ -51,6 +52,7 @@ public interface APIService {
 //    @PUT("users")
 //    Call<User> modifyUser(@Body User user);
 
+    @Headers("Content-type: application/json")
     @DELETE("users")
     Call<User> deleteUser(@Header("Authorization") String Token);
 
@@ -74,8 +76,9 @@ public interface APIService {
 //    Call<Event> getFinishedUserAssistances(@Field("ID") int ID);
 //
 //    //EVENT CRUD//
-//    @POST("events")
-//    Call<Event> postEvent(@Body Event event);
+    @Headers("Content-type: application/json")
+    @POST("events")
+    Call<Event> postEvent(@Body Event event, @Header("Authorization") String Token);
 //    @GET("events")
 //    Call<Event> getEvent(@Field("t") String type);
 //    @GET("events/ID")
