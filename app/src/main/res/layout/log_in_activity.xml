@@ -56,11 +56,11 @@
             android:focusable="true"
             android:fontFamily="@font/gilroylight"
             android:hint="@string/email"
-            android:inputType="textVisiblePassword|textNoSuggestions"
-            app:errorIconDrawable="@null"
-            app:errorTextAppearance="@style/error_appearance"
+            android:inputType="textVisiblePassword|textNoSuggestions|textEmailAddress"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/error_appearance" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
