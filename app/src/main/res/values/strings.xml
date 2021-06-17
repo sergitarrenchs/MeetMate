@@ -11,7 +11,7 @@
         //Top welcome message//
             <string name="welcome_message_morning">Good Morning</string>
             <string name="welcome_message_afternoon">Good Afternoon</string>
-            <string name="welcome_message_night">Good Afternoon</string>
+            <string name="welcome_message_night">Good Night</string>
         //Event Type message//
             <string name="event_type_all">All</string>
             <string name="event_type_games">Games</string>
