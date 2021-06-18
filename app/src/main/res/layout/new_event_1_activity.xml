@@ -55,16 +55,17 @@
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
         android:fontFamily="@font/gilroylight"
         android:hint="@string/start_date"
-        android:inputType="date|textVisiblePassword|textNoSuggestions"
         android:textColorHighlight="@color/black_light"
         android:textColorHint="@color/black_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup" />
+        app:layout_constraintTop_toBottomOf="@+id/event_name_signup"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/event_name_signup4"
@@ -75,16 +76,17 @@
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
         android:fontFamily="@font/gilroylight"
         android:hint="@string/end_date"
-        android:inputType="date|textVisiblePassword|textNoSuggestions"
         android:textColorHighlight="@color/black_light"
         android:textColorHint="@color/black_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup3" />
+        app:layout_constraintTop_toBottomOf="@+id/event_name_signup3"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/event_name_signup5"
@@ -98,7 +100,7 @@
         android:focusable="true"
         android:fontFamily="@font/gilroylight"
         android:hint="@string/max_participants"
-        android:inputType="textVisiblePassword|textNoSuggestions|number"
+        android:inputType="number"
         android:textColorHighlight="@color/black_light"
         android:textColorHint="@color/black_light"
         app:layout_constraintEnd_toEndOf="parent"

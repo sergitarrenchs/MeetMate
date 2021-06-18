@@ -12,8 +12,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.textfield.TextInputEditText;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class FinishEvent extends AppCompatActivity {
@@ -23,13 +28,42 @@ public class FinishEvent extends AppCompatActivity {
     private User user;
     private static String userId = "USER_ID";
 
+    private static String event_name = "EVENT_NAME";
+    private static String event_description = "EVENT_DESCRIPTION";
+    private static String event_startDate = "EVENT_START_DATE";
+    private static String event_endDate = "EVENT_END_DATE";
+    private static String event_Type = "EVENT_TYPE";
+    private static String event_Num = "EVENT_NUM";
 
+    private String eventName;
+    private String eventDescription;
+    private Date eventStartDate;
+    private Date eventEndDate;
+    private String eventType;
+    private int eventMaxParticipants;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_2_activity);
 
         user = (User) getIntent().getSerializableExtra(userId);
+
+        eventName = (String) getIntent().getSerializableExtra(event_name);
+        eventDescription = (String) getIntent().getSerializableExtra(event_description);
+        try {
+            eventStartDate = new SimpleDateFormat("dd/MM/yyyy").parse((String) getIntent().getSerializableExtra(event_startDate));
+        } catch (ParseException e) {
+            eventStartDate = null;
+        }
+        try {
+            eventEndDate = new SimpleDateFormat("dd/MM/yyyy").parse((String) getIntent().getSerializableExtra(event_endDate));
+        } catch (ParseException e) {
+            eventEndDate = null;
+        }
+
+        eventType = (String) getIntent().getSerializableExtra(event_Type);
+
+        eventMaxParticipants = (int) getIntent().getSerializableExtra(event_Num);
 
         CreateButton = (ImageButton) findViewById(R.id.create_button_image);
 
