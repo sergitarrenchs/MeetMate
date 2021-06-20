@@ -177,8 +177,6 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
-
-
             }
         });
     }
