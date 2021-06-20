@@ -2,13 +2,16 @@ package com.lasalle.meet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
@@ -17,10 +20,13 @@ public class ProfileScreen extends AppCompatActivity {
     private MaterialButton LogOutButton;
     private MaterialButton DeleteAccButton;
 
-    private MaterialTextView fullNameText;
-    private MaterialTextView emailText;
-    private MaterialTextView passwordText;
-    private MaterialTextView usernameText;
+    private FloatingActionButton editButton;
+    private boolean infoEditable = false;
+
+    private TextInputEditText fullNameText;
+    private TextInputEditText emailText;
+    private TextInputEditText passwordText;
+    private TextInputEditText usernameText;
 
     private float x1,x2,y1,y2;
 
@@ -63,19 +69,44 @@ public class ProfileScreen extends AppCompatActivity {
             }
         });
 
-        fullNameText = (MaterialTextView) findViewById(R.id.profile_name);
+        fullNameText = (TextInputEditText) findViewById(R.id.profile_name);
         fullNameText.setText(user.getFullName());
+        fullNameText.setEnabled(false);
 
-        emailText = (MaterialTextView) findViewById(R.id.progile_name4);
+        emailText = (TextInputEditText) findViewById(R.id.profile_email);
         emailText.setText(user.getEmail());
+        emailText.setEnabled(false);
 
-        passwordText = (MaterialTextView) findViewById(R.id.progile_name6);
+        passwordText = (TextInputEditText) findViewById(R.id.profile_password);
         passwordText.setText(user.getPassword());
+        passwordText.setEnabled(false);
 
-        usernameText = (MaterialTextView) findViewById(R.id.progile_name2);
+
+        usernameText = (TextInputEditText) findViewById(R.id.progile_username);
         usernameText.setText(user.getUsername());
+        usernameText.setEnabled(false);
 
 
+
+        editButton = (FloatingActionButton) findViewById(R.id.editProfileInfoButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!infoEditable) {
+                    fullNameText.setEnabled(true);
+                    emailText.setEnabled(true);
+                    passwordText.setEnabled(true);
+                    usernameText.setEnabled(true);
+                    infoEditable = true;
+                }else{
+                    fullNameText.setEnabled(false);
+                    emailText.setEnabled(false);
+                    passwordText.setEnabled(false);
+                    usernameText.setEnabled(false);
+                    infoEditable = false;
+                }
+            }
+        });
 
     }
 

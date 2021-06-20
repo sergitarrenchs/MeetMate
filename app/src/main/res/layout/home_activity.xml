@@ -165,6 +165,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:fab_addButtonColorNormal="@color/purple_light"
+            app:fab_addButtonColorPressed="@color/purple_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -174,7 +175,8 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
                 android:src="@drawable/plus_sign"
-                app:fab_colorNormal="@color/purple_strong">
+                app:fab_colorNormal="@color/purple_strong"
+                app:fab_colorPressed="@color/purple_strong">
 
             </com.getbase.floatingactionbutton.FloatingActionButton>
 
@@ -184,7 +186,8 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
                 android:src="@drawable/eye_view"
-                app:fab_colorNormal="@color/yellow">
+                app:fab_colorNormal="@color/yellow"
+                app:fab_colorPressed="@color/yellow">
 
             </com.getbase.floatingactionbutton.FloatingActionButton>
 

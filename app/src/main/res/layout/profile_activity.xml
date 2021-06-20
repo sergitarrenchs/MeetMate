@@ -180,6 +180,7 @@
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/youhave_textView3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.49"
         app:srcCompat="@drawable/profile_background" />
@@ -206,13 +207,16 @@
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin"
+        android:background="@null"
+        android:fallbackLineSpacing="false"
         android:fontFamily="@font/gilroybold"
+        android:singleLine="false"
         android:text="@string/terry_meyer"
         android:textColor="@color/black"
         android:textSize="@dimen/h2_size"
@@ -220,7 +224,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progile_name3"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
@@ -233,7 +237,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progile_name5"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
@@ -243,10 +247,10 @@
         android:textColor="@color/black"
         android:textSize="@dimen/h2_size"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/progile_name4" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_email"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progile_name2"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/progile_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
@@ -254,10 +258,11 @@
         android:text="@string/username_tm"
         android:textSize="@dimen/t1_size"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_name"
+        android:background="@null"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progile_name4"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -265,10 +270,11 @@
         android:text="@string/username_tm"
         android:textSize="@dimen/t1_size"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/progile_name3" />
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        android:background="@null"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progile_name6"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/profile_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
@@ -276,20 +282,23 @@
         android:text="@string/username_tm"
         android:textSize="@dimen/t1_size"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/progile_name5" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:background="@null"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+    <com.getbase.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:paddingBottom="15dp"
         android:clickable="true"
-        app:backgroundTint="@color/purple_light"
+        app:fab_colorNormal="@color/purple_light"
+        app:fab_colorPressed="@color/purple_light"
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:srcCompat="@drawable/edit_icon" />
+        android:src="@drawable/edit_icon"
+        android:id="@+id/editProfileInfoButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
