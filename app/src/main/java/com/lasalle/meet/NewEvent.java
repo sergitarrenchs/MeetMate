@@ -13,8 +13,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompatExtras;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.lasalle.meet.enities.DatePickerFragment;
+import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
+import com.lasalle.meet.exceptions.eventexceptions.EventDateStartAfterEndException;
+import com.lasalle.meet.exceptions.eventexceptions.EventDateStartBeforeNowException;
+import com.lasalle.meet.exceptions.eventexceptions.EventEndDateInvalidException;
+import com.lasalle.meet.exceptions.eventexceptions.EventException;
+import com.lasalle.meet.exceptions.eventexceptions.EventInvalidNumberException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNameNullException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNullDescriptionException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNullFinishException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNullNumberException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNullStartDateException;
+import com.lasalle.meet.exceptions.eventexceptions.EventNullTypeException;
+import com.lasalle.meet.exceptions.eventexceptions.EventStartDateInvalidException;
 
 
 public class NewEvent extends AppCompatActivity {
@@ -37,6 +51,13 @@ public class NewEvent extends AppCompatActivity {
     private TextInputEditText eventType;
     private TextInputEditText eventMaxParticipants;
 
+    private TextInputLayout eventName_layout;
+    private TextInputLayout eventDescription_layout;
+    private TextInputLayout eventStartDate_layout;
+    private TextInputLayout eventEndDate_layout;
+    private TextInputLayout eventType_layout;
+    private TextInputLayout eventMaxParticipants_layout;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_1_activity);
@@ -46,16 +67,41 @@ public class NewEvent extends AppCompatActivity {
         NextButton = (ImageButton) findViewById(R.id.next_button_imageView);
 
         NextButton.setOnClickListener(v -> {
-            Intent intent = new Intent(NewEvent.this, FinishEvent.class);
-            intent.putExtra(userId, user);
-            intent.putExtra(event_name, eventName.getText().toString());
-            intent.putExtra(event_description, eventDescription.getText().toString());
-            intent.putExtra(event_startDate, eventStartDate.getText().toString());
-            intent.putExtra(event_endDate, eventEndDate.getText().toString());
-            intent.putExtra(event_Type, eventType.getText().toString());
-            intent.putExtra(event_Num, Integer.parseInt(eventMaxParticipants.getText().toString()));
-
-            startActivity(intent);
+//            Intent intent = new Intent(NewEvent.this, FinishEvent.class);
+//            intent.putExtra(userId, user);
+//            intent.putExtra(event_name, eventName.getText().toString());
+//            intent.putExtra(event_description, eventDescription.getText().toString());
+//            intent.putExtra(event_startDate, eventStartDate.getText().toString());
+//            intent.putExtra(event_endDate, eventEndDate.getText().toString());
+//            intent.putExtra(event_Type, eventType.getText().toString());
+//            intent.putExtra(event_Num, Integer.parseInt(eventMaxParticipants.getText().toString()));
+//
+//            startActivity(intent);
+            try {
+                Event.newEventCheck(eventName.getText().toString(), eventDescription.getText().toString(), eventStartDate.getText().toString(), eventEndDate.getText().toString(), eventMaxParticipants.getText().toString(), eventType.getText().toString());
+            } catch (EventNameNullException e) {
+                eventName_layout.setError("The name is empty");
+            } catch (EventNullDescriptionException e) {
+                eventDescription_layout.setError("The description is empty");
+            } catch (EventNullStartDateException e) {
+                eventStartDate_layout.setError("The start date is empty");
+            } catch (EventNullFinishException e) {
+                eventEndDate_layout.setError("The end date is empty");
+            } catch (EventNullNumberException e) {
+                eventMaxParticipants_layout.setError("The number of participants are empty");
+            } catch (EventNullTypeException e) {
+                eventType_layout.setError("The event type is empty");
+            } catch (EventStartDateInvalidException e) {
+                eventStartDate_layout.setError("The starting date needs to be a valid date");
+            } catch (EventEndDateInvalidException e) {
+                eventEndDate_layout.setError("The ending date needs to be a valid date");
+            } catch (EventDateStartBeforeNowException e) {
+                eventStartDate_layout.setError("The starting date have to be after current date");
+            } catch (EventDateStartAfterEndException e) {
+                eventStartDate_layout.setError("The starting date have to be before ending date");
+            } catch (EventInvalidNumberException e) {
+                eventMaxParticipants_layout.setError("Invalid number of participants");
+            } catch (EventException ignored){}
         });
 
         eventName = (TextInputEditText) findViewById(R.id.event_name_signup2);

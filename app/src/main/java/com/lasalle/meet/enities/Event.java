@@ -1,7 +1,11 @@
 package com.lasalle.meet.enities;
 
 import com.google.gson.annotations.Expose;
+import com.lasalle.meet.exceptions.eventexceptions.EventDateStartAfterEndException;
+import com.lasalle.meet.exceptions.eventexceptions.EventDateStartBeforeNowException;
+import com.lasalle.meet.exceptions.eventexceptions.EventEndDateInvalidException;
 import com.lasalle.meet.exceptions.eventexceptions.EventException;
+import com.lasalle.meet.exceptions.eventexceptions.EventInvalidNumberException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNameNullException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullDescriptionException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullFinishException;
@@ -10,11 +14,14 @@ import com.lasalle.meet.exceptions.eventexceptions.EventNullLocationException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullNumberException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullStartDateException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullTypeException;
+import com.lasalle.meet.exceptions.eventexceptions.EventStartDateInvalidException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -126,6 +133,50 @@ public class Event implements Serializable {
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
         }
+    }
+
+    public static void newEventCheck(String name, String description, String eventStart_date, String eventEnd_date, String n_participators, String type) throws EventException{
+        if (name.equals("")) {
+            throw new EventNameNullException();
+        } else if (description.equals("")) {
+            throw new EventNullDescriptionException();
+        } else if (eventStart_date.equals("")) {
+            throw new EventNullStartDateException();
+        } else if (eventEnd_date.equals("")) {
+            throw new EventNullFinishException();
+        } else if (n_participators.equals("")) {
+            throw new EventNullNumberException();
+        } else if (type.equals("")) {
+            throw new EventNullTypeException();
+        }
+
+        Date startDate = null;
+        Date endDate = null;
+
+        try {
+            startDate = new SimpleDateFormat("dd/MM/yyyy").parse(eventStart_date);
+        } catch (ParseException e) {
+            throw new EventStartDateInvalidException();
+        }
+
+        try {
+            endDate = new SimpleDateFormat("dd/MM/yyyy").parse(eventEnd_date);
+        } catch (ParseException e) {
+            throw new EventEndDateInvalidException();
+        }
+
+        if (startDate.before(Date.from(Instant.from(LocalDateTime.now())))){
+            throw new EventDateStartBeforeNowException();
+        } else if (startDate.after(endDate)) {
+            throw new EventDateStartAfterEndException();
+        }
+
+        try {
+            Integer.parseInt(n_participators);
+        } catch (NumberFormatException e) {
+            throw new EventInvalidNumberException();
+        }
+
     }
 
     public int getEventError() {
