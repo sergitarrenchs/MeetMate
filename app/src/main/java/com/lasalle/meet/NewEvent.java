@@ -3,14 +3,11 @@ package com.lasalle.meet;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompatExtras;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -104,12 +101,12 @@ public class NewEvent extends AppCompatActivity {
             } catch (EventException ignored){}
         });
 
-        eventName = (TextInputEditText) findViewById(R.id.event_name_signup2);
-        eventDescription = (TextInputEditText) findViewById(R.id.event_name_signup);
-        eventStartDate = (TextInputEditText) findViewById(R.id.event_name_signup3);
-        eventEndDate = (TextInputEditText) findViewById(R.id.event_name_signup4);
-        eventType = (TextInputEditText) findViewById(R.id.event_name_signup6);
-        eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_name_signup5);
+        eventName = (TextInputEditText) findViewById(R.id.event_name_input);
+        eventDescription = (TextInputEditText) findViewById(R.id.event_description_input);
+        eventStartDate = (TextInputEditText) findViewById(R.id.event_start_date_input);
+        eventEndDate = (TextInputEditText) findViewById(R.id.event_end_date_input);
+        eventType = (TextInputEditText) findViewById(R.id.event_type_input);
+        eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_max_participants_input);
 
         eventStartDate.setOnClickListener(new View.OnClickListener() {
             @Override

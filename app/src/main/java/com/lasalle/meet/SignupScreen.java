@@ -11,13 +11,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,14 +27,12 @@ import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
-import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class SignupScreen extends AppCompatActivity{
@@ -113,7 +109,7 @@ public class SignupScreen extends AppCompatActivity{
         passwordSignUpText = (TextInputEditText) findViewById(R.id.password_editText2);
         passwordRepeatedSignUpText = (TextInputEditText) findViewById(R.id.password_editText);
 
-        nameSignUpLayout = (TextInputLayout) findViewById(R.id.name_signup_layout);
+        nameSignUpLayout = (TextInputLayout) findViewById(R.id.event_name_layout);
         surnameSignUpLayout = (TextInputLayout) findViewById(R.id.lastname_signup_layout);
         emailSignUpLayout = (TextInputLayout) findViewById(R.id.username_login3_layout);
         passwordSignUpLayout = (TextInputLayout) findViewById(R.id.password_editText2_layout);

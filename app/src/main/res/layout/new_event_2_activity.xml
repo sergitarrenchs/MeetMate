@@ -6,25 +6,38 @@
     android:layout_height="match_parent"
     android:background="@color/teal_light">
 
-    <EditText
-        android:id="@+id/event_name_signup7"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/event_location"
-        android:inputType="textVisiblePassword|textNoSuggestions|textPostalAddress"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2" />
+        app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_name_signup7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:background="@color/teal_light"
+            android:hint="@string/event_location"
+            android:inputType="textVisiblePassword|textNoSuggestions|textPostalAddress"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_profile_pic_button2"
@@ -89,13 +102,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/side_margin"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/create_button_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup7"
+        app:layout_constraintTop_toBottomOf="@+id/event_name_layout"
         tools:context=".MapsActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
