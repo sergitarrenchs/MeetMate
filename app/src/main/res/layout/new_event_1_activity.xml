@@ -6,127 +6,204 @@
     android:layout_height="match_parent"
     android:background="@color/teal_light">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/event_name"
-        android:inputType="textVisiblePassword|textNoSuggestions"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_details_textView" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/event_description"
-        android:inputType="textVisiblePassword|textNoSuggestions"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup2" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/start_date"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup"
-        android:inputType="date"
-        android:focusable="false"
-        android:clickable="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_details_textView">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup4"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/teal_light"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/event_name"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_details_textView" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_description_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/end_date"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup3"
-        android:inputType="date"
-        android:focusable="false"
-        android:clickable="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_name_layout">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup5"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/teal_light"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/event_description"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_start_date_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/max_participants"
-        android:inputType="number"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup6" />
+        app:layout_constraintTop_toBottomOf="@+id/event_description_layout">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/event_name_signup6"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_start_date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/teal_light"
+            android:clickable="true"
+            android:focusable="false"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/start_date"
+            android:inputType="date"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_description_input" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_end_date_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="@dimen/side_margin"
-        android:focusable="true"
-        android:fontFamily="@font/gilroylight"
-        android:hint="@string/event_type"
-        android:inputType="textVisiblePassword|textNoSuggestions"
-        android:textColorHighlight="@color/black_light"
-        android:textColorHint="@color/black_light"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_signup4" />
+        app:layout_constraintTop_toBottomOf="@+id/event_start_date_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_end_date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/teal_light"
+            android:clickable="true"
+            android:focusable="false"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/end_date"
+            android:inputType="date"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_start_date_input" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_max_participants_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_end_date_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_max_participants_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/teal_light"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/max_participants"
+            android:inputType="number"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_type_input" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_max_participants_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_type_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:background="@color/teal_light"
+            android:hint="@string/event_type"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_end_date_input" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_details_textView"
