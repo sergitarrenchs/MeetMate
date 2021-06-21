@@ -79,8 +79,9 @@ public interface APIService {
     @Headers("Content-type: application/json")
     @POST("events")
     Call<Event> postEvent(@Body Event event, @Header("Authorization") String Token);
-//    @GET("events")
-//    Call<Event> getEvent(@Field("t") String type);
+    @Headers("Content-type: application/json")
+    @GET("events")
+    Call<List<Event>> getEvent(@Query("t") String t, @Header("Authorization") String Token);
 //    @GET("events/ID")
 //    Call<Event> getEventID();
 //    @PUT("events/ID")

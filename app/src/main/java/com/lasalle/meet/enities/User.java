@@ -269,4 +269,8 @@ public class User implements Serializable {
     public String getFullName() {
         return name + " " + last_name;
     }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
 }

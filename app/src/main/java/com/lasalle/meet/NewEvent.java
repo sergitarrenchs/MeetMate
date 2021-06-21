@@ -1,11 +1,15 @@
 package com.lasalle.meet;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lasalle.meet.enities.DatePickerFragment;
 import com.lasalle.meet.enities.Event;
+import com.lasalle.meet.enities.TimePickerFragment;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.eventexceptions.EventDateStartAfterEndException;
 import com.lasalle.meet.exceptions.eventexceptions.EventDateStartBeforeNowException;
@@ -61,21 +66,164 @@ public class NewEvent extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra(userId);
 
+        eventName = (TextInputEditText) findViewById(R.id.event_name_input);
+        eventDescription = (TextInputEditText) findViewById(R.id.event_description_input);
+        eventStartDate = (TextInputEditText) findViewById(R.id.event_start_date_input);
+        eventEndDate = (TextInputEditText) findViewById(R.id.event_end_date_input);
+        eventType = (TextInputEditText) findViewById(R.id.event_type_input);
+        eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_max_participants_input);
+
+        eventName_layout = (TextInputLayout) findViewById(R.id.event_name_layout);
+        eventDescription_layout = (TextInputLayout) findViewById(R.id.event_description_layout);
+        eventStartDate_layout = (TextInputLayout) findViewById(R.id.event_start_date_layout);
+        eventEndDate_layout = (TextInputLayout) findViewById(R.id.event_end_date_layout);
+        eventType_layout = (TextInputLayout) findViewById(R.id.event_type_layout);
+        eventMaxParticipants_layout = (TextInputLayout) findViewById(R.id.event_max_participants_layout);
+
+        eventStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventStartDate_layout.setErrorEnabled(false);
+                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // +1 because January is zero
+                        String selectedDate = twoDigits(day) + " / " + twoDigits(month+1) + " / " + year;
+
+                        TimePickerFragment new2Fragment = TimePickerFragment.newInstance(new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String selectedTime = hourOfDay + " : " + minute;
+
+                                String date = selectedDate + " " + selectedTime;
+
+                                eventStartDate.setText(date);
+                            }
+
+                        });
+
+                        new2Fragment.show(getSupportFragmentManager(), "timePicker");
+                    }
+                });
+
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        eventEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventEndDate_layout.setErrorEnabled(false);
+                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // +1 because January is zero
+                        String selectedDate = twoDigits(day) + " / " + twoDigits(month+1) + " / " + year;
+
+                        TimePickerFragment new2Fragment = TimePickerFragment.newInstance(new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String selectedTime = twoDigits(hourOfDay) + " : " + twoDigits(minute);
+
+                                String date = selectedDate + " " + selectedTime;
+
+                                eventEndDate.setText(date);
+                            }
+
+                        });
+
+                        new2Fragment.show(getSupportFragmentManager(), "timePicker");
+                    }
+                });
+
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        eventName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                eventName_layout.setErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        eventDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                eventDescription_layout.setErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        eventMaxParticipants.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                eventMaxParticipants_layout.setErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        eventType.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                eventType_layout.setErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         NextButton = (ImageButton) findViewById(R.id.next_button_imageView);
 
         NextButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(NewEvent.this, FinishEvent.class);
-//            intent.putExtra(userId, user);
-//            intent.putExtra(event_name, eventName.getText().toString());
-//            intent.putExtra(event_description, eventDescription.getText().toString());
-//            intent.putExtra(event_startDate, eventStartDate.getText().toString());
-//            intent.putExtra(event_endDate, eventEndDate.getText().toString());
-//            intent.putExtra(event_Type, eventType.getText().toString());
-//            intent.putExtra(event_Num, Integer.parseInt(eventMaxParticipants.getText().toString()));
-//
-//            startActivity(intent);
             try {
                 Event.newEventCheck(eventName.getText().toString(), eventDescription.getText().toString(), eventStartDate.getText().toString(), eventEndDate.getText().toString(), eventMaxParticipants.getText().toString(), eventType.getText().toString());
+
+                Intent intent = new Intent(NewEvent.this, FinishEvent.class);
+                intent.putExtra(userId, user);
+                intent.putExtra(event_name, eventName.getText().toString());
+                intent.putExtra(event_description, eventDescription.getText().toString());
+                intent.putExtra(event_startDate, eventStartDate.getText().toString());
+                intent.putExtra(event_endDate, eventEndDate.getText().toString());
+                intent.putExtra(event_Type, eventType.getText().toString());
+                intent.putExtra(event_Num, Integer.parseInt(eventMaxParticipants.getText().toString()));
+
+                startActivity(intent);
+
             } catch (EventNameNullException e) {
                 eventName_layout.setError("The name is empty");
             } catch (EventNullDescriptionException e) {
@@ -99,45 +247,6 @@ public class NewEvent extends AppCompatActivity {
             } catch (EventInvalidNumberException e) {
                 eventMaxParticipants_layout.setError("Invalid number of participants");
             } catch (EventException ignored){}
-        });
-
-        eventName = (TextInputEditText) findViewById(R.id.event_name_input);
-        eventDescription = (TextInputEditText) findViewById(R.id.event_description_input);
-        eventStartDate = (TextInputEditText) findViewById(R.id.event_start_date_input);
-        eventEndDate = (TextInputEditText) findViewById(R.id.event_end_date_input);
-        eventType = (TextInputEditText) findViewById(R.id.event_type_input);
-        eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_max_participants_input);
-
-        eventStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        // +1 because January is zero
-                        String selectedDate = twoDigits(day) + " / " + twoDigits(month+1) + " / " + year;
-                        eventStartDate.setText(selectedDate);
-                    }
-                });
-
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
-        });
-
-        eventEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        // +1 because January is zero
-                        String selectedDate = twoDigits(day) + " / " + twoDigits(month+1) + " / " + year;
-                        eventEndDate.setText(selectedDate);
-                    }
-                });
-
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
         });
     }
 
