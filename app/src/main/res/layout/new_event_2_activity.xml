@@ -7,7 +7,7 @@
     android:background="@color/teal_light">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/event_name_layout"
+        android:id="@+id/event_location_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,12 +21,12 @@
         app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/event_name_signup7"
+            android:id="@+id/event_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:focusable="true"
+            android:focusable="false"
             android:fontFamily="@font/gilroylight"
             android:background="@color/teal_light"
             android:hint="@string/event_location"
@@ -36,7 +36,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2" />
+            app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -108,7 +109,7 @@
         app:layout_constraintBottom_toTopOf="@+id/create_button_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_layout"
+        app:layout_constraintTop_toBottomOf="@+id/event_location_layout"
         tools:context=".MapsActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

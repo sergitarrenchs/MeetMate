@@ -4,34 +4,60 @@ package com.lasalle.meet;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.lasalle.meet.enities.APIAdapter;
+import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
@@ -59,6 +85,10 @@ public class HomeScreen extends AppCompatActivity {
     public static final String inputFormat = "HH:mm";
     private SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.GERMANY);
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private List<Event> eventList = null;
+
+    private final String ALL_EVENT = "";
+    private final String EDUCATION_EVENT = "Education";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +102,8 @@ public class HomeScreen extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this::onMapReady);
+
+        getLocation();
 
 
         newEventButton = (FloatingActionButton) findViewById(R.id.addFloatingActionButton);
@@ -108,6 +140,8 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+                getAllEvents(ALL_EVENT);
             }
         });
 
@@ -122,6 +156,8 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+                getAllEvents(EDUCATION_EVENT);
             }
         });
 
@@ -182,6 +218,43 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
+    private void getAllEvents(String keyValue) {
+//        CountDownLatch countDownLatch = new CountDownLatch(1);
+//
+//        Call<List<Event>> call = APIAdapter.getApiService().getEvent(keyValue,"Bearer " + user.getAccessToken());
+//
+//        call.enqueue(new Callback<List<Event>>() {
+//            @Override
+//            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+//                if (response.isSuccessful()){
+//                    eventList = response.body();
+//                    countDownLatch.countDown();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Event>> call, Throwable t) {
+//                countDownLatch.countDown();
+//            }
+//        });
+//
+//        try {
+//            countDownLatch.await();
+//
+//            new Thread(() -> runOnUiThread(new Runnable() {
+//
+//                @Override
+//                public void run() {
+//                    mMap = Event.displayAllEventMarkers(eventList, mMap, HomeScreen.this);
+//                }
+//            })).start();
+//
+//        } catch (InterruptedException e) {
+//            //TODO: Throw Exception Event Incorrect Error
+//        }
+
+    }
+
     public boolean onTouchEvent(MotionEvent touchEvent) {
         switch (touchEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -216,27 +289,46 @@ public class HomeScreen extends AppCompatActivity {
      */
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-//        // Add a marker in Sydney and move the camera
-//        LatLng barcelona = new LatLng(41.390205,2.154007);
-//        mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona));
-//        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        Task location = fusedLocationProviderClient.getLastLocation();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
 
+        final Task location = fusedLocationProviderClient.getLastLocation();
+        location.addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task task) {
+                if (task.isSuccessful()){
+                    Location currentLocation = (Location) task.getResult();
+
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
+                }else {
+                    Toast.makeText(HomeScreen.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    private void getLocation() {
+        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        if (permission == PackageManager.PERMISSION_DENIED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            }else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+            }
+        }
     }
 
     private void compareDates() {
@@ -290,4 +382,5 @@ public class HomeScreen extends AppCompatActivity {
         intent.putExtra(userId, user);
         startActivity(intent);
     }
+
 }

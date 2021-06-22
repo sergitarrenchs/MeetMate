@@ -6,7 +6,12 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ChatScreen extends AppCompatActivity {
     private float x1,x2,y1,y2;
@@ -14,11 +19,34 @@ public class ChatScreen extends AppCompatActivity {
     private User user;
     private static String userId = "USER_ID";
 
+    private MaterialTextView userName;
+    private MaterialTextView welcomeMessage;
+
+    private LocalDateTime currentDate;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_acticity);
 
         user = (User) getIntent().getSerializableExtra(userId);
+
+        userName = (MaterialTextView) findViewById(R.id.profile_name);
+
+        userName.setText(user.getFullName());
+
+        currentDate = LocalDateTime.ofInstant(new Date().toInstant(),
+                ZoneId.systemDefault());
+
+        if (currentDate.getHour() >= 23 && currentDate.getHour() <= 5) {
+            welcomeMessage.setText("Good Night");
+        } else if (currentDate.getHour() >= 20 && currentDate.getHour() <= 22) {
+            welcomeMessage.setText("Good Evening");
+        } else if (currentDate.getHour() >= 15 && currentDate.getHour() <= 19) {
+            welcomeMessage.setText("Good Afternoon");
+        } else if (currentDate.getHour() >= 5 && currentDate.getHour() <= 14) {
+            welcomeMessage.setText("Good Morning");
+        }
+
     }
 
     public boolean onTouchEvent(MotionEvent touchEvent){
