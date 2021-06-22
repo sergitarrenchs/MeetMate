@@ -4,16 +4,11 @@ package com.lasalle.meet;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,41 +18,29 @@ import androidx.core.content.ContextCompat;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.Autocomplete;
+//import com.google.android.libraries.places.api.model.Place;
+//import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+//import com.google.android.libraries.places.api.net.PlacesClient;
+//import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
-import com.lasalle.meet.enities.APIAdapter;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
@@ -269,7 +252,7 @@ public class HomeScreen extends AppCompatActivity {
                     i.putExtra(userId, user);
                     startActivity(i);
                 } else if (x1 > x2) {
-                    Intent i = new Intent(HomeScreen.this, ChatScreen.class);
+                    Intent i = new Intent(HomeScreen.this, ChatSelectorScreen.class);
                     i.putExtra(userId, user);
                     startActivity(i);
                 }

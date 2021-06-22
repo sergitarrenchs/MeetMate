@@ -66,6 +66,10 @@
     <string name="all">ALL</string>
     <string name="yours">YOURS</string>
     <string name="others">OTHERS</string>
-    <string name="upcoming_events">UP-COMING EVENTS</string>
+
+    //CHAT//
+    <string name="send">Type a message</string>
+    <string name="search">Search</string>
+
 
 </resources>

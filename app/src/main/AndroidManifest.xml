@@ -62,7 +62,7 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar"/>
         <activity
-            android:name="com.lasalle.meet.ChatScreen"
+            android:name="com.lasalle.meet.ChatSelectorScreen"
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar"/>
         <activity

@@ -2,8 +2,6 @@ package com.lasalle.meet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 
@@ -120,7 +117,7 @@ public class ProfileScreen extends AppCompatActivity {
                 x2 = touchEvent.getX();
                 y2 = touchEvent.getY();
                 if(x1 < x2){
-                    Intent i = new Intent(ProfileScreen.this, ChatScreen.class);
+                    Intent i = new Intent(ProfileScreen.this, ChatSelectorScreen.class);
                     i.putExtra(userId, user);
                     startActivity(i);
                 }else if(x1 > x2){
