@@ -4,8 +4,12 @@ package com.lasalle.meet;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 //import com.google.android.libraries.places.api.model.Place;
@@ -31,16 +36,23 @@ import com.google.android.gms.tasks.Task;
 //import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.lasalle.meet.enities.APIAdapter;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeScreen extends AppCompatActivity {
     private GoogleMap mMap;
@@ -72,6 +84,10 @@ public class HomeScreen extends AppCompatActivity {
 
     private final String ALL_EVENT = "";
     private final String EDUCATION_EVENT = "Education";
+    private final String GAMES_EVENT = "Games";
+    private final String MUSIC_EVENT = "Music";
+    private final String SPORTS_EVENT = "Sports";
+    private final String TRAVEL_EVENT = "Travel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +171,8 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+                getAllEvents(GAMES_EVENT);
             }
         });
 
@@ -169,6 +187,8 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+                getAllEvents(MUSIC_EVENT);
             }
         });
 
@@ -183,6 +203,8 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+                getAllEvents(SPORTS_EVENT);
             }
         });
 
@@ -197,44 +219,67 @@ public class HomeScreen extends AppCompatActivity {
                 musicTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 sportsTypeButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 travelTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
+
+                getAllEvents(TRAVEL_EVENT);
             }
         });
     }
 
     private void getAllEvents(String keyValue) {
-//        CountDownLatch countDownLatch = new CountDownLatch(1);
-//
-//        Call<List<Event>> call = APIAdapter.getApiService().getEvent(keyValue,"Bearer " + user.getAccessToken());
-//
-//        call.enqueue(new Callback<List<Event>>() {
-//            @Override
-//            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-//                if (response.isSuccessful()){
-//                    eventList = response.body();
-//                    countDownLatch.countDown();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Event>> call, Throwable t) {
-//                countDownLatch.countDown();
-//            }
-//        });
-//
-//        try {
-//            countDownLatch.await();
-//
-//            new Thread(() -> runOnUiThread(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//                    mMap = Event.displayAllEventMarkers(eventList, mMap, HomeScreen.this);
-//                }
-//            })).start();
-//
-//        } catch (InterruptedException e) {
-//            //TODO: Throw Exception Event Incorrect Error
-//        }
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<Event>> call = APIAdapter.getApiService().getEvent(keyValue,"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (response.isSuccessful()){
+                    eventList = response.body();
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+
+            Runnable myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    mMap.clear();
+
+                    for (int i = 0; i < eventList.size(); i++) {
+                        Event event = (Event) eventList.get(i);
+                        List<Address> addresses;
+
+                        try {
+
+                            addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
+
+                            if (addresses.size() > 0) {
+                                Address location = addresses.get(0);
+
+                                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+                            }
+
+                        } catch (IOException e) {
+
+                        }
+                    }
+                } // This is your code
+            };
+            mainHandler.post(myRunnable);
+
+        } catch (InterruptedException e) {
+            //TODO: Throw Exception Event Incorrect Error
+        }
 
     }
 
@@ -365,5 +410,4 @@ public class HomeScreen extends AppCompatActivity {
         intent.putExtra(userId, user);
         startActivity(intent);
     }
-
 }

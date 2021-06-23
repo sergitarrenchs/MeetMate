@@ -232,28 +232,29 @@ public class Event implements Serializable {
     }
 
     public static GoogleMap displayAllEventMarkers(List<Event> eventList, GoogleMap mMap, Context context) {
-        mMap.clear();
-
-        for (int i = 0; i < eventList.size(); i++) {
-            Event event = (Event) eventList.get(0);
-            List<Address> addresses;
-
-            try {
-
-                addresses = new Geocoder(context).getFromLocationName(event.getLocation(),1);
-
-                if (addresses.size() > 0) {
-                    Address location = addresses.get(0);
-
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
-                }
-
-            } catch (IOException e) {
-
-            }
-        }
-
-        return mMap;
+//        mMap.clear();
+//
+//        for (int i = 0; i < eventList.size(); i++) {
+//            Event event = (Event) eventList.get(0);
+//            List<Address> addresses;
+//
+//            try {
+//
+//                addresses = new Geocoder(context).getFromLocationName(event.getLocation(),1);
+//
+//                if (addresses.size() > 0) {
+//                    Address location = addresses.get(0);
+//
+//                    mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+//                }
+//
+//            } catch (IOException e) {
+//
+//            }
+//        }
+//
+//        return mMap;
+        return null;
     }
 
     public void eventAssist(String accessToken) {
