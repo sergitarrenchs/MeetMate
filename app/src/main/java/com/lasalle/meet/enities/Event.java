@@ -256,6 +256,39 @@ public class Event implements Serializable {
         return mMap;
     }
 
+    public void eventAssist(String accessToken) {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        eventError = 0;
+
+        Call<Event> call = APIAdapter.getApiService().postUserAssistanInfo(ID, 0,"", "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                if (!response.isSuccessful()) {
+                    eventError = response.code();
+                }
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+            if (eventError == BAD_REQUEST) {
+                //TODO: Throw Exception Event Incorrect Error
+            }
+
+        } catch (InterruptedException e) {
+            //TODO: Throw Exception Event Incorrect Error
+        }
+    }
+
     public int getOwner_id() {
         return owner_id;
     }

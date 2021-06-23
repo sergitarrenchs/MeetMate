@@ -95,8 +95,10 @@ public interface APIService {
 //    Call<Event> getEventAssistans(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
 //    @GET("events/ID/assistances/ID_USER")
 //    Call<Event> getUserIDAssistan(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
-//    @POST("events/ID/assistances")
-//    Call<Event> postUserAssistanInfo(@Field("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary); //WHICH ARE THE PARAMETERS??//
+    @Headers("Content-type: application/json")
+    @FormUrlEncoded
+    @POST("events/{ID}}/assistances")
+    Call<Event> postUserAssistanInfo(@Path("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary, @Header("Authorization") String Token);
 //    @PUT("events/ID/assistances")
 //    Call<Event> modifyUserAssistanInfo(@Field("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary); //WHICH ARE THE PARAMETERS??//
 //    @DELETE("events/ID/assistances")

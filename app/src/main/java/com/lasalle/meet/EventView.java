@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
@@ -40,6 +42,7 @@ public class EventView extends AppCompatActivity {
     private MaterialTextView eventDate;
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private MaterialButton mButton;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -64,6 +67,20 @@ public class EventView extends AppCompatActivity {
         eventType.setText(event.getType());
 
         eventDate.setText(event.getDate());
+
+        mButton = (MaterialButton) findViewById(R.id.signup_button);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (event.getOwner_id() != user.getId()) {
+                    //TODO: FIX IT
+//                    event.eventAssist(user.getAccessToken());
+                } else {
+                    Toast.makeText(EventView.this, "You cannot join own events", Toast.LENGTH_SHORT).show();;
+                }
+            }
+        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
