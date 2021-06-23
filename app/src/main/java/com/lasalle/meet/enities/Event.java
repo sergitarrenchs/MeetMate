@@ -222,6 +222,10 @@ public class Event implements Serializable {
         return location;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static GoogleMap displayAllEventMarkers(List<Event> eventList, GoogleMap mMap, Context context) {
         mMap.clear();
 

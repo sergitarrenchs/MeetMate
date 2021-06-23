@@ -32,9 +32,24 @@
         android:layout_marginBottom="@dimen/bottom_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/white_box" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        android:layout_marginVertical="@dimen/bottom_margin">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"

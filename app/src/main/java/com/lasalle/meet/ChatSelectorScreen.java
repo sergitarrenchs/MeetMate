@@ -40,6 +40,8 @@ public class ChatSelectorScreen extends AppCompatActivity {
         currentDate = LocalDateTime.ofInstant(new Date().toInstant(),
                 ZoneId.systemDefault());
 
+        welcomeMessage = (MaterialTextView) findViewById(R.id.welcomeMessage);
+
         if (currentDate.getHour() >= 23 && currentDate.getHour() <= 5) {
             welcomeMessage.setText("Good Night");
         } else if (currentDate.getHour() >= 20 && currentDate.getHour() <= 22) {
