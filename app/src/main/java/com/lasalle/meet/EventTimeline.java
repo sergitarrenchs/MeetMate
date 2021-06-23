@@ -110,8 +110,6 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
 
     @Override
     public void onBackPressed() {
-        user.logOutUser();
-
         Intent intent = new Intent(EventTimeline.this, HomeScreen.class);
         intent.putExtra(userId, user);
         startActivity(intent);

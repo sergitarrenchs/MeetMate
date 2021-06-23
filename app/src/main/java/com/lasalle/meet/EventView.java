@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,6 +46,7 @@ public class EventView extends AppCompatActivity {
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private MaterialButton mButton;
+    private FloatingActionButton mFloatingButton;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -76,18 +78,36 @@ public class EventView extends AppCompatActivity {
 
         mButton = (MaterialButton) findViewById(R.id.signup_button);
 
+        mFloatingButton = (FloatingActionButton) findViewById(R.id.editProfileInfoButton);
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (event.getOwner_id() != user.getId()) {
                     //TODO: FIX IT
-//                    event.eventAssist(user.getAccessToken());
+                    event.eventAssist(user.getAccessToken());
                 } else {
                     Toast.makeText(EventView.this, "You cannot join own events", Toast.LENGTH_SHORT).show();
-                    mButton.setText(R.string.delete);
+                    event.deleteEvent(user.getAccessToken());
+                    onBackPressed();
                 }
             }
         });
+
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (event.getOwner_id() == user.getId()) {
+//                    event.deleteEvent(user.getAccessToken());
+//                    onBackPressed();
+                }
+            }
+        });
+
+        if (event.getOwner_id() == user.getId()) {
+            mButton.setText(R.string.delete);
+            mFloatingButton.setVisibility(View.VISIBLE);
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

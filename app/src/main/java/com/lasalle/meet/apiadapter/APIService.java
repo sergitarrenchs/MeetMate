@@ -49,8 +49,9 @@ public interface APIService {
     Call<List<User>> searchUser(@Query("s") String s, @Header("Authorization") String Token);
 
 
-//    @PUT("users")
-//    Call<User> modifyUser(@Body User user);
+    @Headers("Content-type: application/json")
+    @PUT("users")
+    Call<User> modifyUser(@Body User user, @Header("Authorization") String Token);
 
     @Headers("Content-type: application/json")
     @DELETE("users")
@@ -69,8 +70,9 @@ public interface APIService {
 //    Call<Event> getFinishedUserEvent(@Field("ID") int ID);
 //    @GET("users/ID/events/current")
 //    Call<Event> getCurrentUserEvent(@Field("ID") int ID);
-//    @GET("users/ID/assistances")
-//    Call<Event> getUserAssistances(@Field("ID") int ID);
+
+    @GET("users/{ID}/assistances")
+    Call<List<Event>> getUserAssistances(@Path("ID") int ID, @Header("Authorization") String Token);
 //    @GET("users/ID/assistances/future")
 //    Call<Event> getFutureUserAssistances(@Field("ID") int ID);
 //    @GET("users/ID/assistances/finished")
@@ -87,17 +89,18 @@ public interface APIService {
 //    Call<Event> getEventID();
 //    @PUT("events/ID")
 //    Call<Event> modifyEvent(@Body Event event);
-//    @DELETE("events/ID")
-//    Call<Event> deleteEvent(); //WHICH ARE THE PARAMETERS??//
+    @Headers("Content-type: application/json")
+    @DELETE("events/{ID}")
+    Call<Event> deleteEvent(@Path("ID") int eventID, @Header("Authorization") String Token);
+
 //
 //    //EVENT ASSISTENCES//
 //    @GET("events/ID/assistances")
 //    Call<Event> getEventAssistans(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
 //    @GET("events/ID/assistances/ID_USER")
 //    Call<Event> getUserIDAssistan(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
-    @Headers("Content-type: application/json")
     @FormUrlEncoded
-    @POST("events/{ID}}/assistances")
+    @POST("events/{ID}/assistances")
     Call<Event> postUserAssistanInfo(@Path("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary, @Header("Authorization") String Token);
 //    @PUT("events/ID/assistances")
 //    Call<Event> modifyUserAssistanInfo(@Field("ID") int eventID, @Field("puntuation") int puntuation, @Field("comentary") String comentary); //WHICH ARE THE PARAMETERS??//

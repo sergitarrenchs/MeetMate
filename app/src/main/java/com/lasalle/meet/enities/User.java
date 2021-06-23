@@ -15,6 +15,8 @@ import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -276,5 +278,91 @@ public class User implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void update(@NotNull String name, @NotNull String last_name, String email, String password) throws UserException {
+
+        if (email.equals("")) {
+            throw new UserEmailNullException();
+        } else if (password.equals("")) {
+            throw new UserPasswordNullException();
+        } else if (password.length() < 8){
+            throw new UserPasswordLowSecurityException();
+        } else if (!this.email.equals(email)) {
+
+            CountDownLatch countDownLatch2 = new CountDownLatch(1);
+
+            Call<List<User>> userCall = APIAdapter.getApiService().searchUser(this.email, "Bearer " + this.accessToken);
+
+            userCall.enqueue(new Callback<List<User>>() {
+                @Override
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                    if (!response.isSuccessful()) {
+                        //TODO: Log in
+                        countDownLatch2.countDown();
+                        return;
+                    }
+
+                    userError = EMAIL_EXIST;
+                    countDownLatch2.countDown();
+                }
+
+                @Override
+                public void onFailure(Call<List<User>> call, Throwable t) {
+                    countDownLatch2.countDown();
+                }
+            });
+
+            try {
+                countDownLatch2.await();
+
+                if (userError == EMAIL_EXIST) {
+                    throw new UserEmailExistException();
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.username = "@" + name.toLowerCase().replaceAll(" ", "") + "." + last_name.toLowerCase().replaceAll(" ", "");
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<User> call = APIAdapter.getApiService().modifyUser(this, "Bearer " + this.accessToken);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    accessToken = null;
+                    userError = USER_NOT_FOUND;
+
+                } else {
+                    assert response.body() != null;
+                    accessToken = response.body().accessToken;
+                }
+                countDownLatch.countDown();
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                countDownLatch.countDown();
+
+            }
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            throw new UserIncorrectCredentialsException();
+        }
+
     }
 }
