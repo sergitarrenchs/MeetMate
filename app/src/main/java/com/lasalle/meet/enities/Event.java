@@ -261,7 +261,7 @@ public class Event implements Serializable {
     }
 
     public String getDate() {
-        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         try {
             Date x = ISO8601Utils.parse(eventEnd_date, new ParsePosition(0));

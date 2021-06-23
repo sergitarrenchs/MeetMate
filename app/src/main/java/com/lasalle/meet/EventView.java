@@ -61,16 +61,16 @@ public class EventView extends AppCompatActivity {
 
         eventAddress.setText(event.getLocation());
 
-        eventType.setText(event.getName());
+        eventType.setText(event.getType());
 
         eventDate.setText(event.getDate());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.mapView2);
-//        mapFragment.getMapAsync(this::onMapReady);
-//
-//        getLocation();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapView2);
+        mapFragment.getMapAsync(this::onMapReady);
+
+        getLocation();
 
 
     }
