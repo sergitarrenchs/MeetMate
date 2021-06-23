@@ -111,7 +111,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        allTypeButton = (MaterialButton) findViewById(R.id.all_type_button);
+        allTypeButton = (MaterialButton) findViewById(R.id.yours_events_button);
         allTypeButton.setBackgroundColor(getResources().getColor(R.color.white));
 
         allTypeButton.setOnClickListener(new View.OnClickListener() {

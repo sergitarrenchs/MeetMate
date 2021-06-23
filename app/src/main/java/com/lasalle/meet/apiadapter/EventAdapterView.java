@@ -3,6 +3,7 @@ package com.lasalle.meet.apiadapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,11 +47,16 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
     public class ViewHolderEvents extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView eventName;
+        TextView eventDate;
+        ImageView eventImage;
         OnNoteListener onNoteListener;
 
         public ViewHolderEvents(@NonNull @NotNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-            eventName = itemView.findViewById(R.id.event_recycler_data);
+            eventName = itemView.findViewById(R.id.eventNameText);
+            eventDate = itemView.findViewById(R.id.adressText);
+            eventImage = itemView.findViewById(R.id.eventImageView);
+
             this.onNoteListener = onNoteListener;
 
             itemView.setOnClickListener(this);

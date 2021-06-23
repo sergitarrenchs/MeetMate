@@ -2,8 +2,12 @@ package com.lasalle.meet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,7 +70,7 @@ public class ProfileScreen extends AppCompatActivity {
             }
         });
 
-        fullNameText = (TextInputEditText) findViewById(R.id.profile_name);
+        fullNameText = (TextInputEditText) findViewById(R.id.edit_profile_name);
         fullNameText.setText(user.getFullName());
         fullNameText.setEnabled(false);
 
@@ -83,28 +87,51 @@ public class ProfileScreen extends AppCompatActivity {
         usernameText.setText(user.getUsername());
         usernameText.setEnabled(false);
 
-
-
         editButton = (FloatingActionButton) findViewById(R.id.editProfileInfoButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!infoEditable) {
-                    fullNameText.setEnabled(true);
-                    emailText.setEnabled(true);
-                    passwordText.setEnabled(true);
-                    usernameText.setEnabled(true);
-                    infoEditable = true;
-                }else{
-                    fullNameText.setEnabled(false);
-                    emailText.setEnabled(false);
-                    passwordText.setEnabled(false);
-                    usernameText.setEnabled(false);
-                    infoEditable = false;
-                }
+                onButtonShowPopupWindowClick(v);
             }
         });
 
+    }
+
+    public void onButtonShowPopupWindowClick(View view) {
+        MaterialButton CancelButton;
+        MaterialButton SaveButton;
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.profile_popup_activity, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        CancelButton = (MaterialButton) popupView.findViewById(R.id.cancel_button);
+
+        // dismiss the popup window when touched
+        CancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        SaveButton = (MaterialButton) popupView.findViewById(R.id.save_button);
+
+        SaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
     }
 
     public boolean onTouchEvent(MotionEvent touchEvent){

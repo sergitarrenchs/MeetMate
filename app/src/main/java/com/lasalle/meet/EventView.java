@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class EventView extends AppCompatActivity {
     private MaterialTextView eventAddress;
     private MaterialTextView eventType;
     private MaterialTextView eventDate;
+    private ImageView eventImage;
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private MaterialButton mButton;
@@ -60,6 +62,8 @@ public class EventView extends AppCompatActivity {
 
         eventDate = (MaterialTextView) findViewById(R.id.textView5);
 
+        eventImage = (ImageView) findViewById(R.id.eventImageView);
+
         eventName.setText(event.getName());
 
         eventAddress.setText(event.getLocation());
@@ -67,6 +71,8 @@ public class EventView extends AppCompatActivity {
         eventType.setText(event.getType());
 
         eventDate.setText(event.getDate());
+
+        eventImage.setImageDrawable(getDrawable(R.drawable.defect_image_event));
 
         mButton = (MaterialButton) findViewById(R.id.signup_button);
 
@@ -77,7 +83,8 @@ public class EventView extends AppCompatActivity {
                     //TODO: FIX IT
 //                    event.eventAssist(user.getAccessToken());
                 } else {
-                    Toast.makeText(EventView.this, "You cannot join own events", Toast.LENGTH_SHORT).show();;
+                    Toast.makeText(EventView.this, "You cannot join own events", Toast.LENGTH_SHORT).show();
+                    mButton.setText(R.string.delete);
                 }
             }
         });

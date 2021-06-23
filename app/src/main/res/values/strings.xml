@@ -58,9 +58,13 @@
     <string name="test_num">17</string>
     <string name="terry_meyer">Terry Meyer</string>
     <string name="username_tm">/@terrymeyer</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
 
     //EVENT VIEW//
     <string name="join">JOIN</string>
+    <string name="delete">DELETE</string>
 
     //EVENT TIMELINE//
     <string name="all">ALL</string>

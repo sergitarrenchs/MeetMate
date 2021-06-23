@@ -33,7 +33,7 @@ public class ChatSelectorScreen extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra(userId);
 
-        userName = (MaterialTextView) findViewById(R.id.profile_name);
+        userName = (MaterialTextView) findViewById(R.id.edit_profile_name);
 
         userName.setText(user.getFullName());
 
