@@ -7,7 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.User;
 
@@ -57,9 +57,9 @@ public class ChatSelectorScreen extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChatSelectorScreen.this, ChatScreen.class);
-                intent.putExtra(userId, user);
-                startActivity(intent);
+//                Intent intent = new Intent(ChatSelectorScreen.this, ChatScreen.class);
+//                intent.putExtra(userId, user);
+//                startActivity(intent);
             }
         });
     }

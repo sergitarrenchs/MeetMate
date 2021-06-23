@@ -17,10 +17,12 @@ import java.util.List;
 
 public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.ViewHolderEvents> {
 
-    List<Event> eventList;
+    private List<Event> eventList;
+    private OnNoteListener mOnNoteListener;
 
-    public EventAdapterView(List<Event> eventList) {
+    public EventAdapterView(List<Event> eventList, OnNoteListener onNoteListener) {
         this.eventList = eventList;
+        this.mOnNoteListener = onNoteListener;
     }
 
     @NonNull
@@ -28,7 +30,7 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
     @Override
     public ViewHolderEvents onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_recycler_list, null, false);
-        return new ViewHolderEvents(view);
+        return new ViewHolderEvents(view, mOnNoteListener);
     }
 
     @Override
@@ -41,17 +43,30 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
         return eventList.size();
     }
 
-    public class ViewHolderEvents extends RecyclerView.ViewHolder {
+    public class ViewHolderEvents extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView eventName;
+        OnNoteListener onNoteListener;
 
-        public ViewHolderEvents(@NonNull @NotNull View itemView) {
+        public ViewHolderEvents(@NonNull @NotNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             eventName = itemView.findViewById(R.id.event_recycler_data);
+            this.onNoteListener = onNoteListener;
+
+            itemView.setOnClickListener(this);
         }
 
         public void showInfo(Event event) {
             eventName.setText(event.getName());
         }
+
+        @Override
+        public void onClick(View v) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener {
+        void onNoteClick(int position);
     }
 }

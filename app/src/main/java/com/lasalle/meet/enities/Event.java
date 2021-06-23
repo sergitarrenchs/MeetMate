@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.lasalle.meet.HomeScreen;
 import com.lasalle.meet.exceptions.eventexceptions.EventDateStartAfterEndException;
@@ -28,9 +29,11 @@ import com.lasalle.meet.exceptions.eventexceptions.EventStartDateInvalidExceptio
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -41,11 +44,12 @@ import retrofit2.Response;
 
 public class Event implements Serializable {
 
-    @Expose(serialize = false, deserialize = false)
+    @SerializedName("id")
+    @Expose(serialize = false, deserialize = true)
     private int ID;
     @Expose(serialize = true, deserialize = true)
     private String name;
-    @Expose(serialize = false, deserialize = false)
+    @Expose(serialize = false, deserialize = true)
     private int owner_id;
     @Expose(serialize = false, deserialize = true)
     private String date;
@@ -63,9 +67,10 @@ public class Event implements Serializable {
     private int n_participators;
     @Expose(serialize = true, deserialize = true)
     private String type;
-    @Expose(serialize = false, deserialize = false)
+    @SerializedName("slug")
+    @Expose(serialize = false, deserialize = true)
     private String comentary;
-    @Expose(serialize = false, deserialize = false)
+    @Expose(serialize = false, deserialize = true)
     private int punctuation;
 
     @Expose(serialize = false, deserialize = false)
@@ -249,5 +254,26 @@ public class Event implements Serializable {
         }
 
         return mMap;
+    }
+
+    public int getOwner_id() {
+        return owner_id;
+    }
+
+    public String getDate() {
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date x = ISO8601Utils.parse(eventEnd_date, new ParsePosition(0));
+            String u = spf.format(x);
+
+            return u;
+        } catch (ParseException e) {
+            return "No date";
+        }
+    }
+
+    public String getType() {
+        return type;
     }
 }

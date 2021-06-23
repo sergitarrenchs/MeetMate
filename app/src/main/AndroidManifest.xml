@@ -78,6 +78,11 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar"/>
 
+        <activity
+            android:name="com.lasalle.meet.EventView"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+
     </application>
 
 </manifest>

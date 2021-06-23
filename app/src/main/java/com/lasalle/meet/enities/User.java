@@ -37,7 +37,7 @@ public class User implements Serializable {
     private String image;
     @Expose(serialize = false, deserialize = false)
     private String username;
-    @Expose(serialize = false, deserialize = false)
+    @Expose(serialize = false, deserialize = true)
     private int id;
 
     @Expose(serialize = false, deserialize = false)
@@ -272,5 +272,9 @@ public class User implements Serializable {
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public int getId() {
+        return id;
     }
 }

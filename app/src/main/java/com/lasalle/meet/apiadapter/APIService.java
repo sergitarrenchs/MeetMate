@@ -59,9 +59,10 @@ public interface APIService {
 //    @GET("users/ID/friends")
 //    Call<Event> getUserFriend(@Field("ID") int ID);
 //
-//    //EVENTS//
-//    @GET("users/ID/events")
-//    Call<Event> getUserEvent(@Field("ID") int ID);
+    //EVENTS//
+    @Headers("Content-type: application/json")
+    @GET("users/{ID}/events")
+    Call<List<Event>> getUserEvent(@Path("ID") int ID,@Header("Authorization") String Token);
 //    @GET("users/ID/events/future")
 //    Call<Event> getFutureUserEvent(@Field("ID") int ID);
 //    @GET("users/ID/events/finished")
