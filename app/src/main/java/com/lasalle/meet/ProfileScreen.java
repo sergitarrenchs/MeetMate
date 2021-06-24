@@ -59,6 +59,7 @@ public class ProfileScreen extends AppCompatActivity {
 
     private MaterialTextView createdEvents;
     private MaterialTextView assistedEvents;
+    private MaterialTextView friendsList;
 
     private float x1,x2,y1,y2;
 
@@ -66,6 +67,7 @@ public class ProfileScreen extends AppCompatActivity {
     private static String userId = "USER_ID";
     private List<Event> eventList;
     private List<Event> assistedList;
+    private List<User> friendList;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class ProfileScreen extends AppCompatActivity {
         getYourEvents();
 
         getYourAssistences();
+
+        user.getFriends();
 
         LogOutButton = (MaterialButton) findViewById(R.id.logout_button);
 
@@ -137,6 +141,9 @@ public class ProfileScreen extends AppCompatActivity {
 
         assistedEvents = (MaterialTextView) findViewById(R.id.youhave_textView7);
         assistedEvents.setText(String.valueOf(assistedList.size()));
+
+        friendsList = (MaterialTextView) findViewById(R.id.youhave_textView9);
+        friendsList.setText(String.valueOf(friendList.size()));
 
     }
 

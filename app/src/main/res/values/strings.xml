@@ -65,6 +65,7 @@
     //EVENT VIEW//
     <string name="join">JOIN</string>
     <string name="delete">DELETE</string>
+    <string name="edit">EDIT</string>
 
     //EVENT TIMELINE//
     <string name="all">ALL</string>

@@ -28,6 +28,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
+import com.lasalle.meet.exceptions.eventexceptions.EventInvalidCredentialsException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -84,10 +85,12 @@ public class EventView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (event.getOwner_id() != user.getId()) {
-                    //TODO: FIX IT
-                    event.eventAssist(user.getAccessToken());
+                    try {
+                        event.eventAssist(user.getAccessToken());
+                    } catch (EventInvalidCredentialsException e) {
+                        Toast.makeText(EventView.this, "There has been an error joining", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(EventView.this, "You cannot join own events", Toast.LENGTH_SHORT).show();
                     event.deleteEvent(user.getAccessToken());
                     onBackPressed();
                 }
@@ -98,8 +101,10 @@ public class EventView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (event.getOwner_id() == user.getId()) {
-//                    event.deleteEvent(user.getAccessToken());
-//                    onBackPressed();
+                    Intent intent = new Intent(EventView.this, EventModify.class);
+                    intent.putExtra(userId, user);
+                    intent.putExtra(eventId, event);
+                    startActivity(intent);
                 }
             }
         });

@@ -3,6 +3,7 @@ package com.lasalle.meet.apiadapter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.lasalle.meet.enities.Event;
+import com.lasalle.meet.enities.Message;
 import com.lasalle.meet.enities.User;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public interface APIService {
 
 //    @GET("users/ID/friends")
 //    Call<Event> getUserFriend(@Field("ID") int ID);
-//
+
     //EVENTS//
     @Headers("Content-type: application/json")
     @GET("users/{ID}/events")
@@ -77,8 +78,8 @@ public interface APIService {
 //    Call<Event> getFutureUserAssistances(@Field("ID") int ID);
 //    @GET("users/ID/assistances/finished")
 //    Call<Event> getFinishedUserAssistances(@Field("ID") int ID);
-//
-//    //EVENT CRUD//
+
+    //EVENT CRUD//
     @Headers("Content-type: application/json")
     @POST("events")
     Call<Event> postEvent(@Body Event event, @Header("Authorization") String Token);
@@ -87,14 +88,15 @@ public interface APIService {
     Call<List<Event>> getEvent(@Query("t") String t, @Header("Authorization") String Token);
 //    @GET("events/ID")
 //    Call<Event> getEventID();
-//    @PUT("events/ID")
-//    Call<Event> modifyEvent(@Body Event event);
+    @Headers("Content-type: application/json")
+    @PUT("events/{ID}")
+    Call<Event> modifyEvent(@Path("ID") int eventID, @Body Event event, @Header("Authorization") String Token);
     @Headers("Content-type: application/json")
     @DELETE("events/{ID}")
     Call<Event> deleteEvent(@Path("ID") int eventID, @Header("Authorization") String Token);
 
-//
-//    //EVENT ASSISTENCES//
+
+    //EVENT ASSISTENCES//
 //    @GET("events/ID/assistances")
 //    Call<Event> getEventAssistans(@Field("t") String type); //WHICH ARE THE PARAMETERS??//
 //    @GET("events/ID/assistances/ID_USER")
@@ -107,24 +109,26 @@ public interface APIService {
 //    @DELETE("events/ID/assistances")
 //    Call<Event> deleteAssistance(@Field("ID") int eventID); //WHICH ARE THE PARAMETERS??//
 //
-//    //FRIENDS//
+    //FRIENDS//
 //    @GET("friends/requests")
 //    Call<Event> getFriendRequests(); //WHICH ARE THE PARAMETERS??//
-//    @GET("friends")
-//    Call<Event> getFriends(); //WHICH ARE THE PARAMETERS??//
+        @Headers("Content-type: application/json")
+        @GET("friends")
+        Call<List<User>> getFriends(@Header("Authorization") String Token);
 //    @POST("friends/ID")
 //    Call<Event> postFriendRequest(); //WHICH ARE THE PARAMETERS??//
 //    @PUT("friends/ID")
 //    Call<Event> putFriendRequestAccept(); //WHICH ARE THE PARAMETERS??//
 //    @DELETE("friends/ID")
-//    Call<Event> deleteFriendRequest(@Field("ID") int ID); //WHICH ARE THE PARAMETERS??//
-//
-//    //MESSAGES//
-//    @POST("messages")
-//    Call<Event> postMessage(@Field("content") String content, @Field("user_id_send") int user_id_send, @Field("user_id_recived") int user_id_recived); //WHICH ARE THE PARAMETERS??//
+    //Call<Event> deleteFriendRequest(@Field("ID") int ID); //WHICH ARE THE PARAMETERS??//
+
+    //MESSAGES//
+    @Headers("Content-type: application/json")
+    @POST("messages")
+    Call<Message> postMessage(@Body Message message, @Header("Authorization") String Token);
 //    @GET("messages/users")
 //    Call<Event> getUsersMessaged(); //WHICH ARE THE PARAMETERS??//
-//    @GET("messages/USER_ID")
-//    Call<Event> getUserIDMessages(@Field("USER_ID") int user_id); //WHICH ARE THE PARAMETERS??//
+    @GET("messages/{USER_ID}")
+    Call<List<Message>> getUserIDMessages(@Path("USER_ID") int user_id, @Header("Authorization") String Token);
 
 }

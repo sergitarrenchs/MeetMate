@@ -11,8 +11,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +38,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.eventexceptions.EventException;
@@ -59,14 +58,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-
-public class FinishEvent extends AppCompatActivity {
+public class FinishModify extends AppCompatActivity {
     private GoogleMap mMap;
     private ImageButton CreateButton;
     private MaterialButton uploadEventPicture;
 
     private User user;
+    private Event event;
     private static String userId = "USER_ID";
+    private static String eventId = "EVENT_ID";
 
     private static String event_name = "EVENT_NAME";
     private static String event_description = "EVENT_DESCRIPTION";
@@ -89,12 +89,14 @@ public class FinishEvent extends AppCompatActivity {
     private TextInputEditText eventAddress;
     private TextInputLayout eventAddress_layout;
     private ImageView imageSelected;
+    private MaterialTextView editEvent;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_2_activity);
 
         user = (User) getIntent().getSerializableExtra(userId);
+        event = (Event) getIntent().getSerializableExtra(eventId);
 
         eventName = (String) getIntent().getSerializableExtra(event_name);
         eventDescription = (String) getIntent().getSerializableExtra(event_description);
@@ -123,10 +125,10 @@ public class FinishEvent extends AppCompatActivity {
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean eventCreated = createNewEvent();
+                boolean eventUpdated = updateEvent();
 
-                if (eventCreated) {
-                    Intent intent = new Intent(FinishEvent.this, HomeScreen.class);
+                if (eventUpdated) {
+                    Intent intent = new Intent(FinishModify.this, EventTimeline.class);
                     intent.putExtra(userId, user);
                     startActivity(intent);
                 }
@@ -142,7 +144,7 @@ public class FinishEvent extends AppCompatActivity {
                         getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE
                 ) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
-                            FinishEvent.this,
+                            FinishModify.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             REQUEST_CODE_STORAGE_PERMISSION
                     );
@@ -152,6 +154,9 @@ public class FinishEvent extends AppCompatActivity {
             }
         });
 
+        editEvent = (MaterialTextView) findViewById(R.id.next_textView);
+        editEvent.setText(R.string.edit);
+
         Places.initialize(this, "AIzaSyCuUpbi0fy0VT9rvz2XD85pYnj69ZtpfjA");
 
         eventAddress.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +164,7 @@ public class FinishEvent extends AppCompatActivity {
             public void onClick(View v) {
                 List<Place.Field> places = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME);
 
-                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, places).build(FinishEvent.this);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, places).build(FinishModify.this);
 
                 startActivityForResult(intent, REQUEST_CODE_CALENDAR);
             }
@@ -249,7 +254,7 @@ public class FinishEvent extends AppCompatActivity {
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
                 }else {
-                    Toast.makeText(FinishEvent.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FinishModify.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -266,7 +271,7 @@ public class FinishEvent extends AppCompatActivity {
 
                 mMap.addMarker(markerOptions);
 
-                Geocoder geocoder = new Geocoder(FinishEvent.this, Locale.getDefault());
+                Geocoder geocoder = new Geocoder(FinishModify.this, Locale.getDefault());
 
                 try {
                     List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
@@ -291,30 +296,31 @@ public class FinishEvent extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
 
             }else {
-               ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
             }
         }
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(FinishEvent.this, NewEvent.class);
+        Intent intent = new Intent(FinishModify.this, EventModify.class);
         intent.putExtra(userId, user);
+        intent.putExtra(eventId, event);
         startActivity(intent);
     }
 
-    private boolean createNewEvent() {
+    private boolean updateEvent() {
         try {
-            Event.createNewEvent(eventName, eventAddress.getText().toString(), eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventType, "imageString", user.getAccessToken());
+            event.updateEvent(eventName, eventAddress.getText().toString(), eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventType, "imageString", user.getAccessToken());
 
             return true;
         } catch (EventNullLocationException e) {
-            eventAddress_layout.setError("The address is empty");
+            eventAddress_layout.setError("The address is empty");;
         } catch (EventNullImageException e) {
             eventAddress_layout.setError("The image is empty");
         } catch (EventInvalidCredentialsException e) {
             eventAddress_layout.setError("Invalid parameters");
-        } catch (EventException ignored) {}
+        }catch (EventException ignored) {}
 
         return false;
 

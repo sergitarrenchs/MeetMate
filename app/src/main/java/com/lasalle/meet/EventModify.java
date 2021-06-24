@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,12 +33,13 @@ import com.lasalle.meet.exceptions.eventexceptions.EventNullStartDateException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullTypeException;
 import com.lasalle.meet.exceptions.eventexceptions.EventStartDateInvalidException;
 
-
-public class NewEvent extends AppCompatActivity {
+public class EventModify extends AppCompatActivity {
     private ImageButton NextButton;
 
     private User user;
+    private Event event;
     private static String userId = "USER_ID";
+    private static String eventId = "EVENT_ID";
 
     private static String event_name = "EVENT_NAME";
     private static String event_description = "EVENT_DESCRIPTION";
@@ -66,12 +68,30 @@ public class NewEvent extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra(userId);
 
+        event = (Event) getIntent().getSerializableExtra(eventId);
+
         eventName = (TextInputEditText) findViewById(R.id.event_name_input);
+        eventName.setText(event.getName());
+
         eventDescription = (TextInputEditText) findViewById(R.id.event_description_input);
+        eventDescription.setText(event.getDescription());
+
         eventStartDate = (TextInputEditText) findViewById(R.id.event_start_date_input);
+        eventStartDate.setText(event.getEventStart_date());
+
+
         eventEndDate = (TextInputEditText) findViewById(R.id.event_end_date_input);
+        eventEndDate.setText(event.getEventEnd_date());
+
+
         eventType = (TextInputEditText) findViewById(R.id.event_type_input);
+        eventType.setText(event.getType());
+
+
         eventMaxParticipants = (TextInputEditText) findViewById(R.id.event_max_participants_input);
+        eventMaxParticipants.setText(String.valueOf(event.getN_participators()));
+
+
 
         eventName_layout = (TextInputLayout) findViewById(R.id.event_name_layout);
         eventDescription_layout = (TextInputLayout) findViewById(R.id.event_description_layout);
@@ -211,9 +231,9 @@ public class NewEvent extends AppCompatActivity {
 
         NextButton.setOnClickListener(v -> {
             try {
-                Event.newEventCheck(eventName.getText().toString(), eventDescription.getText().toString(), eventStartDate.getText().toString(), eventEndDate.getText().toString(), eventMaxParticipants.getText().toString(), eventType.getText().toString(), true);
+                Event.newEventCheck(eventName.getText().toString(), eventDescription.getText().toString(), eventStartDate.getText().toString(), eventEndDate.getText().toString(), eventMaxParticipants.getText().toString(), eventType.getText().toString(), false);
 
-                Intent intent = new Intent(NewEvent.this, FinishEvent.class);
+                Intent intent = new Intent(EventModify.this, FinishModify.class);
                 intent.putExtra(userId, user);
                 intent.putExtra(event_name, eventName.getText().toString());
                 intent.putExtra(event_description, eventDescription.getText().toString());
@@ -221,6 +241,7 @@ public class NewEvent extends AppCompatActivity {
                 intent.putExtra(event_endDate, eventEndDate.getText().toString());
                 intent.putExtra(event_Type, eventType.getText().toString());
                 intent.putExtra(event_Num, Integer.parseInt(eventMaxParticipants.getText().toString()));
+                intent.putExtra(eventId, event);
 
                 startActivity(intent);
 
@@ -240,8 +261,6 @@ public class NewEvent extends AppCompatActivity {
                 eventStartDate_layout.setError("The starting date needs to be a valid date");
             } catch (EventEndDateInvalidException e) {
                 eventEndDate_layout.setError("The ending date needs to be a valid date");
-            } catch (EventDateStartBeforeNowException e) {
-                eventStartDate_layout.setError("The starting date have to be after current date");
             } catch (EventDateStartAfterEndException e) {
                 eventEndDate_layout.setError("The ending date have to be after starting date");
             } catch (EventInvalidNumberException e) {
@@ -256,9 +275,8 @@ public class NewEvent extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(NewEvent.this, HomeScreen.class);
+        Intent intent = new Intent(EventModify.this, EventTimeline.class);
         intent.putExtra(userId, user);
         startActivity(intent);
     }
-
 }

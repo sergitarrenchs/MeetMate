@@ -6,6 +6,7 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.gson.annotations.Expose;
 import com.lasalle.meet.exceptions.apierrors.APIError;
 import com.lasalle.meet.exceptions.apierrors.ErrorUtils;
+import com.lasalle.meet.exceptions.messageexceptions.MessageNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
@@ -44,6 +45,9 @@ public class User implements Serializable {
 
     @Expose(serialize = false, deserialize = false)
     private int userError;
+
+    @Expose(serialize = false, deserialize = false)
+    private List<User> friends;
 
     @Expose(serialize = false, deserialize = true)
     private String accessToken;
@@ -364,5 +368,62 @@ public class User implements Serializable {
             throw new UserIncorrectCredentialsException();
         }
 
+    }
+
+    public List<User> getFriends() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<User>> call = APIAdapter.getApiService().getFriends("Bearer " + this.accessToken);
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                friends = response.body();
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            //TODO: FIX
+        }
+
+        return friends;
+    }
+
+    public void sendMessage(int otherId, String text) throws MessageNullException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        if (text.equals("")) {
+            throw new MessageNullException();
+        }else {
+            Message messageToSend = new Message(text, id,otherId);
+
+            Call<Message> call = APIAdapter.getApiService().postMessage(messageToSend,"Bearer " + this.accessToken);
+
+            call.enqueue(new Callback<Message>() {
+                @Override
+                public void onResponse(Call<Message> call, Response<Message> response) {
+                    countDownLatch.countDown();
+                }
+
+                @Override
+                public void onFailure(Call<Message> call, Throwable t) {
+                    countDownLatch.countDown();
+                }
+            });
+
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                //TODO: FIX
+            }
+        }
     }
 }

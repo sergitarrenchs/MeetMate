@@ -15,6 +15,7 @@ import com.lasalle.meet.exceptions.eventexceptions.EventDateStartAfterEndExcepti
 import com.lasalle.meet.exceptions.eventexceptions.EventDateStartBeforeNowException;
 import com.lasalle.meet.exceptions.eventexceptions.EventEndDateInvalidException;
 import com.lasalle.meet.exceptions.eventexceptions.EventException;
+import com.lasalle.meet.exceptions.eventexceptions.EventInvalidCredentialsException;
 import com.lasalle.meet.exceptions.eventexceptions.EventInvalidNumberException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNameNullException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullDescriptionException;
@@ -124,15 +125,15 @@ public class Event implements Serializable {
         try {
             countDownLatch.await();
             if (event.getEventError() == BAD_REQUEST) {
-                //TODO: Throw Exception Event Incorrect Error
+                throw new EventInvalidCredentialsException();
             }
 
         } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
+            throw new EventInvalidCredentialsException();
         }
     }
 
-    public static void newEventCheck(String name, String description, String eventStart_date, String eventEnd_date, String n_participators, String type) throws EventException{
+    public static void newEventCheck(String name, String description, String eventStart_date, String eventEnd_date, String n_participators, String type, boolean checkCurrentDate) throws EventException{
         if (name.equals("")) {
             throw new EventNameNullException();
         } else if (description.equals("")) {
@@ -163,11 +164,17 @@ public class Event implements Serializable {
         }
 
 
-        if (startDate.before(Date.from(LocalDateTime.ofInstant(new Date().toInstant(),
-                ZoneId.systemDefault()).atZone(ZoneId.systemDefault()).toInstant()))){
-            throw new EventDateStartBeforeNowException();
-        } else if (startDate.after(endDate)) {
-            throw new EventDateStartAfterEndException();
+        if (checkCurrentDate) {
+            if (startDate.before(Date.from(LocalDateTime.ofInstant(new Date().toInstant(),
+                    ZoneId.systemDefault()).atZone(ZoneId.systemDefault()).toInstant()))){
+                throw new EventDateStartBeforeNowException();
+            } else if (startDate.after(endDate)) {
+                throw new EventDateStartAfterEndException();
+            }
+        } else {
+            if (startDate.after(endDate)) {
+                throw new EventDateStartAfterEndException();
+            }
         }
 
         try {
@@ -186,43 +193,6 @@ public class Event implements Serializable {
         this.eventError = eventError;
     }
 
-    public static List<Event> getAllEvents(String accessToken){
-
-//        CountDownLatch countDownLatch = new CountDownLatch(1);
-//
-//        Call<List<Event>> call = APIAdapter.getApiService().getEvent("","Bearer " + accessToken);
-//
-//        List<Event> myList;
-//
-//        call.enqueue(new Callback<List<Event>>() {
-//            @Override
-//            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-//                if (response.isSuccessful()){
-//                    myList = response.body();
-//                    countDownLatch.countDown();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Event>> call, Throwable t) {
-//                countDownLatch.countDown();
-//            }
-//        });
-//
-//        try {
-//            countDownLatch.await();
-////            if (event.getEventError() == BAD_REQUEST) {
-////                //TODO: Throw Exception Event Incorrect Error
-////            }
-//
-//        } catch (InterruptedException e) {
-//            //TODO: Throw Exception Event Incorrect Error
-//        }
-//
-//        return myList;
-        return null;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -231,33 +201,41 @@ public class Event implements Serializable {
         return name;
     }
 
-    public static GoogleMap displayAllEventMarkers(List<Event> eventList, GoogleMap mMap, Context context) {
-//        mMap.clear();
-//
-//        for (int i = 0; i < eventList.size(); i++) {
-//            Event event = (Event) eventList.get(0);
-//            List<Address> addresses;
-//
-//            try {
-//
-//                addresses = new Geocoder(context).getFromLocationName(event.getLocation(),1);
-//
-//                if (addresses.size() > 0) {
-//                    Address location = addresses.get(0);
-//
-//                    mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
-//                }
-//
-//            } catch (IOException e) {
-//
-//            }
-//        }
-//
-//        return mMap;
-        return null;
+    public String getDescription() {
+        return description;
     }
 
-    public void eventAssist(String accessToken) {
+    public String getEventStart_date() {
+        SimpleDateFormat spf = new SimpleDateFormat("dd / MM / yyyy HH : mm");
+
+        try {
+            Date x = ISO8601Utils.parse(eventStart_date, new ParsePosition(0));
+            String u = spf.format(x);
+
+            return u;
+        } catch (ParseException e) {
+            return "No date";
+        }
+    }
+
+    public String getEventEnd_date() {
+        SimpleDateFormat spf = new SimpleDateFormat("dd / MM / yyyy HH : mm");
+
+        try {
+            Date x = ISO8601Utils.parse(eventEnd_date, new ParsePosition(0));
+            String u = spf.format(x);
+
+            return u;
+        } catch (ParseException e) {
+            return "No date";
+        }
+    }
+
+    public int getN_participators() {
+        return n_participators;
+    }
+
+    public void eventAssist(String accessToken) throws EventInvalidCredentialsException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
 
         eventError = 0;
@@ -282,11 +260,11 @@ public class Event implements Serializable {
         try {
             countDownLatch.await();
             if (eventError == BAD_REQUEST) {
-                //TODO: Throw Exception Event Incorrect Error
+                throw new EventInvalidCredentialsException();
             }
 
         } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
+            throw new EventInvalidCredentialsException();
         }
     }
 
@@ -341,6 +319,56 @@ public class Event implements Serializable {
 
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
+        }
+    }
+
+    public void updateEvent(String name, String location, String description, Date eventStart_date, Date eventEnd_date, int n_participators, String type, String image,String accessToken) throws EventException {
+
+        if (location.equals("")) {
+            throw new EventNullLocationException();
+        } else if (image.equals("")) {
+            throw new EventNullImageException();
+        }
+
+        this.name = name;
+        this.image = image;
+        this.location = location;
+        this.description = description;
+        this.eventStart_date = ISO8601Utils.format(eventStart_date, true);
+        this.eventEnd_date = ISO8601Utils.format(eventEnd_date, true);
+        this.n_participators = n_participators;
+        this.type = type;
+        this.image = image;
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        eventError = 0;
+
+        Call<Event> call = APIAdapter.getApiService().modifyEvent(ID,this,"Bearer " + accessToken);
+
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                if (!response.isSuccessful()) {
+                    eventError = response.code();
+                }
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+            if (eventError == BAD_REQUEST) {
+                throw new EventInvalidCredentialsException();
+            }
+
+        } catch (InterruptedException e) {
+            throw new EventInvalidCredentialsException();
         }
     }
 }
