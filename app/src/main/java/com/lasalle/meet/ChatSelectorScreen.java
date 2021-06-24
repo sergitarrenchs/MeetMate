@@ -83,9 +83,9 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(ChatSelectorScreen.this, ChatScreen.class);
-//                intent.putExtra(userId, user);
-//                startActivity(intent);
+                Intent intent = new Intent(ChatSelectorScreen.this, AddFriend.class);
+                intent.putExtra(userId, user);
+                startActivity(intent);
             }
         });
 

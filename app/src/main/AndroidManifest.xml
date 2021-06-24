@@ -94,6 +94,10 @@
             android:name="com.lasalle.meet.ChatScreen"
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.AddFriend"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
 
     </application>
 

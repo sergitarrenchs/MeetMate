@@ -47,7 +47,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_search"
+        android:src="@drawable/friend_list"
         app:backgroundTint="@color/white"
         app:fabCustomSize="50dp"
         app:fab_colorPressed="@color/teal_light"

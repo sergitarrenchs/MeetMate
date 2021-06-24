@@ -57,7 +57,7 @@ public class User implements Serializable {
     private final static int EMAIL_EXIST = 1062;
     private final static int UNAUTHORISED = 401;
 
-    private User(String name, String last_name, String email, String password, String image) {
+    public User(String name, String last_name, String email, String password, String image) {
         this.name = name;
         this.last_name = last_name;
         this.username = "@" + name.toLowerCase().replaceAll(" ","") + "." + last_name.toLowerCase().replaceAll(" ","");

@@ -79,7 +79,6 @@ public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.Vi
             onNoteListener.onNoteClick(getAdapterPosition());
         }
     }
-
     public interface OnNoteListener {
         void onNoteClick(int position);
     }
