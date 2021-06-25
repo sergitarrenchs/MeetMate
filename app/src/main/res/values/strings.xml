@@ -66,6 +66,10 @@
     <string name="join">JOIN</string>
     <string name="delete">DELETE</string>
     <string name="edit">EDIT</string>
+    <string name="from">FROM</string>
+    <string name="to">to</string>
+    <string name="description">Description</string>
+    <string name="maxparticipants">MAX PARTICIPANTS:</string>
 
     //EVENT TIMELINE//
     <string name="all">ALL</string>

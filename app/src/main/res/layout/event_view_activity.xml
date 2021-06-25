@@ -161,4 +161,85 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/event_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/description"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+    <TextView
+        android:id="@+id/event_description2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/from"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/event_description" />
+
+    <TextView
+        android:id="@+id/event_description6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/maxparticipants"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/event_description4" />
+
+    <TextView
+        android:id="@+id/event_description3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/start_date"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/event_description4"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/event_description2" />
+
+    <TextView
+        android:id="@+id/event_description4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroylight"
+        android:text="to"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/event_description2" />
+
+    <TextView
+        android:id="@+id/event_description5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/end_date"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/event_description4"
+        app:layout_constraintTop_toBottomOf="@+id/event_description2" />
+
+    <TextView
+        android:id="@+id/event_description7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/gilroylight"
+        android:text="150"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/event_description6"
+        app:layout_constraintTop_toBottomOf="@+id/event_description4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
