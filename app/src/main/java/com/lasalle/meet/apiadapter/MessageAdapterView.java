@@ -65,9 +65,11 @@ public class MessageAdapterView extends RecyclerView.Adapter<MessageAdapterView.
             if (message.getUserID() == user.getId()) {
                 messageView.setText(message.getContent());
                 messageView.setVisibility(View.VISIBLE);
+                messageViewOther.setVisibility(View.GONE);
             } else {
                 messageViewOther.setText(message.getContent());
                 messageViewOther.setVisibility(View.VISIBLE);
+                messageView.setVisibility(View.GONE);
             }
 
 
