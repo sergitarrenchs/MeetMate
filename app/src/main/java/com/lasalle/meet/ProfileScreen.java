@@ -30,6 +30,7 @@ import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -65,9 +66,9 @@ public class ProfileScreen extends AppCompatActivity {
 
     private User user;
     private static String userId = "USER_ID";
-    private List<Event> eventList;
-    private List<Event> assistedList;
-    private List<User> friendList;
+    private List<Event> eventList = new ArrayList<Event>();
+    private List<Event> assistedList = new ArrayList<Event>();
+    private List<User> friendList = new ArrayList<User>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
