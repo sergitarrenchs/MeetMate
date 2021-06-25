@@ -203,7 +203,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
-        android:src="@drawable/signup_upload_picture_icon"
+        android:src="@drawable/user"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
