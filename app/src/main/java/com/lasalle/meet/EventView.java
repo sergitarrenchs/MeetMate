@@ -75,7 +75,7 @@ public class EventView extends AppCompatActivity {
 
         eventDate.setText(event.getDate());
 
-        eventImage.setImageDrawable(getDrawable(R.drawable.defect_image_event));
+        eventImage.setImageDrawable(getDrawable(R.drawable.default_image_event));
 
         mButton = (MaterialButton) findViewById(R.id.join_button);
 
