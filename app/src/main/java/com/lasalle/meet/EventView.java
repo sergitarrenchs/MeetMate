@@ -77,7 +77,7 @@ public class EventView extends AppCompatActivity {
 
         eventImage.setImageDrawable(getDrawable(R.drawable.defect_image_event));
 
-        mButton = (MaterialButton) findViewById(R.id.signup_button);
+        mButton = (MaterialButton) findViewById(R.id.join_button);
 
         mFloatingButton = (FloatingActionButton) findViewById(R.id.editProfileInfoButton);
 

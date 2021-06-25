@@ -67,7 +67,7 @@ public class SignupScreen extends AppCompatActivity{
 
         imageSelected = (ImageView) findViewById(R.id.profilePicture);
 
-        SignUpButton = (MaterialButton) findViewById(R.id.signup_button);
+        SignUpButton = (MaterialButton) findViewById(R.id.join_button);
 
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

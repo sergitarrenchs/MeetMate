@@ -119,7 +119,7 @@
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
         android:layout_marginBottom="@dimen/side_margin"
-        app:layout_constraintBottom_toTopOf="@+id/signup_button"
+        app:layout_constraintBottom_toTopOf="@+id/join_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -144,21 +144,21 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signup_button"
-        style="@style/Widget.AppCompat.Button"
+        android:id="@+id/join_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        android:backgroundTint="@color/purple_strong"
         android:fontFamily="@font/gilroybold"
         android:text="@string/join"
         android:textSize="@dimen/t1_size"
         app:cornerRadius="@dimen/radius_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

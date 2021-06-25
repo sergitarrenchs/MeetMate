@@ -7,18 +7,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lasalle.meet.enities.User;
-import com.lasalle.meet.exceptions.userexceptions.UserEmailExistException;
 import com.lasalle.meet.exceptions.userexceptions.UserEmailNullException;
 import com.lasalle.meet.exceptions.userexceptions.UserException;
 import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordLowSecurityException;
-import com.lasalle.meet.exceptions.userexceptions.UserPasswordNotEqualException;
 import com.lasalle.meet.exceptions.userexceptions.UserPasswordNullException;
 
 public class LoginScreen extends AppCompatActivity {
@@ -39,7 +36,7 @@ public class LoginScreen extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra(userId);
 
-        LoginButton = (MaterialButton) findViewById(R.id.signup_button);
+        LoginButton = (MaterialButton) findViewById(R.id.join_button);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
