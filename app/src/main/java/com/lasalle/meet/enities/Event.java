@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -237,6 +238,28 @@ public class Event implements Serializable {
 
     public int getN_participators() {
         return n_participators;
+    }
+
+    public Date getStartDateObj () {
+        try {
+            Date x = ISO8601Utils.parse(eventStart_date, new ParsePosition(0));
+            return x;
+        } catch (ParseException e) {
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    public Date getEndDateObj () {
+        try {
+            Date x = ISO8601Utils.parse(eventEnd_date, new ParsePosition(0));
+            return x;
+        } catch (ParseException e) {
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     public void eventAssist(String accessToken) throws EventInvalidCredentialsException {

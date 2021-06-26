@@ -65,12 +65,12 @@ public interface APIService {
     @Headers("Content-type: application/json")
     @GET("users/{ID}/events")
     Call<List<Event>> getUserEvent(@Path("ID") int ID,@Header("Authorization") String Token);
-//    @GET("users/ID/events/future")
-//    Call<Event> getFutureUserEvent(@Field("ID") int ID);
-//    @GET("users/ID/events/finished")
-//    Call<Event> getFinishedUserEvent(@Field("ID") int ID);
-//    @GET("users/ID/events/current")
-//    Call<Event> getCurrentUserEvent(@Field("ID") int ID);
+    @GET("users/ID/events/future")
+    Call<Event> getFutureUserEvent(@Field("ID") int ID);
+    @GET("users/ID/events/finished")
+    Call<Event> getFinishedUserEvent(@Field("ID") int ID);
+    @GET("users/ID/events/current")
+    Call<Event> getCurrentUserEvent(@Field("ID") int ID);
 
     @GET("users/{ID}/assistances")
     Call<List<Event>> getUserAssistances(@Path("ID") int ID, @Header("Authorization") String Token);

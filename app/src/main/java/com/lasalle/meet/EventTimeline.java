@@ -17,6 +17,10 @@ import com.google.android.material.button.MaterialButton;
 import com.lasalle.meet.enities.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -210,6 +214,30 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         try {
             countDownLatch.await();
 
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getEndDateObj();
+                    Date second = o2.getEndDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
+
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
         }
@@ -238,6 +266,30 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
 
         try {
             countDownLatch.await();
+
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getEndDateObj();
+                    Date second = o2.getEndDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
 
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
@@ -276,6 +328,30 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
             }
 
             eventList = eventOthers;
+
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getEndDateObj();
+                    Date second = o2.getEndDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
 
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
