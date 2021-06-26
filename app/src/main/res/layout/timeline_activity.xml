@@ -6,69 +6,136 @@
     android:layout_height="match_parent"
     android:background="@color/teal_light">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/all_events_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginTop="@dimen/top_margin"
-        android:backgroundTint="@color/transparent"
-        android:fontFamily="@font/gilroybold"
-        android:outlineSpotShadowColor="@color/transparent"
-        android:text="@string/event_type_all"
-        android:textColor="@color/black"
-        android:textSize="@dimen/t1_size"
-        android:theme="@style/Widget.AppCompat.Button"
-        app:cornerRadius="@dimen/radius_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/yours_events_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="@dimen/top_margin"
-        android:backgroundTint="@color/transparent"
-        android:fontFamily="@font/gilroybold"
-        android:outlineSpotShadowColor="@color/transparent"
-        android:text="@string/yours"
-        android:textColor="@color/black"
-        android:textSize="@dimen/t1_size"
-        android:theme="@style/Widget.AppCompat.Button"
-        app:cornerRadius="@dimen/radius_1"
-        app:layout_constraintEnd_toStartOf="@+id/others_events_button"
-        app:layout_constraintStart_toEndOf="@+id/all_events_button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/others_events_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="@dimen/top_margin"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/transparent"
-        android:fontFamily="@font/gilroybold"
-        android:outlineSpotShadowColor="@color/transparent"
-        android:text="@string/others"
-        android:textColor="@color/black"
-        android:textSize="@dimen/t1_size"
-        android:theme="@style/Widget.AppCompat.Button"
-        app:cornerRadius="@dimen/radius_1"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/all_events_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/event_type_all"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/yours_events_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/yours"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/others_events_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/others"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/finished_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/finished"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/current_type_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/current"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/future_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/gilroybold"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    android:text="@string/future"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/t1_size"
+                    android:theme="@style/Widget.AppCompat.Button"
+                    app:cornerRadius="@dimen/radius_1" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_event"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginBottom="@dimen/bottom_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yours_events_button">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
     </androidx.recyclerview.widget.RecyclerView>
 

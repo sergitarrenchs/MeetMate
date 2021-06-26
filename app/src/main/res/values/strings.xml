@@ -75,6 +75,9 @@
     <string name="all">ALL</string>
     <string name="yours">YOURS</string>
     <string name="others">OTHERS</string>
+    <string name="current">CURRENT</string>
+    <string name="finished">FINISHED</string>
+    <string name="future">FUTURE</string>
 
     //CHAT//
     <string name="send">Type a message</string>

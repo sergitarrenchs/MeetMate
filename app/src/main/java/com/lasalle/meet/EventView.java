@@ -95,7 +95,7 @@ public class EventView extends AppCompatActivity {
 
         numberParticipants.setText(String.valueOf(event.getN_participators()));
 
-        eventImage.setImageDrawable(getDrawable(R.drawable.default_image_event));
+        eventImage.setImageDrawable(getDrawable(R.drawable.event_default_picture));
 
         mButton = (MaterialButton) findViewById(R.id.join_button);
 

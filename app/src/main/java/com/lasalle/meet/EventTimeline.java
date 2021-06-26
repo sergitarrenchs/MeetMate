@@ -39,6 +39,9 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
     private MaterialButton allEventsButton;
     private MaterialButton yoursEventsButton;
     private MaterialButton othersEventsButton;
+    private MaterialButton currentEventsButton;
+    private MaterialButton finishedEventsButton;
+    private MaterialButton futureEventsButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +59,15 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
 
 
         allEventsButton = (MaterialButton) findViewById(R.id.all_events_button);
-        allEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
-
         allEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 allEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
                 getAllEvents("");
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
@@ -78,6 +82,10 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
                 allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
 
                 getYourEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
@@ -93,6 +101,10 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
                 allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
 
                 getOtherEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
@@ -101,10 +113,70 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
             }
         });
 
+        currentEventsButton = (MaterialButton) findViewById(R.id.current_type_button);
+        currentEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+
+                getOtherEvents();
+                EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
+                recyclerView.setAdapter(eventAdapterView);
+
+            }
+        });
+
+        finishedEventsButton = (MaterialButton) findViewById(R.id.finished_type_button);
+        finishedEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+
+                getOtherEvents();
+                EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
+                recyclerView.setAdapter(eventAdapterView);
+
+            }
+        });
+
+        futureEventsButton = (MaterialButton) findViewById(R.id.future_type_button);
+        futureEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+
+                getOtherEvents();
+                EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
+                recyclerView.setAdapter(eventAdapterView);
+
+            }
+        });
+
+
         //Initial start
         allEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
         yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
         othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+        currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+        finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+        futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
     }
 
