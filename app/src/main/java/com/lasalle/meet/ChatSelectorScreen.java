@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapterView.OnNoteListener{
+    private static final String TAG = "ChatSelectorScreen";
     private float x1,x2,y1,y2;
 
     private User user;
@@ -49,6 +51,7 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
     private List<User> friendList = new ArrayList<User>();;
     private List<User> userList = new ArrayList<User>();
     private RecyclerView recyclerView;
+    FriendAdapterView friendAdapterView;
 
     private TextInputEditText searchUser;
 
@@ -93,9 +96,11 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
         friendList = user.getFriends();
 
         userList.clear();
-        userList.addAll(friendList);
+        if (friendList != null) {
+            userList.addAll(friendList);
+        }
 
-        FriendAdapterView friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this::onNoteClick, friendList);
+        friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this, friendList);
         recyclerView.setAdapter(friendAdapterView);
 
         searchUser = (TextInputEditText) findViewById(R.id.search_text_user);
@@ -111,7 +116,7 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
                 try {
                     searchUsers(s.toString());
 
-                    FriendAdapterView friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this::onNoteClick, friendList);
+                    FriendAdapterView friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this, friendList);
                     recyclerView.setAdapter(friendAdapterView);
 
                 } catch (UserIncorrectCredentialsException e) {
@@ -127,7 +132,7 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
                     userList.clear();
                     userList.addAll(friendList);
 
-                    FriendAdapterView friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this::onNoteClick, friendList);
+                    friendAdapterView = new FriendAdapterView(userList, ChatSelectorScreen.this, friendList);
                     recyclerView.setAdapter(friendAdapterView);
                 }
 
@@ -223,5 +228,75 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
         startActivity(intent);
     }
 
+    @Override
+    public void onFriendAdd(int position) {
+        try {
+            user.addFriend(userList.get(position));
 
+            searchUsers(searchUser.getText().toString());
+
+            friendAdapterView.setDataSet(userList);
+
+        } catch (UserIncorrectCredentialsException e) {
+            Log.w(TAG, "User has already been requested");
+            Toast.makeText(this,"User has already been requested", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFriendDelete(int position) {
+        try {
+            deleteFriends(userList.get(position).getId());
+
+            searchUsers(searchUser.getText().toString());
+
+            friendList = user.getFriends();
+
+            if (searchUser.getText().toString().equals("")) {
+                userList.clear();
+                userList.addAll(friendList);
+            }
+
+            friendAdapterView.setDataSet(userList);
+
+        } catch (UserIncorrectCredentialsException e) {
+            Log.w(TAG, "User has already been deleted");
+            Toast.makeText(this,"User has already been deleted as friends", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deleteFriends (int friendID) throws UserIncorrectCredentialsException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        userError = 0;
+
+        Call<User> call = APIAdapter.getApiService().deleteFriendRequest(friendID,"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    userError = response.code();
+                }
+
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            if (userError == 400) {
+                throw new UserIncorrectCredentialsException();
+            }
+
+        } catch (InterruptedException e) {
+            throw new UserIncorrectCredentialsException();
+        }
+    }
 }

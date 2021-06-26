@@ -120,6 +120,11 @@ public class ChatScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+        }
+
         Intent intent = new Intent(ChatScreen.this, ChatSelectorScreen.class);
         intent.putExtra(userId, user);
         startActivity(intent);

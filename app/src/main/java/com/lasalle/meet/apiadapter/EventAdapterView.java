@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.R;
 import com.lasalle.meet.enities.Event;
 
@@ -48,7 +49,7 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
     public class ViewHolderEvents extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView eventName;
-        TextView eventDate;
+        MaterialTextView eventDate;
         ImageView eventImage;
         OnNoteListener onNoteListener;
         ImageView eventImageButton;
@@ -67,6 +68,7 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
 
         public void showInfo(Event event) {
             eventName.setText(event.getName());
+            eventDate.setText(event.getDate());
         }
 
         @Override

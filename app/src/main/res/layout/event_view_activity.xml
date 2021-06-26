@@ -161,12 +161,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/side_margin"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/gilroylight"
         android:text="@string/description"
@@ -179,25 +179,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/gilroylight"
+        android:fontFamily="@font/gilroybold"
         android:text="@string/from"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/event_description" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/gilroylight"
+        android:layout_marginTop="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
         android:text="@string/maxparticipants"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/event_description4" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -209,18 +211,18 @@
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/event_description2" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/gilroylight"
+        android:fontFamily="@font/gilroybold"
         android:text="to"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/event_description2" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -231,11 +233,12 @@
         app:layout_constraintStart_toEndOf="@+id/event_description4"
         app:layout_constraintTop_toBottomOf="@+id/event_description2" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/event_description7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/side_margin"
         android:fontFamily="@font/gilroylight"
         android:text="150"
         android:textAlignment="center"

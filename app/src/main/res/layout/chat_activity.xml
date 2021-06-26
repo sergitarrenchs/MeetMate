@@ -40,9 +40,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_chat_message"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/bottom_margin"
+        android:layout_marginVertical="8dp"
         app:layout_constrainedHeight="true"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/send_message_layout"

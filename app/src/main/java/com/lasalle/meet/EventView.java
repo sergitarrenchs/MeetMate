@@ -48,6 +48,10 @@ public class EventView extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private MaterialButton mButton;
     private FloatingActionButton mFloatingButton;
+    private MaterialTextView eventDescription;
+    private MaterialTextView eventStartDate;
+    private MaterialTextView eventEndDate;
+    private MaterialTextView numberParticipants;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -67,6 +71,14 @@ public class EventView extends AppCompatActivity {
 
         eventImage = (ImageView) findViewById(R.id.eventImageView);
 
+        eventDescription = (MaterialTextView) findViewById(R.id.event_description);
+
+        eventStartDate = (MaterialTextView) findViewById(R.id.event_description3);
+
+        eventEndDate = (MaterialTextView) findViewById(R.id.event_description5);
+
+        numberParticipants = (MaterialTextView) findViewById(R.id.event_description7);
+
         eventName.setText(event.getName());
 
         eventAddress.setText(event.getLocation());
@@ -74,6 +86,14 @@ public class EventView extends AppCompatActivity {
         eventType.setText(event.getType());
 
         eventDate.setText(event.getDate());
+
+        eventDescription.setText(event.getDescription());
+
+        eventStartDate.setText(event.getEventStart_date());
+
+        eventEndDate.setText(event.getEventEnd_date());
+
+        numberParticipants.setText(String.valueOf(event.getN_participators()));
 
         eventImage.setImageDrawable(getDrawable(R.drawable.default_image_event));
 

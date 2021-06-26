@@ -56,6 +56,7 @@ public class User implements Serializable {
     private final static int USER_NOT_FOUND = 404;
     private final static int EMAIL_EXIST = 1062;
     private final static int UNAUTHORISED = 401;
+    private final static int BAD_REQUEST = 400;
 
     public User(String name, String last_name, String email, String password, String image) {
         this.name = name;
@@ -424,6 +425,41 @@ public class User implements Serializable {
             } catch (InterruptedException e) {
                 //TODO: FIX
             }
+        }
+    }
+
+    public void addFriend(User user) throws UserIncorrectCredentialsException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        userError = NO_ERROR;
+
+        Call<User> call = APIAdapter.getApiService().postFriendRequest(user.getId(),"Bearer " + this.accessToken);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    userError = response.code();
+                }
+
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            if (userError == BAD_REQUEST) {
+                throw new UserIncorrectCredentialsException();
+            }
+
+        } catch (InterruptedException e) {
+            throw new UserIncorrectCredentialsException();
         }
     }
 }

@@ -43,6 +43,7 @@
 
     <ImageView
         android:id="@+id/imageView3"
+        android:tag="YES FRIEND"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/side_margin"

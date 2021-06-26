@@ -41,6 +41,12 @@ public class AddNewFriendAdapterView extends RecyclerView.Adapter<AddNewFriendAd
         holder.showInfo(this.friendList.get(position));
     }
 
+    public void setDataSet(List<User> newList){
+        friendList.clear();
+        friendList.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return friendList.size();

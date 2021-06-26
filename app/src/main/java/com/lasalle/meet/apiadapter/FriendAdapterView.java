@@ -5,12 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lasalle.meet.R;
 import com.lasalle.meet.enities.Event;
+import com.lasalle.meet.enities.Message;
 import com.lasalle.meet.enities.User;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +45,12 @@ public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.Vi
         holder.showInfo(this.friendList.get(position));
     }
 
+    public void setDataSet(List<User> newList){
+        currentFriendList.clear();
+        currentFriendList.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return friendList.size();
@@ -64,12 +72,34 @@ public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.Vi
             this.onNoteListener = onNoteListener;
 
             itemView.setOnClickListener(this);
+
+            userAddButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (userAddButton.getTag().toString().equals("YES FRIEND")) {
+                        if (onNoteListener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                onNoteListener.onFriendAdd(position);
+                            }
+                        }
+                    } else if (userAddButton.getTag().toString().equals("NO FRIEND")) {
+                        if (onNoteListener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                onNoteListener.onFriendDelete(position);
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         public void showInfo(User user) {
             userName.setText(user.getFullName());
             if (currentFriendList.contains(user)) {
                 userAddButton.setImageResource(R.drawable.delete_friend);
+                userAddButton.setTag("NO FRIEND");
             }
 
         }
@@ -81,5 +111,7 @@ public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.Vi
     }
     public interface OnNoteListener {
         void onNoteClick(int position);
+        void onFriendAdd(int position);
+        void onFriendDelete(int position);
     }
 }

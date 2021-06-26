@@ -10,4 +10,5 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="orange_red">#FC8A5C</color>
     <color name="error_red">#F61A1A</color>
+    <color name="light_blue">#CDF2F8</color>
 </resources>

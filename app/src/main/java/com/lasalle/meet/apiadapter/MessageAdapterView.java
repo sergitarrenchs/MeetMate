@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -17,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MessageAdapterView extends RecyclerView.Adapter<MessageAdapterView.ViewHolderEvents>{
+    private static final int MESSAGE_SENT = 1;
+    private static final int MESSAGE_RECEIVED = -1;
+
     private List<Message> messageList;
     private User user;
 
@@ -29,7 +33,12 @@ public class MessageAdapterView extends RecyclerView.Adapter<MessageAdapterView.
     @NotNull
     @Override
     public MessageAdapterView.ViewHolderEvents onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_message_recycler, null, false);
+        int layoutId = (viewType == MESSAGE_SENT) ? R.layout.chat_message_recycler_right : R.layout.chat_message_recycler;
+
+        CardView view = (CardView) LayoutInflater.from(parent.getContext())
+                .inflate(layoutId, parent, false);
+
+
         return new MessageAdapterView.ViewHolderEvents(view);
     }
 
@@ -43,6 +52,14 @@ public class MessageAdapterView extends RecyclerView.Adapter<MessageAdapterView.
         return messageList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        int userId = user.getId();
+        int senderId = messageList.get(position).getUserID();
+        return (senderId == userId) ? MESSAGE_SENT : MESSAGE_RECEIVED;
+    }
+
+
     public void setDataSet(List<Message> newList){
         messageList.clear();
         messageList.addAll(newList);
@@ -52,27 +69,15 @@ public class MessageAdapterView extends RecyclerView.Adapter<MessageAdapterView.
     public class ViewHolderEvents extends RecyclerView.ViewHolder {
 
         MaterialTextView messageView;
-        MaterialTextView messageViewOther;
 
         public ViewHolderEvents(@NonNull @NotNull View itemView) {
             super(itemView);
-            messageView = itemView.findViewById(R.id.textView6);
-            messageViewOther = itemView.findViewById(R.id.textView7);
+            messageView = itemView.findViewById(R.id.message_id);
 
         }
 
         public void showInfo(Message message) {
-            if (message.getUserID() == user.getId()) {
                 messageView.setText(message.getContent());
-                messageView.setVisibility(View.VISIBLE);
-                messageViewOther.setVisibility(View.GONE);
-            } else {
-                messageViewOther.setText(message.getContent());
-                messageViewOther.setVisibility(View.VISIBLE);
-                messageView.setVisibility(View.GONE);
-            }
-
-
         }
     }
 

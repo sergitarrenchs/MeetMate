@@ -110,17 +110,17 @@ public interface APIService {
 //    Call<Event> deleteAssistance(@Field("ID") int eventID); //WHICH ARE THE PARAMETERS??//
 //
     //FRIENDS//
-//    @GET("friends/requests")
-//    Call<Event> getFriendRequests(); //WHICH ARE THE PARAMETERS??//
-        @Headers("Content-type: application/json")
-        @GET("friends")
-        Call<List<User>> getFriends(@Header("Authorization") String Token);
-//    @POST("friends/ID")
-//    Call<Event> postFriendRequest(); //WHICH ARE THE PARAMETERS??//
-//    @PUT("friends/ID")
-//    Call<Event> putFriendRequestAccept(); //WHICH ARE THE PARAMETERS??//
-//    @DELETE("friends/ID")
-    //Call<Event> deleteFriendRequest(@Field("ID") int ID); //WHICH ARE THE PARAMETERS??//
+    @GET("friends/requests")
+    Call<List<User>> getFriendRequests(@Header("Authorization") String Token);
+    @Headers("Content-type: application/json")
+    @GET("friends")
+    Call<List<User>> getFriends(@Header("Authorization") String Token);
+    @POST("friends/{ID}")
+    Call<User> postFriendRequest(@Path("ID") int user_id, @Header("Authorization") String Token);
+    @PUT("friends/{ID}")
+    Call<User> putFriendRequestAccept(@Path("ID") int user_id, @Header("Authorization") String Token);
+    @DELETE("friends/{ID}")
+    Call<User> deleteFriendRequest(@Path("ID") int user_id, @Header("Authorization") String Token);
 
     //MESSAGES//
     @Headers("Content-type: application/json")

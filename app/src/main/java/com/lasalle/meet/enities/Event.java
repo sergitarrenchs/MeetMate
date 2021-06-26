@@ -215,6 +215,8 @@ public class Event implements Serializable {
             return u;
         } catch (ParseException e) {
             return "No date";
+        } catch (NullPointerException e) {
+            return "No date";
         }
     }
 
@@ -227,6 +229,8 @@ public class Event implements Serializable {
 
             return u;
         } catch (ParseException e) {
+            return "No date";
+        } catch (NullPointerException e) {
             return "No date";
         }
     }
@@ -281,6 +285,8 @@ public class Event implements Serializable {
 
             return u;
         } catch (ParseException e) {
+            return "No date";
+        } catch (NullPointerException e) {
             return "No date";
         }
     }
