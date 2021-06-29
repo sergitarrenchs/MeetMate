@@ -351,7 +351,9 @@ public class HomeScreen extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Location currentLocation = (Location) task.getResult();
 
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
+                    if (currentLocation != null) {
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
+                    }
                 }else {
                     Toast.makeText(HomeScreen.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                 }
