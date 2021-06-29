@@ -60,6 +60,7 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
@@ -165,7 +166,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:visibility="visible"
+        android:visibility="gone"
+        android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/all_events_button"
@@ -177,7 +179,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:visibility="invisible"
+        android:visibility="gone"
+        android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yours_events_button"
@@ -189,10 +192,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:visibility="invisible"
+        android:visibility="gone"
+        android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/others_events_button"
-        app:srcCompat="@drawable/right_timeline_select" />
+        app:srcCompat="@drawable/right_timeline_select"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

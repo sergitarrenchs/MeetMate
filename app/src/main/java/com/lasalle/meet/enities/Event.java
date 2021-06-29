@@ -299,11 +299,22 @@ public class Event implements Serializable {
         return owner_id;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public String getImage() {
+        if (image == null) {
+            return "";
+        }
+        return image;
+    }
+
     public String getDate() {
         SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         try {
-            Date x = ISO8601Utils.parse(eventEnd_date, new ParsePosition(0));
+            Date x = ISO8601Utils.parse(eventStart_date, new ParsePosition(0));
             String u = spf.format(x);
 
             return u;

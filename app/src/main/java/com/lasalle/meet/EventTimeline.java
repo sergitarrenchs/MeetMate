@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -46,13 +47,15 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
     private MaterialButton subAllEventsButton;
     private MaterialButton yoursEventsButton;
     private MaterialButton othersEventsButton;
+
     private MaterialButton currentEventsButton;
     private MaterialButton finishedEventsButton;
     private MaterialButton futureEventsButton;
 
-    private ImageView leftTimelineSelect;
-    private ImageView centerTimelineSelect;
-    private ImageView rightTimelineSelect;
+    private ScrollView belowScrollView;
+    private ImageView belowArrow;
+    private ImageView belowArrowLeft;
+    private ImageView belowArrowRight;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +71,13 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         EventAdapterView eventAdapterView = new EventAdapterView(eventList, this);
         recyclerView.setAdapter(eventAdapterView);
 
+        belowScrollView = (ScrollView) findViewById(R.id.scrollView2);
 
-        leftTimelineSelect = (ImageView) findViewById(R.id.left_timeline_select);
-        leftTimelineSelect.setVisibility(View.VISIBLE);
+        belowArrow = (ImageView) findViewById(R.id.center_timeline_select);
+
+        belowArrowLeft = (ImageView) findViewById(R.id.right_timeline_select);
+
+        belowArrowRight = (ImageView) findViewById(R.id.left_timeline_select);
 
         allEventsButton = (MaterialButton) findViewById(R.id.all_events_button);
         allEventsButton.setOnClickListener(new View.OnClickListener() {
@@ -80,17 +87,17 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
-                leftTimelineSelect.setVisibility(View.VISIBLE);
-                centerTimelineSelect.setVisibility(View.INVISIBLE);
-                rightTimelineSelect.setVisibility(View.INVISIBLE);
+                belowArrow.setVisibility(View.GONE);
+                belowArrowLeft.setVisibility(View.GONE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.GONE);
+
 
                 getAllEvents("");
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
                 recyclerView.setAdapter(eventAdapterView);
             }
         });
-
-        centerTimelineSelect = (ImageView) findViewById(R.id.center_timeline_select);
 
         yoursEventsButton = (MaterialButton) findViewById(R.id.yours_events_button);
         yoursEventsButton.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +106,15 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
                 allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                subAllEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
-                leftTimelineSelect.setVisibility(View.INVISIBLE);
-                centerTimelineSelect.setVisibility(View.VISIBLE);
-                rightTimelineSelect.setVisibility(View.INVISIBLE);
+                belowArrow.setVisibility(View.GONE);
+                belowArrowLeft.setVisibility(View.VISIBLE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.VISIBLE);
 
                 getYourEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
@@ -110,8 +122,6 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
 
             }
         });
-
-        rightTimelineSelect = (ImageView) findViewById(R.id.right_timeline_select);
 
         othersEventsButton = (MaterialButton) findViewById(R.id.others_events_button);
         othersEventsButton.setOnClickListener(new View.OnClickListener() {
@@ -121,9 +131,10 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
                 yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 othersEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
 
-                leftTimelineSelect.setVisibility(View.INVISIBLE);
-                centerTimelineSelect.setVisibility(View.INVISIBLE);
-                rightTimelineSelect.setVisibility(View.VISIBLE);
+                belowArrow.setVisibility(View.GONE);
+                belowArrowLeft.setVisibility(View.GONE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.GONE);
 
 
                 getOtherEvents();
@@ -137,12 +148,20 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         subAllEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 subAllEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
-                getAllEvents("");
+                belowArrow.setVisibility(View.GONE);
+                belowArrowLeft.setVisibility(View.VISIBLE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.VISIBLE);
+
+                getYourEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
                 recyclerView.setAdapter(eventAdapterView);
             }
@@ -153,13 +172,21 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         currentEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 subAllEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 currentEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
+                belowArrow.setVisibility(View.VISIBLE);
+                belowArrowLeft.setVisibility(View.GONE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.VISIBLE);
 
-                getOtherEvents();
+
+                getCurrentEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
                 recyclerView.setAdapter(eventAdapterView);
 
@@ -170,12 +197,20 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         finishedEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 subAllEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
                 futureEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
 
-                getOtherEvents();
+                belowArrow.setVisibility(View.VISIBLE);
+                belowArrowLeft.setVisibility(View.GONE);
+                belowArrowRight.setVisibility(View.GONE);
+                belowScrollView.setVisibility(View.VISIBLE);
+
+                getFinishedEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
                 recyclerView.setAdapter(eventAdapterView);
 
@@ -186,12 +221,20 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
         futureEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                allEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
+                yoursEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
+                othersEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 subAllEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 currentEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 finishedEventsButton.setBackgroundColor(getResources().getColor(R.color.transparent));
                 futureEventsButton.setBackgroundColor(getResources().getColor(R.color.white));
 
-                getOtherEvents();
+                belowArrow.setVisibility(View.GONE);
+                belowArrowLeft.setVisibility(View.GONE);
+                belowArrowRight.setVisibility(View.VISIBLE);
+                belowScrollView.setVisibility(View.VISIBLE);
+
+                getFutureEvents();
                 EventAdapterView eventAdapterView = new EventAdapterView(eventList, EventTimeline.this::onNoteClick);
                 recyclerView.setAdapter(eventAdapterView);
 
@@ -243,8 +286,8 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
             Collections.sort(eventList, new Comparator<Event>() {
                 @Override
                 public int compare(Event o1, Event o2) {
-                    Date first = o1.getEndDateObj();
-                    Date second = o2.getEndDateObj();
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
 
                     if (first == null && second != null) {
                         return 1;
@@ -296,8 +339,8 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
             Collections.sort(eventList, new Comparator<Event>() {
                 @Override
                 public int compare(Event o1, Event o2) {
-                    Date first = o1.getEndDateObj();
-                    Date second = o2.getEndDateObj();
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
 
                     if (first == null && second != null) {
                         return 1;
@@ -358,8 +401,164 @@ public class EventTimeline extends AppCompatActivity implements EventAdapterView
             Collections.sort(eventList, new Comparator<Event>() {
                 @Override
                 public int compare(Event o1, Event o2) {
-                    Date first = o1.getEndDateObj();
-                    Date second = o2.getEndDateObj();
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
+
+        } catch (InterruptedException e) {
+            //TODO: Throw Exception Event Incorrect Error
+        }
+    }
+
+    private void getCurrentEvents() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<Event>> call = APIAdapter.getApiService().getCurrentUserEvent(user.getId(),"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (response.isSuccessful()){
+                    eventList = response.body();
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
+
+        } catch (InterruptedException e) {
+            //TODO: Throw Exception Event Incorrect Error
+        }
+    }
+
+    private void getFinishedEvents() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<Event>> call = APIAdapter.getApiService().getFinishedUserEvent(user.getId(),"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (response.isSuccessful()){
+                    eventList = response.body();
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
+
+                    if (first == null && second != null) {
+                        return 1;
+                    } else if (first != null && second == null) {
+                        return -1;
+                    } else if (first == null && second == null) {
+                        return 0;
+                    } else {
+                        long diff = first.getTime() - second.getTime();
+
+                        if (diff == 0) {
+                            return 0;
+                        }
+
+                        return (int) (diff/Math.abs(diff));
+                    }
+                }
+            });
+
+        } catch (InterruptedException e) {
+            //TODO: Throw Exception Event Incorrect Error
+        }
+    }
+
+    private void getFutureEvents() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<Event>> call = APIAdapter.getApiService().getFutureUserEvent(user.getId(),"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (response.isSuccessful()){
+                    eventList = response.body();
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+
+            Collections.sort(eventList, new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    Date first = o1.getStartDateObj();
+                    Date second = o2.getStartDateObj();
 
                     if (first == null && second != null) {
                         return 1;

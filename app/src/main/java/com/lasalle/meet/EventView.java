@@ -3,8 +3,11 @@ package com.lasalle.meet;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -22,18 +27,29 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.lasalle.meet.enities.APIAdapter;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.eventexceptions.EventInvalidCredentialsException;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EventView extends AppCompatActivity {
 
+    private static final String TAG = "EventView";
     private User user;
     private static String userId = "USER_ID";
     private Event event;
@@ -53,6 +69,10 @@ public class EventView extends AppCompatActivity {
     private MaterialTextView eventEndDate;
     private MaterialTextView numberParticipants;
 
+    private Address address;
+    private List<Event> assistedEvents;
+    private int eventError = 0;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +90,14 @@ public class EventView extends AppCompatActivity {
         eventDate = (MaterialTextView) findViewById(R.id.textView5);
 
         eventImage = (ImageView) findViewById(R.id.eventImageView);
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.event_default_picture)
+                .error(R.drawable.event_default_picture);
+
+
+        Glide.with(this).load(event.getImage()).apply(options).into(eventImage);
 
         eventDescription = (MaterialTextView) findViewById(R.id.event_description);
 
@@ -104,12 +132,14 @@ public class EventView extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (event.getOwner_id() != user.getId()) {
+                if (event.getOwner_id() != user.getId() && !containsEvent()) {
                     try {
                         event.eventAssist(user.getAccessToken());
                     } catch (EventInvalidCredentialsException e) {
                         Toast.makeText(EventView.this, "There has been an error joining", Toast.LENGTH_SHORT).show();
                     }
+                } else if (event.getOwner_id() != user.getId() && containsEvent()){
+                    Toast.makeText(EventView.this, "You have already joined this event", Toast.LENGTH_SHORT).show();
                 } else {
                     event.deleteEvent(user.getAccessToken());
                     onBackPressed();
@@ -144,6 +174,51 @@ public class EventView extends AppCompatActivity {
 
     }
 
+    private boolean containsEvent() {
+        getAssistedEvents();
+
+        for (int i = 0; i < assistedEvents.size(); i++) {
+            if (assistedEvents.get(i).getID() == event.getID()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void getAssistedEvents() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Call<List<Event>> call = APIAdapter.getApiService().getUserAssistances(user.getId(),"Bearer " + user.getAccessToken());
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (!response.isSuccessful()) {
+                    eventError = response.code();
+                }else {
+                    assistedEvents = response.body();
+                }
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+            if (eventError == 400) {
+                assistedEvents.clear();
+            }
+
+        } catch (InterruptedException e) {
+            assistedEvents.clear();
+        }
+    }
+
     private void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -167,12 +242,32 @@ public class EventView extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Location currentLocation = (Location) task.getResult();
 
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
+                    if (address == null) {
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
+                    }
+
                 }else {
                     Toast.makeText(EventView.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        try {
+        List<Address> addresses;
+
+            addresses = new Geocoder(EventView.this).getFromLocationName(event.getLocation(),5);
+
+            if (addresses.size() > 0) {
+                address = addresses.get(0);
+
+                mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(address.getLatitude(), address.getLongitude()),15));
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "Could not found address");
+
+        }
     }
 
     private void getLocation() {

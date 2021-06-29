@@ -1,5 +1,8 @@
 package com.lasalle.meet.apiadapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.lasalle.meet.ChatSelectorScreen;
 import com.lasalle.meet.R;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.Message;
@@ -17,11 +23,18 @@ import com.lasalle.meet.enities.User;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.ViewHolderEvents>{
+    private static final String TAG = "FriendAdapterView";
     private List<User> friendList;
     private FriendAdapterView.OnNoteListener mOnNoteListener;
     private List<User> currentFriendList;
@@ -101,6 +114,16 @@ public class FriendAdapterView extends RecyclerView.Adapter<FriendAdapterView.Vi
                 userAddButton.setImageResource(R.drawable.delete_friend);
                 userAddButton.setTag("NO FRIEND");
             }
+
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.drawable.user)
+                    .error(R.drawable.user);
+
+
+
+            Glide.with(this.itemView.getContext()).load(user.getImage()).apply(options).into(userImage);
+
 
         }
 

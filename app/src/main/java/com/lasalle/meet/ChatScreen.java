@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
@@ -29,6 +32,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +49,7 @@ public class ChatScreen extends AppCompatActivity {
 
     private MaterialTextView userName;
     private MaterialTextView welcomeMessage;
+    private CircleImageView profilePicture;
 
     private LocalDateTime currentDate;
 
@@ -72,6 +77,8 @@ public class ChatScreen extends AppCompatActivity {
 
         welcomeMessage = (MaterialTextView) findViewById(R.id.welcomeMessage);
 
+        profilePicture = (CircleImageView) findViewById(R.id.profileImage);
+
         userName.setText(otherUser.getFullName());
 
         if (currentDate.getHour() >= 23 && currentDate.getHour() <= 5) {
@@ -83,6 +90,14 @@ public class ChatScreen extends AppCompatActivity {
         } else if (currentDate.getHour() >= 5 && currentDate.getHour() <= 14) {
             welcomeMessage.setText("Good Morning");
         }
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.user)
+                .error(R.drawable.user);
+
+
+        Glide.with(this).load(otherUser.getImage()).apply(options).into(profilePicture);
 
         message = (TextInputEditText) findViewById(R.id.send_message_input);
 

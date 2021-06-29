@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textview.MaterialTextView;
 import com.lasalle.meet.R;
 import com.lasalle.meet.enities.Event;
@@ -17,6 +19,8 @@ import com.lasalle.meet.enities.Event;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.ViewHolderEvents> {
 
@@ -50,7 +54,7 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
 
         TextView eventName;
         MaterialTextView eventDate;
-        ImageView eventImage;
+        CircleImageView eventImage;
         OnNoteListener onNoteListener;
         ImageView eventImageButton;
 
@@ -69,6 +73,13 @@ public class EventAdapterView extends RecyclerView.Adapter<EventAdapterView.View
         public void showInfo(Event event) {
             eventName.setText(event.getName());
             eventDate.setText(event.getDate());
+
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.drawable.event_default_picture)
+                    .error(R.drawable.event_default_picture);
+
+            Glide.with(this.itemView.getContext()).load(event.getImage()).apply(options).into(eventImage);
         }
 
         @Override

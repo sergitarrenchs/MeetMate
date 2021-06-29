@@ -15,6 +15,8 @@ import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,6 +55,7 @@ public class ProfileScreen extends AppCompatActivity {
 
     private MaterialButton CancelButton;
     private MaterialButton SaveButton;
+    private CircleImageView profilePicture;
 
     private TextInputEditText nameField = null;
     private TextInputEditText lastNameField = null;
@@ -81,7 +85,17 @@ public class ProfileScreen extends AppCompatActivity {
 
         getYourAssistences();
 
-        user.getFriends();
+        friendList = user.getFriends();
+
+        profilePicture = (CircleImageView) findViewById(R.id.profileImage);
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.user)
+                .error(R.drawable.user);
+
+
+        Glide.with(this).load(user.getImage()).apply(options).into(profilePicture);
 
         LogOutButton = (MaterialButton) findViewById(R.id.logout_button);
 
