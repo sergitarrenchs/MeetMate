@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -43,12 +44,16 @@ import com.lasalle.meet.enities.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,6 +86,8 @@ public class HomeScreen extends AppCompatActivity {
     private SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.GERMANY);
     private FusedLocationProviderClient fusedLocationProviderClient;
     private List<Event> eventList = null;
+    private Thread threadToRun;
+    //private LongRunningTask longRunningTask;
 
     private final String ALL_EVENT = "";
     private final String EDUCATION_EVENT = "Education";
@@ -249,33 +256,39 @@ public class HomeScreen extends AppCompatActivity {
             countDownLatch.await();
 
             Handler mainHandler = new Handler(Looper.getMainLooper());
+//
+//            Runnable myRunnable = new Runnable() {
+//                @Override
+//                public void run() {
+//                    mMap.clear();
+//
+//                    for (int i = 0; i < eventList.size(); i++) {
+//                        Event event = (Event) eventList.get(i);
+//                        List<Address> addresses;
+//
+//                        try {
+//
+//                            addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
+//
+//                            if (addresses.size() > 0) {
+//                                Address location = addresses.get(0);
+//
+//                                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+//                            }
+//
+//                        } catch (IOException e) {
+//
+//                        }
+//                    }
+//                } // This is your code
+//            };
+//            mainHandler.post(myRunnable);
 
-            Runnable myRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mMap.clear();
+            showMarkers();
+            threadToRun.start();
 
-                    for (int i = 0; i < eventList.size(); i++) {
-                        Event event = (Event) eventList.get(i);
-                        List<Address> addresses;
-
-                        try {
-
-                            addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
-
-                            if (addresses.size() > 0) {
-                                Address location = addresses.get(0);
-
-                                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
-                            }
-
-                        } catch (IOException e) {
-
-                        }
-                    }
-                } // This is your code
-            };
-            mainHandler.post(myRunnable);
+//            longRunningTask = new LongRunningTask(this);
+//            longRunningTask.execute();
 
         } catch (InterruptedException e) {
             //TODO: Throw Exception Event Incorrect Error
@@ -396,6 +409,98 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
+    public void showMarkers() {
+        threadToRun = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                HomeScreen.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMap.clear();
+                    }
+                });
+
+                for (int i = 0; i < eventList.size(); i++) {
+                    Event event = (Event) eventList.get(i);
+                    List<Address> addresses;
+
+                    try {
+
+                        addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
+
+                        if (addresses.size() > 0) {
+
+                            Address location = addresses.get(0);
+                            if (location != null) {
+                                Handler mainHandler = new Handler(Looper.getMainLooper());
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        addMarker(location);
+                                    }
+                                };
+                                mainHandler.post(runnable);
+                            }
+                        }
+
+                    } catch (IOException ignored) {}
+                }
+            }
+        });
+    }
+
+    private void addMarker(Address location) {
+        HomeScreen.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+            }
+        });
+
+    }
+
+//    private class LongRunningTask extends AsyncTask<String, Void, List<Event>> {
+//        private final String TAG = HomeScreen.LongRunningTask.class.getSimpleName();
+//        private WeakReference<HomeScreen> activityReference;
+//
+//        LongRunningTask(HomeScreen context) {
+//            activityReference = new WeakReference<>(context);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Event> events) {
+//            super.onPostExecute(events);
+//        }
+//
+//        @Override
+//        protected List<Event> doInBackground(String... strings) {
+//            // Some long running task
+//
+//            mMap.clear();
+//
+//            for (int i = 0; i < eventList.size(); i++) {
+//                Event event = (Event) eventList.get(i);
+//                List<Address> addresses;
+//
+//                try {
+//
+//                    addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
+//
+//                    if (addresses.size() > 0) {
+//
+//                        Address location = addresses.get(0);
+//                        if (location != null) {
+//                            addMarker(location);
+//                        }
+//                    }
+//
+//                } catch (IOException ignored) {}
+//            }
+//
+//            return null;
+//        }
+//    }
 
 
     /**
