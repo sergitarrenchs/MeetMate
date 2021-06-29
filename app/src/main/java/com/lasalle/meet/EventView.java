@@ -242,7 +242,7 @@ public class EventView extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Location currentLocation = (Location) task.getResult();
 
-                    if (address == null) {
+                    if (address == null && currentLocation != null) {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15));
                     }
 
