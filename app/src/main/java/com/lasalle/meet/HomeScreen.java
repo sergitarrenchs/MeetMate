@@ -1,5 +1,4 @@
 package com.lasalle.meet;
-//MAIN COMENT
 
 import android.Manifest;
 import android.content.Intent;
