@@ -128,7 +128,6 @@ public class ChatSelectorScreen extends AppCompatActivity implements FriendAdapt
             public void afterTextChanged(Editable s) {
 
                 if (s.toString().equals("")) {
-                    //TODO: Show again Friends
                     userList.clear();
                     userList.addAll(friendList);
 

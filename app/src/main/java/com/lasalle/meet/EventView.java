@@ -36,6 +36,7 @@ import com.lasalle.meet.enities.APIAdapter;
 import com.lasalle.meet.enities.Event;
 import com.lasalle.meet.enities.User;
 import com.lasalle.meet.exceptions.eventexceptions.EventInvalidCredentialsException;
+import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -141,8 +142,12 @@ public class EventView extends AppCompatActivity {
                 } else if (event.getOwner_id() != user.getId() && containsEvent()){
                     Toast.makeText(EventView.this, "You have already joined this event", Toast.LENGTH_SHORT).show();
                 } else {
-                    event.deleteEvent(user.getAccessToken());
-                    onBackPressed();
+                    try {
+                        event.deleteEvent(user.getAccessToken());
+                        onBackPressed();
+                    } catch (UserIncorrectCredentialsException e) {
+                        Log.e(TAG, "onClick: Couldn't connect to API to delete the user");
+                    }
                 }
             }
         });

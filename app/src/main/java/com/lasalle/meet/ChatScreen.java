@@ -166,7 +166,7 @@ public class ChatScreen extends AppCompatActivity {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            //TODO: FIX
+            messageList = new ArrayList<Message>();
         }
     }
 

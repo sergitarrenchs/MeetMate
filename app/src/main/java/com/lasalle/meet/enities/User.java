@@ -19,6 +19,7 @@ import com.lasalle.meet.exceptions.userexceptions.UserUnableDeletionException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -180,7 +181,6 @@ public class User implements Serializable {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                         if (!response.isSuccessful()){
-                            //TODO: Log in
                             countDownLatch2.countDown();
                             return;
                         }
@@ -230,7 +230,6 @@ public class User implements Serializable {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()) {
-                    //TODO: WHAT
                     userError = response.code();
                 }
             }
@@ -303,7 +302,6 @@ public class User implements Serializable {
                 @Override
                 public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     if (!response.isSuccessful()) {
-                        //TODO: Log in
                         countDownLatch2.countDown();
                         return;
                     }
@@ -392,7 +390,7 @@ public class User implements Serializable {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            //TODO: FIX
+            friends = new ArrayList<User>();
         }
 
         return friends;
@@ -423,7 +421,7 @@ public class User implements Serializable {
             try {
                 countDownLatch.await();
             } catch (InterruptedException e) {
-                //TODO: FIX
+                throw new MessageNullException();
             }
         }
     }

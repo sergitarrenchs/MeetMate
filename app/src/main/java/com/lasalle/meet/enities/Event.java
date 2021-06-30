@@ -26,6 +26,7 @@ import com.lasalle.meet.exceptions.eventexceptions.EventNullNumberException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullStartDateException;
 import com.lasalle.meet.exceptions.eventexceptions.EventNullTypeException;
 import com.lasalle.meet.exceptions.eventexceptions.EventStartDateInvalidException;
+import com.lasalle.meet.exceptions.userexceptions.UserIncorrectCredentialsException;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -329,7 +330,7 @@ public class Event implements Serializable {
         return type;
     }
 
-    public void deleteEvent(String accessToken) {
+    public void deleteEvent(String accessToken) throws UserIncorrectCredentialsException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
 
         eventError = 0;
@@ -354,11 +355,11 @@ public class Event implements Serializable {
         try {
             countDownLatch.await();
             if (eventError == BAD_REQUEST) {
-                //TODO: Throw Exception Event Incorrect Error
+                throw new UserIncorrectCredentialsException();
             }
 
         } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
+            throw new UserIncorrectCredentialsException();
         }
     }
 

@@ -280,7 +280,7 @@ public class ProfileScreen extends AppCompatActivity {
             countDownLatch.await();
 
         } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
+            eventList = new ArrayList<Event>();
         }
     }
 
@@ -308,7 +308,7 @@ public class ProfileScreen extends AppCompatActivity {
             countDownLatch.await();
 
         } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
+            eventList = new ArrayList<Event>();
         }
     }
 
