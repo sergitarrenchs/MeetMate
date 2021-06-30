@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lasalle.meetmate">
+    package="com.lasalle.meet">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -8,17 +18,87 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MeetMate">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
-            android:name=".MainActivity"
+            android:name="com.lasalle.meet.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MeetMate.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.lasalle.meet.LoginScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.SignupScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.HomeScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.ProfileScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.ChatSelectorScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.EventTimeline"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.NewEvent"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.FinishEvent"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+
+        <activity
+            android:name="com.lasalle.meet.EventView"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.EventModify"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.FinishModify"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.ChatScreen"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+        <activity
+            android:name="com.lasalle.meet.AddFriend"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MeetMate.NoActionBar"/>
+
     </application>
 
 </manifest>

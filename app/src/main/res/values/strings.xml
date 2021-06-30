@@ -1,12 +1,87 @@
 <resources>
-    <string name="app_name">MeetMate</string>
+    //GENERAL STRINGS//
+    <string name="app_name">Meet</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label">FirstFragmentLabel</string>
+    <string name="second_fragment_label">SecondFragmentLabel</string>
+    <string name="icon">ICON</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    //HOME STRINGS//
+    //Top welcome message//
+    <string name="welcome_message_morning">Good Morning</string>
+    <string name="welcome_message_afternoon">Good Afternoon</string>
+    <string name="welcome_message_night">Good Night</string>
+    //Event Type message//
+    <string name="event_type_all">All</string>
+    <string name="event_type_games">Games</string>
+    <string name="event_type_music">Music</string>
+    <string name="event_type_sports">Sports</string>
+    <string name="event_type_Travel">Travel</string>
+    <string name="event_type_education">Education</string>
+
+    //LOGIN/SIGNUP STRINGS//
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="or">OR</string>
+    <string name="content_description">Sign up top design</string>
+    <string name="name">NAME</string>
+    <string name="last_name">LAST NAME</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
+    <string name="repeat_password">REPEAT PASSWORD</string>
+    <string name="upload_profile_picture">UPLOAD PROFILE PICTURE</string>
+
+    //NEW EVENT//
+    <string name="event_details">Event Details</string>
+    <string name="next_button">NEXT</string>
+    <string name="create_button">CREATE</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_description">Event Description</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="event_type">Event Type</string>
+    <string name="max_participants">Max Participants</string>
+    <string name="upload_event_picture">UPLOAD EVENT PICTURE</string>
+    <string name="event_location">Event Location</string>
+
+    //PROFILE//
+    <string name="delete_account">Delete Account</string>
+    <string name="log_out">Log Out</string>
+    <string name="background">Background Image</string>
+    <string name="you_have">YOU HAVE</string>
+    <string name="created">CREATED</string>
+    <string name="attended">ATTENDED</string>
+    <string name="connected">CONNECTED</string>
+    <string name="events">EVENTS</string>
+    <string name="friends">FRIENDS</string>
+    <string name="test_num">17</string>
+    <string name="terry_meyer">Terry Meyer</string>
+    <string name="username_tm">/@terrymeyer</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
+
+    //EVENT VIEW//
+    <string name="join">JOIN</string>
+    <string name="delete">DELETE</string>
+    <string name="edit">EDIT</string>
+    <string name="from">FROM</string>
+    <string name="to">to</string>
+    <string name="description">Description</string>
+    <string name="maxparticipants">MAX PARTICIPANTS:</string>
+
+    //EVENT TIMELINE//
+    <string name="all">ALL</string>
+    <string name="yours">YOURS</string>
+    <string name="others">OTHERS</string>
+    <string name="current">CURRENT</string>
+    <string name="finished">FINISHED</string>
+    <string name="future">FUTURE</string>
+
+    //CHAT//
+    <string name="send">Type a message</string>
+    <string name="search">Search</string>
+
+
 </resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_light">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signup_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="246dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/login"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h1_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/login_top_imageView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/login_top_imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_signup_top_design" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/side_margin"
+        app:layout_constraintTop_toBottomOf="@+id/signup_textView"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_textView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:background="@color/teal_light"
+            android:focusable="true"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/error_appearance"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/name_login_layout"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_signup"
+            android:layout_alignEnd="@+id/name_signup"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginEnd="16dp"
+            android:background="@color/teal_light"
+            android:ems="10"
+            android:fontFamily="@font/gilroylight"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/error_appearance"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/join_button"
+        android:theme="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginBottom="@dimen/side_margin"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/login"
+        android:textSize="@dimen/t1_size"
+        app:cornerRadius="@dimen/radius_1"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/purple_strong"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginBottom="30dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/signup"
+        android:textColor="@color/black_light"
+        android:textSize="@dimen/t1_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/logo_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/meet_logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

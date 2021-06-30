@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_light">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_location_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_appearance"
+        app:errorTextColor="@color/error_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="false"
+            android:fontFamily="@font/gilroylight"
+            android:background="@color/teal_light"
+            android:hint="@string/event_location"
+            android:inputType="textVisiblePassword|textNoSuggestions|textPostalAddress"
+            android:textColorHighlight="@color/black_light"
+            android:textColorHint="@color/black_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upload_profile_pic_button2"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/upload_profile_pic_button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:fontFamily="@font/gilroylight"
+        android:text="@string/upload_event_picture"
+        android:textColor="@color/white"
+        android:textSize="@dimen/t1_size"
+        app:cornerRadius="@dimen/radius_2"
+        app:icon="@drawable/signup_upload_picture_icon"
+        app:iconSize="60dp"
+        app:iconTint="@color/white"
+        app:iconTintMode="multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_details_textView" />
+
+    <TextView
+        android:id="@+id/event_details_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/event_details"
+        android:textColor="@color/black_light"
+        android:textSize="@dimen/h1super_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/create_button_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_light"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/new_event_button" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/next_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="@string/create_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/h2_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <fragment
+        android:id="@+id/event_location_mapView"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_button_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_location_layout"
+        tools:context=".MapsActivity" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
