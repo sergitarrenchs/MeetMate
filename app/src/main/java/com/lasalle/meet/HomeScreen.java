@@ -86,7 +86,6 @@ public class HomeScreen extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private List<Event> eventList = null;
     private Thread threadToRun;
-    //private LongRunningTask longRunningTask;
 
     private final String ALL_EVENT = "";
     private final String EDUCATION_EVENT = "Education";
@@ -254,44 +253,10 @@ public class HomeScreen extends AppCompatActivity {
         try {
             countDownLatch.await();
 
-            Handler mainHandler = new Handler(Looper.getMainLooper());
-//
-//            Runnable myRunnable = new Runnable() {
-//                @Override
-//                public void run() {
-//                    mMap.clear();
-//
-//                    for (int i = 0; i < eventList.size(); i++) {
-//                        Event event = (Event) eventList.get(i);
-//                        List<Address> addresses;
-//
-//                        try {
-//
-//                            addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
-//
-//                            if (addresses.size() > 0) {
-//                                Address location = addresses.get(0);
-//
-//                                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
-//                            }
-//
-//                        } catch (IOException e) {
-//
-//                        }
-//                    }
-//                } // This is your code
-//            };
-//            mainHandler.post(myRunnable);
-
             showMarkers();
             threadToRun.start();
 
-//            longRunningTask = new LongRunningTask(this);
-//            longRunningTask.execute();
-
-        } catch (InterruptedException e) {
-            //TODO: Throw Exception Event Incorrect Error
-        }
+        } catch (InterruptedException e){}
 
     }
 
@@ -460,48 +425,6 @@ public class HomeScreen extends AppCompatActivity {
         });
 
     }
-
-//    private class LongRunningTask extends AsyncTask<String, Void, List<Event>> {
-//        private final String TAG = HomeScreen.LongRunningTask.class.getSimpleName();
-//        private WeakReference<HomeScreen> activityReference;
-//
-//        LongRunningTask(HomeScreen context) {
-//            activityReference = new WeakReference<>(context);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<Event> events) {
-//            super.onPostExecute(events);
-//        }
-//
-//        @Override
-//        protected List<Event> doInBackground(String... strings) {
-//            // Some long running task
-//
-//            mMap.clear();
-//
-//            for (int i = 0; i < eventList.size(); i++) {
-//                Event event = (Event) eventList.get(i);
-//                List<Address> addresses;
-//
-//                try {
-//
-//                    addresses = new Geocoder(HomeScreen.this).getFromLocationName(event.getLocation(),1);
-//
-//                    if (addresses.size() > 0) {
-//
-//                        Address location = addresses.get(0);
-//                        if (location != null) {
-//                            addMarker(location);
-//                        }
-//                    }
-//
-//                } catch (IOException ignored) {}
-//            }
-//
-//            return null;
-//        }
-//    }
 
 
     /**
